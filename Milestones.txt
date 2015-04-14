@@ -1,0 +1,16 @@
+
+Due Wednesday 8PM
+5% of the total grade
+
+Key Milestones Player
+M1. On execution, show splash screen with team credits
+M2. Review progress ( sixteen levels,  four of each type)
+M3. Select unlocked puzzle level to play
+M4. Show board as it would look during game play but no moves
+M5. Demonstrate player can quit level and go back to main screen
+
+Key Milestones Builder
+M6. On execution, show splash screen
+M7. Allow builder to request to create new level
+M8. Show GUI that will appear but no actions
+M9. Demonstrate builder can close level without saving
