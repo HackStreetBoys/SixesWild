@@ -1,5 +1,7 @@
 package hackstreet.sixeswild.gui;
 
-public abstract class AbstractScreen {
+import javax.swing.JPanel;
+
+public abstract class AbstractScreen extends JPanel {
 
 }
