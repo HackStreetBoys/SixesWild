@@ -1,47 +1,45 @@
 package hackstreet.sixeswild.gui;
 
+import hackstreet.sixeswild.controller.ToGameScreenController;
+import hackstreet.sixeswild.controller.ToMainScreenController;
+
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class LevelSelectScreen extends AbstractScreen {
 	
-	JButton backBtn;
-	ArrayList<JButton> levelBtns;
+	private JButton backButton;
+	private ArrayList<JButton> levelBtns;
 	
-	public LevelSelectScreen(SixesWildApplication sixesWildApplication){
-		super(sixesWildApplication, "Levels");
+	public LevelSelectScreen(SWApplication application){
+		super(application, "Levels");
 		
 		levelBtns = new ArrayList<JButton>();
 		
-		for (int i = 0 ; i<4; i++)
-		{
-			for (int j = 0;j<4;i++)
-			{
-				JButton temp = new JButton( (i*4 + j++)+""); 
-				temp.setSize(50,50);
-				temp.setLocation( (300+i*50), (100+j*50));
-				levelBtns.add(temp);
-				super.add(temp);
+		for(int x = 0; x<4; x++){
+			for(int y = 0; y<4; y++){
+				JButton button = new JButton((y*4+x+1)+"");
+				if(Integer.parseInt(button.getText())>2){
+					button.setEnabled(false);
+					button.setBackground(new Color(180,180,180));
+					button.setForeground(Color.white);
+				}
+				button.setSize(50,50);
+				button.setLocation(255+x*50+30*x,120+y*50+30*y);
+				button.addActionListener(new ToGameScreenController(super.getApplication()));
+				this.levelBtns.add(button);
+				super.add(button);
 			}
 		}
 		
-	    backBtn = new JButton("Back");
-	    backBtn.setSize(60,60);
-	    backBtn.setLocation(720,20);
-	    super.add(backBtn);
-	    
-	    
-		
-		//Check if more or less 16
-		
-//		for (int i = 0; i<16; i++){
-//			levelBtns.add(sixesWildApplication.levels[i])
-//		}
-		
-		
-		
+		this.backButton = new JButton("Back");
+		this.backButton.setSize(100,50);
+		this.backButton.setLocation(10,500);
+		this.backButton.addActionListener(new ToMainScreenController(super.getApplication()));
+	    super.add(backButton);		
 	}
 
 }

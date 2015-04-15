@@ -1,34 +1,30 @@
 package hackstreet.sixeswild.gui;
 
+import hackstreet.sixeswild.controller.ToLevelSelectScreenController;
+
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class SWMainScreen extends AbstractScreen {
-	JButton playBtn;
-	JButton achievementsBtn;
 	
-
+	private JButton playBtn;
+	private JButton achievementsBtn;
 	
-	public SWMainScreen(SixesWildApplication sixesWildApplication)
-	{
-		super(sixesWildApplication, "Sixes Wild");
+	public SWMainScreen(SWApplication application) {
+		super(application, "Sixes Wild");
 		
-//	    JPanel panel = new JPanel();
-	    achievementsBtn = new JButton("Achievements");
-	    playBtn = new JButton("Play");
-	    
 	    super.setLayout(null);
-	    
+
+	    playBtn = new JButton("Play");
 	    playBtn.setSize(150,50);
+	    playBtn.setLocation(325,190);
+	    playBtn.addActionListener(new ToLevelSelectScreenController(super.getApplication()));
+
+	    achievementsBtn = new JButton("Achievements");
 	    achievementsBtn.setSize(150,50);
-	    
-	    playBtn.setLocation(350,190);
-	    playBtn.setLocation(350,190);
-	    
-	    achievementsBtn.setLocation(350,250);
+	    achievementsBtn.setLocation(325,250);
 	    
 	    super.add(playBtn);
 	    super.add(achievementsBtn);
-	    
 	}
 }

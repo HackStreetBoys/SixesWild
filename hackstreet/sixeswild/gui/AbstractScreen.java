@@ -1,15 +1,8 @@
 package hackstreet.sixeswild.gui;
 
-<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-=======
-import javax.swing.JPanel;
-
-public abstract class AbstractScreen extends JPanel {
->>>>>>> 07050e1f4ec669beae4ab0e2fc4eac50cbc9718f
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -24,12 +17,14 @@ public abstract class AbstractScreen extends JPanel{
 		this.application = application;
 		
 		super.setLayout(null);
+		super.setBackground(Color.yellow); //TODO
 		
 		this.title = new JLabel(title);
+		this.title.setSize(200,75);
+		this.title.setLocation(300,0);
 		this.title.setVerticalAlignment(SwingConstants.CENTER);
-		this.title.setFont(new Font("SansSerif",Font.BOLD,48));
-		this.title.setSize(300,100);
-		this.title.setLocation(250,0);
+		this.title.setFont(new Font("Serif",Font.BOLD,48));
+		this.setupFont();
 		this.title.setBackground(new Color(0,0,0,0));
 		super.add(this.title);
 	}
@@ -42,6 +37,26 @@ public abstract class AbstractScreen extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.setColor(Color.black);
-		g.drawRect(this.title.getX(), this.title.getY(), this.title.getWidth(), this.title.getHeight());
+		g.drawRect(this.title.getX()-1, this.title.getY(), this.title.getWidth(), this.title.getHeight());
+	}
+	
+	private void setupFont(){
+		Font titleFont = this.title.getFont();
+		String titleText = this.title.getText();
+
+		int stringWidth = this.title.getFontMetrics(titleFont).stringWidth(titleText);
+		int componentWidth = this.title.getWidth();
+
+		// Find out how much the font can grow in width.
+		double widthRatio = (double)componentWidth / (double)stringWidth;
+
+		int newFontSize = (int)(titleFont.getSize() * widthRatio);
+		int componentHeight = this.title.getHeight();
+
+		// Pick a new font size so it will not be larger than the height of this.title.
+		int fontSizeToUse = Math.min(newFontSize, componentHeight);
+
+		// Set the this.title's font size to the newly determined size.
+		this.title.setFont(new Font(titleFont.getName(), Font.PLAIN, fontSizeToUse));
 	}
 }
