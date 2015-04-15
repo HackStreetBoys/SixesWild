@@ -1,8 +1,14 @@
 package hackstreet.sixeswild.gui;
 
+<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+=======
+import javax.swing.JPanel;
+
+public abstract class AbstractScreen extends JPanel {
+>>>>>>> 07050e1f4ec669beae4ab0e2fc4eac50cbc9718f
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
