@@ -50,7 +50,8 @@ public class ActiveGameScreen extends AbstractScreen {
 		this.backButton.addActionListener(new ToLevelSelectScreenController(super.getApplication()));
 		
 		this.gridView = new GridView();
-		this.gridView.setLocation(400 - gridView.getWidth()/2,125);
+		this.gridView.setSize(450,450);
+		this.gridView.setLocation(400 - gridView.getWidth()/2,100);
 		
 		this.removeTileButton = new JButton();
 		this.removeTileButton.setSize(30,30);
@@ -112,8 +113,6 @@ public class ActiveGameScreen extends AbstractScreen {
 		super.paintComponent(g);
 		g.setColor(Color.black);
 		g.drawLine(120, 0, 120, 600);
-		
-		
 	}
 
 }

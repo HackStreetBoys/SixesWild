@@ -22,7 +22,7 @@ public abstract class AbstractScreen extends JPanel{
 		this.title = new JLabel(title);
 		this.title.setSize(200,75);
 		this.title.setLocation(300,0);
-		this.title.setVerticalAlignment(SwingConstants.CENTER);
+		this.title.setHorizontalAlignment(SwingConstants.CENTER);
 		this.title.setFont(new Font("Serif",Font.BOLD,48));
 		this.setupFont();
 		this.title.setBackground(new Color(0,0,0,0));
