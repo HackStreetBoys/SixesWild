@@ -20,7 +20,13 @@ public class ActiveSlotView extends JPanel{
 		super.setBackground(new Color(0,0,0,0));
 		
 		int val = 1 + (int)(6*Math.random());
-		int mult = 1 + (int)(3*Math.random());
+		int mult = 1 + (int)(100*Math.random());
+		if(mult<70)
+			mult = 1;
+		else if(mult<90)
+			mult = 2;
+		else
+			mult = 3;
 		Tile tile = new Tile(val,mult);
 		this.tileView = new TileView(tile);
 		this.tileView.setSize(48,48);
