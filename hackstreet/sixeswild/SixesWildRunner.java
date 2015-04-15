@@ -20,10 +20,8 @@ public class SixesWildRunner {
 			}
 		} catch (Exception e) { }
 
-		/*
 		SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		splash.showSplash();
-		 */
 
 		SixesWild model = new SixesWild();
 
