@@ -1,5 +1,7 @@
 package hackstreet.sixeswild.gui;
 
-public class GridView {
+import javax.swing.JPanel;
+
+public class GridView extends JPanel {
 
 }

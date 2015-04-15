@@ -1,5 +1,7 @@
 package hackstreet.sixeswild.gui;
 
-public class ProgressView {
+import javax.swing.JPanel;
+
+public class ProgressView extends JPanel{
 
 }
