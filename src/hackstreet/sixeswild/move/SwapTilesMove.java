@@ -1,8 +1,7 @@
 package hackstreet.sixeswild.move;
 
-import java.util.ArrayList;
-import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.game.Tile;
+import hackstreet.sixeswild.level.AbstractLevel;
 
 /**
  * Move: Swap two Tiles given their Slots.
@@ -12,22 +11,27 @@ import hackstreet.sixeswild.game.Tile;
  */
 public class SwapTilesMove extends AbstractGameMove {
 
-	public SwapTilesMove(ArrayList<Slot> selectedSlots){
-		super(selectedSlots);
+	/**
+	 * SwapTilesMove constructor.
+	 * @param level The current level being played.
+	 */
+	public SwapTilesMove(AbstractLevel level){
+		super(level);
 	}
 
 	@Override
 	public boolean isValid() {
-		return (this.selectedSlots.size() == 2);
+		return (level.getSelectedSlots().size() == 2);
 	}
 
 	@Override
 	public void doMove() {
 		if (this.isValid()){
 			Tile tempTile;
-			tempTile = selectedSlots.get(0).getTile();
-			selectedSlots.get(0).setTile(selectedSlots.get(1).getTile());
-			selectedSlots.get(1).setTile(tempTile);
+			tempTile = level.getSelectedSlots().get(0).getTile();
+			level.getSelectedSlots().get(0).setTile(level.getSelectedSlots().get(1).getTile());
+			level.getSelectedSlots().get(1).setTile(tempTile);
+			
 			// TODO repaint grid;
 		}
 		else

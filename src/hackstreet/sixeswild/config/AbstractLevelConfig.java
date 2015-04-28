@@ -3,7 +3,44 @@ package hackstreet.sixeswild.config;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Storage for all of the information saved about a level in SixesWildLevelBuilder.
+ * This class should be nearly identical to its twin in the LevelBuilder.
+ * @author Nicholas
+ *
+ */
 public class AbstractLevelConfig {
+
+	protected String Type; // Added so that we can load files. It is protected b/c sub classes need to know this information;
+	private String name;
+	private int height;
+	private int width;
+	private ArrayList<hackstreet.sixeswild.game.Location> nullLocations;
+	private double[] percentage = new double[6];
+	private int numShuffle;
+	private int numSwap;
+	private int numRemove;
+	private int numHint;
+	private double freq1;
+	private double freq2;
+	private double freq3;
+	private double freq4;
+	private double freq5;
+	private double freq6;
+	private double freqMult2;
+	private double freqMult3;
+	private int pointsStar1;
+	private int pointsStar2;
+	private int pointsStar3;
+	public File File;
+	
+	/**
+	 * 
+	 */
+	public AbstractLevelConfig(){
+		
+	}
+	
 
 	public String getType() {
 		return Type;
@@ -182,30 +219,4 @@ public class AbstractLevelConfig {
 		File = file;
 	}
 
-	protected String Type; // Added so that we can load files. It is protected b/c sub classes need to know this information;
-	private String name;
-	private int height;
-	private int width;
-	private ArrayList<hackstreet.sixeswild.game.Location> nullLocations;
-	private double[] percentage = new double[6];
-	private int numShuffle;
-	private int numSwap;
-	private int numRemove;
-	private int numHint;
-	private double freq1;
-	private double freq2;
-	private double freq3;
-	private double freq4;
-	private double freq5;
-	private double freq6;
-	private double freqMult2;
-	private double freqMult3;
-	private int pointsStar1;
-	private int pointsStar2;
-	private int pointsStar3;
-	public File File;
-	
-	public AbstractLevelConfig(){
-		
-	}
 }

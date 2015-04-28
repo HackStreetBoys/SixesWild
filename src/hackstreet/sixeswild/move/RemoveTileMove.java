@@ -1,24 +1,36 @@
 package hackstreet.sixeswild.move;
 
-import hackstreet.sixeswild.game.Slot;
+import hackstreet.sixeswild.level.AbstractLevel;
 
-import java.util.ArrayList;
-
+/**
+ * Move: Remove the selected Tile, then repopulate.
+ * @author Nicholas
+ *
+ */
 public class RemoveTileMove extends AbstractGameMove {
 
-	public RemoveTileMove(ArrayList<Slot> selectedSlots) {
-		super(selectedSlots);
+	AbstractLevel level;
+	
+	/**
+	 * RemoveTileMove constructor.
+	 * @param level The current level being played.
+	 */
+	public RemoveTileMove(AbstractLevel level) {
+		super(level);
 	}
 
 	@Override
 	public boolean isValid() {
-		return (this.selectedSlots.size() == 1);
+		return (level.getSelectedSlots().size() == 1);
 	}
 
 	@Override
 	public void doMove() {
-		if (this.isValid()){
-			// TODO update board with gravity
+		if (this.isValid()) {
+			level.getSelectedSlots().get(0).setTile(null);
+			level.repopulateSlots();
+			
+			// TODO repaint
 		}
 	}
 }

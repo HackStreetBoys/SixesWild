@@ -24,7 +24,7 @@ public class SavedLevelData {
 		this.starsEarned = 0;
 	}
 	
-	public AbstractLevelConfig getConfig() {
+	public AbstractLevelConfig getLevelConfig() {
 		return config;
 	}
 

@@ -1,7 +1,6 @@
 package hackstreet.sixeswild.move;
 
-import java.util.ArrayList;
-import hackstreet.sixeswild.game.Slot;
+import hackstreet.sixeswild.level.AbstractLevel;
 
 /**
  * Different game moves have different implementations,
@@ -13,11 +12,17 @@ import hackstreet.sixeswild.game.Slot;
  */
 public abstract class AbstractGameMove {
 	
-	/** List of selected Slots. */
-	ArrayList<Slot> selectedSlots;
+	/** Current level being played. */
+	AbstractLevel level;
 	
-	public AbstractGameMove(ArrayList<Slot> selectedSlots){
-		this.selectedSlots = selectedSlots;
+	/**
+	 * Different game moves have different implementations,
+	 * but each of them have validation, execution, and a 
+	 * list of slots the move is performed on.
+	 * @param level The current level being played.
+	 */
+	public AbstractGameMove(AbstractLevel level){
+		this.level = level;
 	}
 	
 	public abstract boolean isValid();
