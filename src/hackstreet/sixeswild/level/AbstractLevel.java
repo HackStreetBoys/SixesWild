@@ -291,17 +291,17 @@ public class AbstractLevel {
 					
 				}
 			}
-		}
-		
+		}	
 	}
 
 	/**
 	 * Apply gravity to sift down existing tiles into null spaces.
 	 */
 	public void applyGravity() {
+		
 		// apply gravity to all columns individually
-		for (int x=0; x < 9; x++) {
-			this.applyGravityInColumn(x);
+		for (int col=0; col < 9; col++) {
+			this.applyGravityInColumn(col);
 		}
 		
 	}
@@ -330,7 +330,7 @@ public class AbstractLevel {
 						
 						// copy down value to first slot
 						board.get(loc).setTile(board.get(loc2).getTile());	
-						// set value of moved tile to null
+						// set tile in slot over to null
 						board.get(loc2).setTile(null);
 					}
 				}
