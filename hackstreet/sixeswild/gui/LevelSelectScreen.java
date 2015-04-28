@@ -33,10 +33,8 @@ public class LevelSelectScreen extends AbstractScreen {
 		levelPanel.setLayout(new GridLayout(4, 5, 10, 10));
 		for (int x = 1; x <= 20; x++) {
 			JButton button = new JButton(x+"");
-			ImageIcon buttonImage = new ImageIcon("images/1-star-unpressed.png");
-			ImageIcon buttonImage2 = new ImageIcon("images/1-star-pressed.png");
-			button.setIcon(buttonImage);
-			button.setPressedIcon(buttonImage2);
+			
+			setImages(button, x);
 			button.setBorderPainted(true);
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
@@ -68,30 +66,40 @@ public class LevelSelectScreen extends AbstractScreen {
 	 * @param x
 	 * @return
 	 */
-	private String getImage(int x) {
+	private void setImages(JButton b, int x) {
 		
-		String imgName = "";
+		// for now..
+		int stars = -1;
+		if (x < 5) 
+			stars = 1 + (int)(Math.random()*3);
 		
-		switch(x) {
+		
+		// supposed to switch on actual value
+		switch(stars) {
+			case 0:
+				b.setIcon(new ImageIcon("images/0-stars-unpressed.png"));
+				b.setPressedIcon(new ImageIcon("images/0-stars-pressed.png"));
+				break;
 			case 1:
+				b.setIcon(new ImageIcon("images/1-star-unpressed.png"));
+				b.setPressedIcon(new ImageIcon("images/1-star-pressed.png"));
+				break;
 			case 2:
-				imgName = "images/3-stars-button.png";
+				b.setIcon(new ImageIcon("images/2-stars-unpressed.png"));
+				b.setPressedIcon(new ImageIcon("images/2-stars-pressed.png"));
 				break;
 				
 			case 3:
-				imgName = "images/1-star-button.png";
-				break;
-			
-			case 4: 
-				imgName = "images/0-stars-button2.png";
+				b.setIcon(new ImageIcon("images/3-stars-unpressed.png"));
+				b.setPressedIcon(new ImageIcon("images/3-stars-pressed.png"));
 				break;
 			
 			default: 
-				imgName = "images/locked-button.png";
+				b.setIcon(new ImageIcon("images/locked-button.png"));
 				break;
 				
 		}
-		return imgName;
+		return;
 	}
 
 }
