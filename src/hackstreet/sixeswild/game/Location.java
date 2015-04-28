@@ -138,7 +138,8 @@ public class Location {
 					new Location(this.getX()+1,this.getY())
 					));
 		}
-		
+		else
+			throw new IllegalStateException("Location.getAdjacentRawLocations(): logic error");		
 
 		return adj;
 	}

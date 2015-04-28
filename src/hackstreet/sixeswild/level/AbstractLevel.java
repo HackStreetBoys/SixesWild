@@ -2,9 +2,12 @@ package hackstreet.sixeswild.level;
 
 import hackstreet.sixeswild.config.SavedLevelData;
 import hackstreet.sixeswild.game.AI;
+import hackstreet.sixeswild.game.EliminationSlot;
+import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.move.AbstractGameMove;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
@@ -55,7 +58,96 @@ public class AbstractLevel {
 		this.moveStack = new Stack<AbstractGameMove>();
 	}
 	
+	/**
+	 * If the addition is valid, add a Slot to the selectedSlot ArrayList.
+	 * @param loc
+	 */
+	public void addToSelection(Location loc){
+		if (isValidSelectionAddition(loc)){
+			selectedSlots.add(board.get(loc));
+		}
+		else
+			throw new IllegalArgumentException();
+	}
 	
+	/**
+	 * Validate whether a location can be added to the selected slots.
+	 * @param loc
+	 * @return boolean
+	 */
+	private boolean isValidSelectionAddition(Location loc){
+		return (this.getAllAdjacentLocations().contains(loc));
+	}
+	
+	/**
+	 * Gets the raw adjacent locations of a loc, and then filters to make sure
+	 * that none of them are Inert, Elimination, or already added.
+	 * 
+	 * @return a list of all valid adjacent tiles to the selected tiles
+	 */
+	private ArrayList<Location> getAllAdjacentLocations(){
+		
+		ArrayList<Location> answer = new ArrayList<Location>();
+		ArrayList<Location> temp = new ArrayList<Location>();
+		
+		// run check for every selected slot
+		for (Slot slot : selectedSlots){
+			temp = slot.getLoc().getRawAdjacentLocations();
+			
+			for (Location loc : temp){
+				
+				// do not add location to answer if the loc is Inert, Elimination, or already added
+				if ( !(board.get(loc) instanceof InertSlot) && !(board.get(loc) instanceof EliminationSlot) &&
+						(!selectedSlots.contains(board.get(loc)))){
+					answer.add(loc);
+				}
+			}
+		}
+		return answer;
+	}
+
+	/**
+	 * First, apply gravity to sift down existing tiles into null spaces.
+	 * Then, repopulate any remaining NULL Tiles using the random generation of
+	 * values and multipliers.
+	 */
+	public void repopulateSlots(){
+		this.applyGravity();
+		// TODO HERE
+	}
+	
+	/**
+	 * Apply gravity to sift down existing tiles into null spaces.
+	 */
+	private void applyGravity(){
+		// TODO HERE
+	}
+	
+	/**
+	 * 
+	 * @return the new value for a Tile {1-6}
+	 */
+	private int generateRandomValue(){
+		// TODO HERE
+		return 0;
+	}
+	
+	/**
+	 * 
+	 * @return the new multiplier for a tile {1-3}
+	 */
+	private int generateRandomMultiplier(){
+		// TODO HERE
+		return 0;
+	}
+	
+	/**
+	 * Add points to the score.
+	 * @param delta The number of points to add to the score.
+	 */
+	public void addPointsEarned(int delta) {
+		this.pointsEarned += delta;
+	}
 	
 	public SavedLevelData getSavedLevelData() {
 		return savedLevelData;
@@ -210,81 +302,5 @@ public class AbstractLevel {
 	public void setMoveStack(Stack<AbstractGameMove> moveStack) {
 		this.moveStack = moveStack;
 	}
-
-
-	public ArrayList<Slot> getSelectedSlots() {
-		return selectedSlots;
-	}
-
-	
-
-	/**
-	 * 
-	 * @return a list of all valid adjacent tiles to the selected tiles
-	 */
-	public ArrayList<Location> getAdjacentLocations(){
-		
-		ArrayList<Location> answer = new ArrayList<Location>();
-		
-		for (Slot slot : selectedSlots){
-			
-		}
-		
-		/*
-		// Ensure no tiles are returned that have already been visited
-		for (Location visitedTile : alreadyVisited){
-			if (adj.contains(visitedTile)){
-				adj.remove(visitedTile);
-			}				
-		}
-		*/
-		return null;
-	}
-
-	/**
-	 * First, apply gravity to sift down existing tiles into null spaces.
-	 * Then, repopulate any remaining NULL Tiles using the random generation of
-	 * values and multipliers.
-	 */
-	public void repopulateSlots(){
-		this.applyGravity();
-		// TODO HERE
-	}
-	
-	/**
-	 * Apply gravity to sift down existing tiles into null spaces.
-	 */
-	private void applyGravity(){
-		// TODO HERE
-	}
-	
-	/**
-	 * 
-	 * @return the new value for a Tile {1-6}
-	 */
-	private int generateRandomValue(){
-		// TODO HERE
-		return 0;
-	}
-	
-	/**
-	 * 
-	 * @return the new multiplier for a tile {1-3}
-	 */
-	private int generateRandomMultiplier(){
-		// TODO HERE
-		return 0;
-	}
-	
-	/**
-	 * Add points to the score.
-	 * @param delta The number of points to add to the score.
-	 */
-	public void addPointsEarned(int delta) {
-		this.pointsEarned += delta;
-	}
-	
-	
-	
 	
 }
