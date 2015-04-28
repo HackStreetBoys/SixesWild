@@ -34,9 +34,8 @@ public class Slot {
 	 * Returns true if this slot has a tile that can be moved using gravity.
 	 * @return
 	 */
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hasTile() {
+		return !(this.tile == null);
 	}
 
 }

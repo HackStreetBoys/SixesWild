@@ -36,7 +36,7 @@ public class AbstractLevel {
 	private boolean isShuffleMoveSelected;
 	private boolean isAISelected;
 	private Stack<AbstractGameMove> moveStack;
-	
+
 	/**
 	 * AbstractLevel constructor.
 	 * @param savedLevelData The data used to create the level.
@@ -57,7 +57,7 @@ public class AbstractLevel {
 		this.isAISelected = false;
 		this.moveStack = new Stack<AbstractGameMove>();
 	}
-	
+
 	/**
 	 * If the addition is valid, add a Slot to the selectedSlot ArrayList.
 	 * @param loc
@@ -69,7 +69,7 @@ public class AbstractLevel {
 		else
 			throw new IllegalArgumentException();
 	}
-	
+
 	/**
 	 * Validate whether a location can be added to the selected slots.
 	 * @param loc
@@ -78,7 +78,7 @@ public class AbstractLevel {
 	private boolean isValidSelectionAddition(Location loc){
 		return (this.getAllAdjacentLocations().contains(loc));
 	}
-	
+
 	/**
 	 * Gets the raw adjacent locations of a loc, and then filters to make sure
 	 * that none of them are Inert, Elimination, or already added.
@@ -86,16 +86,16 @@ public class AbstractLevel {
 	 * @return a list of all valid adjacent tiles to the selected tiles
 	 */
 	private ArrayList<Location> getAllAdjacentLocations(){
-		
+
 		ArrayList<Location> answer = new ArrayList<Location>();
 		ArrayList<Location> temp = new ArrayList<Location>();
-		
+
 		// run check for every selected slot
 		for (Slot slot : selectedSlots){
 			temp = slot.getLoc().getRawAdjacentLocations();
-			
+
 			for (Location loc : temp){
-				
+
 				// do not add location to answer if the loc is Inert, Elimination, or already added
 				if ( !(board.get(loc) instanceof InertSlot) && !(board.get(loc) instanceof EliminationSlot) &&
 						(!selectedSlots.contains(board.get(loc)))){
@@ -106,7 +106,7 @@ public class AbstractLevel {
 		return answer;
 	}
 
-	
+
 	public SavedLevelData getSavedLevelData() {
 		return savedLevelData;
 	}
@@ -272,65 +272,66 @@ public class AbstractLevel {
 		this.applyGravity();
 		// TODO HERE
 	}
-	
+
 	/**
 	 * Apply gravity to sift down existing tiles into null spaces.
 	 */
 	public void applyGravity() {
+		// apply gravity to all columns individually
 		for (int x=0; x < 9; x++) {
 			this.applyGravityInColumn(x);
 		}
 	}
-	
+
 	/**
 	 * Apply gravity in given column, stacking tiles in column on the bottom.
 	 * @param column
 	 */
 	public void applyGravityInColumn(int column) {
 		
-		return;
-	}
-	
-	/**
-	 * Finds location of a valid tile above the one at given location.
-	 * @param location
-	 * @return
-	 */
-	private Location LocationOfAboveTile(Location location) {
+		// column to go through
+		int col = column;
 		
-		int x = location.getX();
-		int y = location.getY();
-		
-		// finds first location of a slot that is not empty in column x of board
-		for (int i=y; i>0; i--) {
-			Location loc = new Location(x, i);
-			Slot s = board.get(loc);
-			if (!s.isEmpty()) 
-				return loc;
+		for (int row = 8; row > 0; row--) {
+			Location loc = new Location(col, row);
+			
+			// if slot is not inert and does not have a tile, find one in column above to move down
+			if (!(board.get(loc) instanceof InertSlot) && !(board.get(loc).hasTile())) {
+				
+				// look through slots above
+				for (int row2 = row-1; row2 >= 0; row2--) {
+					Location loc2 = new Location(col, row2);
+					
+					// if this slot has a tile, move it down
+					if (!(board.get(loc2) instanceof InertSlot) && (board.get(loc2).hasTile())) {
+						
+						// copy down value to first slot
+						board.get(loc).setTile(board.get(loc2).getTile());	
+						// set value of moved tile to null
+						board.get(loc2).setTile(null);
+					}
+				}
+			}
 		}
-		return null;
 	}
-
 
 
 	/**
 	 * 
 	 * @return the new value for a Tile {1-6}
 	 */
-	public int generateRandomValue(){
+	public int generateRandomValue() {
 		double freq1 = this.getSavedLevelData().getLevelConfig().getFreq1();
 		double freq2 = this.getSavedLevelData().getLevelConfig().getFreq2();
 		double freq3 = this.getSavedLevelData().getLevelConfig().getFreq3();
 		double freq4 = this.getSavedLevelData().getLevelConfig().getFreq4();
 		double freq5 = this.getSavedLevelData().getLevelConfig().getFreq5();
 		double freq6 = this.getSavedLevelData().getLevelConfig().getFreq6();
-		
+
 		double denom = freq1+freq2+freq3+freq4+freq5+freq6;
-		
 		double r = Math.random();
-		
 		double p = freq1/denom;
-		
+
 		if (r < p)
 			return 1;
 		p = (freq1+freq2)/denom;
@@ -345,21 +346,19 @@ public class AbstractLevel {
 		p = (freq1+freq2+freq3+freq4+freq5)/denom;
 		if (r < p)
 			return 5;
-		
+
 		return 6;
 	}
-	
+
 	/**
 	 * Generates the multiplier for a tile using information stored in leveldata.
 	 * @return the new multiplier for a tile {1-3}
 	 */
 	public int generateRandomMultiplier(){
-		double mult2 = this.getSavedLevelData().getLevelConfig().getFreqMult2();
-		double mult3 = this.getSavedLevelData().getLevelConfig().getFreqMult3();
-		
-		// compute random multiplier using above frequencies
-		
-		return 0;
+//		double mult2Freq = this.getSavedLevelData().getLevelConfig().getFreqMult2();
+//		double mult3Freq = this.getSavedLevelData().getLevelConfig().getFreqMult3();
+
+		return 1;
 	}
 
 	public ArrayList<Slot> getSelectedSlots() {
@@ -377,8 +376,8 @@ public class AbstractLevel {
 	public void addPointsEarned(int delta) {
 		this.pointsEarned += delta;
 	}
-	
-	
-	
-	
+
+
+
+
 }
