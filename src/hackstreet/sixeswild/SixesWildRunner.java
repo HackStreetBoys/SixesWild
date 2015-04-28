@@ -1,17 +1,13 @@
 package hackstreet.sixeswild;
 
-import javax.swing.UIManager;
-import javax.swing.UIManager.*;
-
-import hackstreet.sixeswild.SixesWild;
-import hackstreet.sixeswild.SplashScreen;
 import hackstreet.sixeswild.gui.SWApplication;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 public class SixesWildRunner {
 
 	public static void main(String[] args){
 
-		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -19,7 +15,10 @@ public class SixesWildRunner {
 					break;
 				}
 			}
-		} catch (Exception e) { }
+		} 
+		catch (Exception e) { 
+			// none
+		}
 
 		SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		splash.showSplash();

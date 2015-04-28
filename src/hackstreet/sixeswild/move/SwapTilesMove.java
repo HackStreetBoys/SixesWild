@@ -1,6 +1,8 @@
 package hackstreet.sixeswild.move;
 
+import java.util.ArrayList;
 import hackstreet.sixeswild.game.Slot;
+import hackstreet.sixeswild.game.Tile;
 
 /**
  * Move: Swap two Tiles given their Slots.
@@ -10,23 +12,23 @@ import hackstreet.sixeswild.game.Slot;
  */
 public class SwapTilesMove extends AbstractGameMove {
 
-	public SwapTilesMove(Slot selectedSlots[]){
+	public SwapTilesMove(ArrayList<Slot> selectedSlots){
 		super(selectedSlots);
 	}
 
 	@Override
 	public boolean isValid() {
-		return (selectedSlots.length == 2);
+		return (this.selectedSlots.size() == 2);
 	}
 
 	@Override
 	public void doMove() {
 		if (this.isValid()){
-			Tile tempTile = new Tile();
+			Tile tempTile;
 			tempTile = selectedSlots.get(0).getTile();
 			selectedSlots.get(0).setTile(selectedSlots.get(1).getTile());
 			selectedSlots.get(1).setTile(tempTile);
-			// repaint grid;
+			// TODO repaint grid;
 		}
 		else
 			throw new IllegalStateException();
