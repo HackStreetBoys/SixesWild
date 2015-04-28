@@ -46,7 +46,7 @@ public class AbstractLevel {
 		this.numHintLeft = this.savedLevelData.getLevelConfig().getNumHint();
 		this.pointsEarned = 0;
 		this.board = new HashMap<Location, Slot>();
-		this.setSelectedSlots(new ArrayList<Slot>());
+		this.selectedSlots = new ArrayList<Slot>();
 		this.ai = new AI();
 		this.isRemoveMoveSelected = false;
 		this.isSwapMoveSelected = false;
@@ -212,6 +212,27 @@ public class AbstractLevel {
 	}
 
 
+	public ArrayList<Slot> getSelectedSlots() {
+		return selectedSlots;
+	}
+
+
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Location> getAdjacentLocations(){
+		
+		/*
+		// Ensure no tiles are returned that have already been visited
+		for (Location visitedTile : alreadyVisited){
+			if (adj.contains(visitedTile)){
+				adj.remove(visitedTile);
+			}				
+		}
+		*/
+		return null;
+	}
 
 	/**
 	 * First, apply gravity to sift down existing tiles into null spaces.
@@ -226,7 +247,7 @@ public class AbstractLevel {
 	/**
 	 * Apply gravity to sift down existing tiles into null spaces.
 	 */
-	public void applyGravity(){
+	private void applyGravity(){
 		// TODO HERE
 	}
 	
@@ -234,7 +255,7 @@ public class AbstractLevel {
 	 * 
 	 * @return the new value for a Tile {1-6}
 	 */
-	public int generateRandomValue(){
+	private int generateRandomValue(){
 		// TODO HERE
 		return 0;
 	}
@@ -243,24 +264,16 @@ public class AbstractLevel {
 	 * 
 	 * @return the new multiplier for a tile {1-3}
 	 */
-	public int generateRandomMultiplier(){
+	private int generateRandomMultiplier(){
 		// TODO HERE
 		return 0;
 	}
-
-	public ArrayList<Slot> getSelectedSlots() {
-		return selectedSlots;
-	}
-
-	public void setSelectedSlots(ArrayList<Slot> selectedSlots) {
-		this.selectedSlots = selectedSlots;
-	}
-
+	
 	/**
 	 * Add points to the score.
 	 * @param delta The number of points to add to the score.
 	 */
-	public void addPointsEarned(int delta) {
+	private void addPointsEarned(int delta) {
 		this.pointsEarned += delta;
 	}
 	
