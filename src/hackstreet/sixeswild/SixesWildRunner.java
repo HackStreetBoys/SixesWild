@@ -3,8 +3,9 @@ package hackstreet.sixeswild;
 import javax.swing.UIManager;
 import javax.swing.UIManager.*;
 
+import hackstreet.sixeswild.SixesWild;
+import hackstreet.sixeswild.SplashScreen;
 import hackstreet.sixeswild.gui.SWApplication;
-
 
 public class SixesWildRunner {
 

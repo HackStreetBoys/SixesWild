@@ -18,7 +18,7 @@ public class GridView extends JPanel {
 		
 		for(int y=0; y<9; y++){
 			for(int x=0; x<9; x++){
-				Location loc = new Location(x+1,y+1);
+				Location loc = new Location(x,y);
 				ActiveSlotView slotView = new ActiveSlotView(loc);
 				super.add(slotView, new Dimension(x,y));
 			}
