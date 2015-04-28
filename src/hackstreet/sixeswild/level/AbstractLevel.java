@@ -9,8 +9,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 
+/**
+ * If SixesWild is in the GamePlay screen, there should
+ * be a single AbstractLevel representing the current game.
+ * 
+ * @author Nicholas
+ *
+ */
 public class AbstractLevel {
 
+	/** The data used to create the level. */
 	SavedLevelData savedLevelData;
 	int numShuffleLeft;
 	int numSwapLeft;
@@ -20,27 +28,31 @@ public class AbstractLevel {
 	HashMap <Location, Slot> board;
 	ArrayList<Slot> selectedSlots;
 	AI ai;
-	boolean removeMoveSelected;
-	boolean swapMoveSelected;
-	boolean shuffleMoveSelected;
+	boolean isRemoveMoveSelected;
+	boolean isSwapMoveSelected;
+	boolean isShuffleMoveSelected;
+	boolean isAISelected;
 	Stack<AbstractGameMove> moveStack;
 	
+	/**
+	 * AbstractLevel constructor.
+	 * @param savedLevelData The data used to create the level.
+	 */
 	public AbstractLevel(SavedLevelData savedLevelData){
 		this.savedLevelData = savedLevelData;
-		/*
 		this.numShuffleLeft = this.savedLevelData.getConfig().getNumShuffle();
 		this.numSwapLeft = this.savedLevelData.getConfig().getNumSwap();
 		this.numRemoveLeft = this.savedLevelData.getConfig().getNumRemove();
 		this.numHintLeft = this.savedLevelData.getConfig().getNumHint();
-		this.this.pointsEarned;
-		this.board;
-		this.selectedSlots;
-		this.ai;
-		this.removeMoveSelected;
-		this.swapMoveSelected;
-		this.shuffleMoveSelected;
+		this.pointsEarned = 0;
+		this.board = new HashMap<Location, Slot>();
+		this.selectedSlots = new ArrayList<Slot>();
+		this.ai = new AI();
+		this.isRemoveMoveSelected = false;
+		this.isSwapMoveSelected = false;
+		this.isShuffleMoveSelected = false;
+		this.isAISelected = false;
 		this.moveStack = new Stack<AbstractGameMove>();
-		*/
 	}
 	
 }
