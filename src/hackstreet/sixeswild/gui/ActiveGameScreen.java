@@ -49,7 +49,7 @@ public class ActiveGameScreen extends AbstractScreen {
 		this.backButton.setFocusable(false);
 		this.backButton.addActionListener(new ToLevelSelectScreenController(super.getApplication()));
 		
-		this.gridView = new GridView();
+		this.gridView = new GridView(application);
 		this.gridView.setSize(450,450);
 		this.gridView.setLocation(400 - gridView.getWidth()/2,100);
 		

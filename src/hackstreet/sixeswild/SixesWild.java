@@ -53,4 +53,8 @@ public class SixesWild {
 		return true;
 		*/
 	}
+	
+	public AbstractLevel getLevel(){
+		return this.activeLevel;
+	}
 }

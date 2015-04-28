@@ -7,36 +7,27 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import hackstreet.sixeswild.game.Location;
-import hackstreet.sixeswild.game.Tile;
+import hackstreet.sixeswild.game.Slot;
 
 @SuppressWarnings("serial")
 public class ActiveSlotView extends JPanel{
 
-	private Location loc;
+	private Slot slot;
 	private TileView tileView;
 	
-	public ActiveSlotView(Location loc){
-		this.loc = loc;
+	public ActiveSlotView(Slot slot){
+		this.slot = slot;
 		super.setLayout(null);
 		super.setBackground(new Color(0,0,0,0));
 		
-		int val = 1 + (int)(6*Math.random());
-		int mult = 1 + (int)(100*Math.random());
-		if(mult<70)
-			mult = 1;
-		else if(mult<90)
-			mult = 2;
-		else
-			mult = 3;
-		Tile tile = new Tile(val,mult);
-		this.tileView = new TileView(tile);
+		this.tileView = new TileView(slot.getTile());
 		this.tileView.setSize(48,48);
 		this.tileView.setLocation(1,1);
 		super.add(tileView);
 	}
 	
 	public Location getLoc(){
-		return this.loc;
+		return this.slot.getLoc();
 	}
 	
 	@Override
@@ -49,7 +40,7 @@ public class ActiveSlotView extends JPanel{
 	public boolean equals(Object o){
 		if(o instanceof ActiveSlotView){
 			ActiveSlotView other = (ActiveSlotView)o;
-			return other.loc.equals(this.loc);
+			return other.slot.equals(this.slot);
 		}
 		return false;
 

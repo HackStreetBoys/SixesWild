@@ -1,6 +1,7 @@
 package hackstreet.sixeswild.gui;
 
 import hackstreet.sixeswild.game.Location;
+import hackstreet.sixeswild.game.Slot;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,14 +13,15 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GridView extends JPanel {
 
-	public GridView(){
+	public GridView(SWApplication application){
 		super.setLayout(new GridLayout(9,9));
 		super.setBackground(new Color(0,0,0,0));
 		
 		for(int y=0; y<9; y++){
 			for(int x=0; x<9; x++){
 				Location loc = new Location(x,y);
-				ActiveSlotView slotView = new ActiveSlotView(loc);
+				Slot slot = application.getModel().getLevel().getBoard().get(loc);
+				ActiveSlotView slotView = new ActiveSlotView(slot);
 				super.add(slotView, new Dimension(x,y));
 			}
 		}
