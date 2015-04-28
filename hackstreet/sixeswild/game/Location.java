@@ -1,21 +1,34 @@
 package hackstreet.sixeswild.game;
 
+/**
+ * Stores x and y coordinates on the game board.
+ * 
+ * @author Nicholas
+ *
+ */
 public class Location {
 
+	/** The x-coordinate of the tile, {0-8}. */
 	private int x;
+	
+	/** The y-coordinate of the tile, {0-8}. */
 	private int y;
 	
+	/**
+	 * Location constructor.
+	 * @param x The x-coordinate of the tile, {0-8}.
+	 * @param y The y-coordinate of the tile, {0-8}.
+	 */
 	public Location(int x, int y){
-		this.x = x;
-		this.y = y;
-	}
-	
-	public void setX(int x){
-		this.x = x;
-	}
-	
-	public void setY(int y){
-		this.y = y;
+		if (x >= 0 && x <= 8)
+			this.x = x;
+		else
+			throw new IllegalArgumentException("x must be between 0 and 8.");
+		
+		if (y >= 0 && y <= 8)
+			this.y = y;
+		else
+			throw new IllegalArgumentException("y must be between 0 and 8.");
 	}
 	
 	public int getX(){
