@@ -3,7 +3,7 @@ package hackstreet.sixeswild.game;
 /**
  * A Permanent game entity with a fixed Location and variable Tile.
  * 
- * @author Nicholas
+ * @author Tim, Nicholas
  *
  */
 public class Slot {
@@ -28,6 +28,15 @@ public class Slot {
 
 	public void setTile(Tile tile) {
 		this.tile = tile;
+	}
+
+	/**
+	 * Returns true if this slot has a tile that can be moved using gravity.
+	 * @return
+	 */
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

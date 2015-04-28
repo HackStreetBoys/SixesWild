@@ -13,7 +13,7 @@ import java.util.Stack;
  * If SixesWild is in the GamePlay screen, there should
  * be a single AbstractLevel representing the current game.
  * 
- * @author Nicholas
+ * @author Tim, Nicholas
  *
  */
 public class AbstractLevel {
@@ -226,25 +226,89 @@ public class AbstractLevel {
 	/**
 	 * Apply gravity to sift down existing tiles into null spaces.
 	 */
-	public void applyGravity(){
-		// TODO HERE
+	public void applyGravity() {
+		for (int x=0; x < 9; x++) {
+			this.applyGravityInColumn(x);
+		}
 	}
 	
+	/**
+	 * Apply gravity in given column, stacking tiles in column on the bottom.
+	 * @param column
+	 */
+	public void applyGravityInColumn(int column) {
+		
+		return;
+	}
+	
+	/**
+	 * Finds location of a valid tile above the one at given location.
+	 * @param location
+	 * @return
+	 */
+	private Location LocationOfAboveTile(Location location) {
+		
+		int x = location.getX();
+		int y = location.getY();
+		
+		// finds first location of a slot that is not empty in column x of board
+		for (int i=y; i>0; i--) {
+			Location loc = new Location(x, i);
+			Slot s = board.get(loc);
+			if (!s.isEmpty()) 
+				return loc;
+		}
+		return null;
+	}
+
+
+
 	/**
 	 * 
 	 * @return the new value for a Tile {1-6}
 	 */
 	public int generateRandomValue(){
-		// TODO HERE
-		return 0;
+		double freq1 = this.getSavedLevelData().getLevelConfig().getFreq1();
+		double freq2 = this.getSavedLevelData().getLevelConfig().getFreq2();
+		double freq3 = this.getSavedLevelData().getLevelConfig().getFreq3();
+		double freq4 = this.getSavedLevelData().getLevelConfig().getFreq4();
+		double freq5 = this.getSavedLevelData().getLevelConfig().getFreq5();
+		double freq6 = this.getSavedLevelData().getLevelConfig().getFreq6();
+		
+		double denom = freq1+freq2+freq3+freq4+freq5+freq6;
+		
+		double r = Math.random();
+		
+		double p = freq1/denom;
+		
+		if (r < p)
+			return 1;
+		p = (freq1+freq2)/denom;
+		if (r < p)
+			return 2;
+		p = (freq1+freq2+freq3)/denom;
+		if (r < p)
+			return 3;
+		p = (freq1+freq2+freq3+freq4)/denom;
+		if (r < p)
+			return 4;
+		p = (freq1+freq2+freq3+freq4+freq5)/denom;
+		if (r < p)
+			return 5;
+		
+		return 6;
 	}
 	
 	/**
-	 * 
+	 * Generates the multiplier for a tile using information stored in leveldata.
 	 * @return the new multiplier for a tile {1-3}
 	 */
 	public int generateRandomMultiplier(){
-		// TODO HERE
+		double mult2 = this.getSavedLevelData().getLevelConfig().getFreqMult2();
+		double mult3 = this.getSavedLevelData().getLevelConfig().getFreqMult3();
+		
+		// compute random multiplier using above frequencies
+		
 		return 0;
 	}
 
