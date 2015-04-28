@@ -216,12 +216,19 @@ public class AbstractLevel {
 		return selectedSlots;
 	}
 
+	
 
 	/**
 	 * 
-	 * @return
+	 * @return a list of all valid adjacent tiles to the selected tiles
 	 */
 	public ArrayList<Location> getAdjacentLocations(){
+		
+		ArrayList<Location> answer = new ArrayList<Location>();
+		
+		for (Slot slot : selectedSlots){
+			
+		}
 		
 		/*
 		// Ensure no tiles are returned that have already been visited
@@ -273,7 +280,7 @@ public class AbstractLevel {
 	 * Add points to the score.
 	 * @param delta The number of points to add to the score.
 	 */
-	private void addPointsEarned(int delta) {
+	public void addPointsEarned(int delta) {
 		this.pointsEarned += delta;
 	}
 	

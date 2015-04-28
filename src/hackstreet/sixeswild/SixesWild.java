@@ -18,9 +18,8 @@ public class SixesWild {
 	ArrayList<SavedLevelData> savedLevelData;
 	AbstractLevel activeLevel;
 
-	public SixesWild(ArrayList<SavedLevelData> savedLevelData, ArrayList<AbstractAchievement> achievements){
-		this.savedLevelData = savedLevelData;
-		this.achievements = achievements;
+	public SixesWild(){
+		// empty
 	}
 	
 	private void winLevel(SixesWild sw)
