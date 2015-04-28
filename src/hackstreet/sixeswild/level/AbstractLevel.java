@@ -6,6 +6,7 @@ import hackstreet.sixeswild.game.EliminationSlot;
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
+import hackstreet.sixeswild.game.Tile;
 import hackstreet.sixeswild.move.AbstractGameMove;
 
 import java.util.ArrayList;
@@ -270,7 +271,28 @@ public class AbstractLevel {
 	 */
 	public void repopulateSlots(){
 		this.applyGravity();
-		// TODO HERE
+		
+		// go over each column
+		for (int col = 0; col < 9; col++) {
+			
+			// repopulate each cell
+			for (int row = 0; row < 9; row++) {
+				
+				Location loc = new Location(col,row);
+				
+				// if slot is not intert and does not have tile, give it a new tile
+				if (!(board.get(loc) instanceof InertSlot) && !(board.get(loc).hasTile())) {
+					
+					int val = this.generateRandomValue();
+					int mult = this.generateRandomMultiplier();
+					
+					Tile t = new Tile(val, mult);
+					board.get(loc).setTile(t);
+					
+				}
+			}
+		}
+		
 	}
 
 	/**
@@ -281,6 +303,7 @@ public class AbstractLevel {
 		for (int x=0; x < 9; x++) {
 			this.applyGravityInColumn(x);
 		}
+		
 	}
 
 	/**
