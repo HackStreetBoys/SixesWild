@@ -8,22 +8,28 @@ import javax.swing.JPanel;
 import javax.swing.JWindow;
 
 /**
+ * Splash screen that will display the given image for a given duration.
  * 
- * @author timpetri
- * Class for splash screens, most code found online
+ * @author Tim Petri
+ * 
  */
 public class SplashScreen extends JWindow {
-
+	
+	/** Sleep duration in milliseconds. */
 	private int duration;
+	
+	/** Relative path for image to display (should be 630*300px.) */
 	private String path;
 	
+	/** Constructor */
 	public SplashScreen(int d, String p) {
 		this.duration = d;
 		this.path = p;
 	}
-
-	// A simple little method to show a title screen in the center
-	// of the screen for the amount of time given in the constructor
+	
+	/**
+	 * Show the splash screen.
+	 */
 	public void showSplash() {
 		JPanel content = (JPanel)getContentPane();
 		content.setBackground(Color.white);
@@ -50,19 +56,13 @@ public class SplashScreen extends JWindow {
 		setVisible(false);
 	}
 	
+	/**
+	 * Show the splash screen and exit.
+	 * 
+	 * Used for testing.
+	 */
 	public void showSplashAndExit() {
 		showSplash();
 		System.exit(0);
 	}
-
-
-
-
-	public static void main(String[] args) {
-	    // Throw a nice little title page up on the screen first
-	    SplashScreen splash = new SplashScreen(10000, "LevelBuilderSplashScreen.png");
-	    // Normally, we'd call splash.showSplash() and get on with the program.
-	    splash.showSplashAndExit();
-	}
-
 }
