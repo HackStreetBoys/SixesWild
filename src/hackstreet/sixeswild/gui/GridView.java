@@ -1,6 +1,6 @@
 package hackstreet.sixeswild.gui;
 
-import hackstreet.sixeswild.controller.SwipeListener;
+import hackstreet.sixeswild.controller.SwipeController;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 
@@ -37,7 +37,7 @@ public class GridView extends JPanel {
 	}
 	
 	private void addController(SWApplication application){
-		SwipeListener sl = new SwipeListener(application);
+		SwipeController sl = new SwipeController(application);
 		super.addMouseListener(sl);
 		super.addMouseMotionListener(sl);
 	}

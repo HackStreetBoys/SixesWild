@@ -12,12 +12,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class SwipeListener extends MouseAdapter{
+public class SwipeController extends MouseAdapter{
 
 	SWApplication application;
 	boolean accepting;
 
-	public SwipeListener(SWApplication application){
+	public SwipeController(SWApplication application){
 		this.application = application;
 		this.accepting = false;
 	}
@@ -50,6 +50,7 @@ public class SwipeListener extends MouseAdapter{
 				SwapTilesMove move = new SwapTilesMove(level);
 				move.doMove();
 				level.getMoveStack().push(move);
+				this.accepting = false;
 			}
 		}
 	}
