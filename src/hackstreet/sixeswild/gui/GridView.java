@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.gui;
 
+import hackstreet.sixeswild.controller.SwipeListener;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 
@@ -16,6 +17,7 @@ public class GridView extends JPanel {
 	public GridView(SWApplication application){
 		super.setLayout(new GridLayout(9,9));
 		super.setBackground(new Color(0,0,0,0));
+		this.addController(application);
 		
 		for(int y=0; y<9; y++){
 			for(int x=0; x<9; x++){
@@ -32,5 +34,11 @@ public class GridView extends JPanel {
 		super.paintComponent(g);
 		g.setColor(Color.black);
 		g.drawRect(1,1,super.getWidth()-3,super.getHeight()-3);
+	}
+	
+	private void addController(SWApplication application){
+		SwipeListener sl = new SwipeListener(application);
+		super.addMouseListener(sl);
+		super.addMouseMotionListener(sl);
 	}
 }

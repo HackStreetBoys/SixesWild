@@ -114,5 +114,9 @@ public class ActiveGameScreen extends AbstractScreen {
 		g.setColor(Color.black);
 		g.drawLine(120, 0, 120, 600);
 	}
+	
+	public GridView getGridView(){
+		return this.gridView;
+	}
 
 }
