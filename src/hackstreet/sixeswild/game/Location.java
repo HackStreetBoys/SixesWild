@@ -1,7 +1,6 @@
 package hackstreet.sixeswild.game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Stores x and y coordinates on the game board.
