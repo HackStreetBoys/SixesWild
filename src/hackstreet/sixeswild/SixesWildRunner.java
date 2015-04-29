@@ -53,7 +53,6 @@ public class SixesWildRunner {
 		config.setFreqMult2(.1);
 		config.setFreqMult3(.1);
 		config.setName("Our Fake Level 1");
-		
 		ArrayList<Location> inertLocs = new ArrayList<Location>();
 		for(int n=3;n<=5;n++){
 			for(int m=3;m<=5;m++){
@@ -64,6 +63,19 @@ public class SixesWildRunner {
 		inertLocs.add(new Location(0,8));
 		inertLocs.add(new Location(8,8));
 		inertLocs.add(new Location(8,0));
+		inertLocs.add(new Location(4,2));
+		inertLocs.add(new Location(2,4));
+		inertLocs.add(new Location(4,6));
+		inertLocs.add(new Location(6,4));
+		//-----
+		inertLocs.add(new Location(0,1));
+		inertLocs.add(new Location(1,0));
+		inertLocs.add(new Location(0,7));
+		inertLocs.add(new Location(1,8));
+		inertLocs.add(new Location(7,8));
+		inertLocs.add(new Location(8,7));
+		inertLocs.add(new Location(7,0));
+		inertLocs.add(new Location(8,1));
 		config.setNullLocations(inertLocs);
 		config.setNumHint(1);
 		config.setNumRemove(1);

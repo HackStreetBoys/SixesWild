@@ -40,6 +40,10 @@ public class Location {
 		return 13 * x + y;
 	}
 	
+	public Location pullNearbyLocation(int xDiff, int yDiff){
+		return new Location(this.x+xDiff,this.y+yDiff);
+	}
+	
 	@Override
 	public boolean equals(Object o){
 		if(o instanceof Location){

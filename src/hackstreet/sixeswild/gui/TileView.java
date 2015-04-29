@@ -3,7 +3,9 @@ package hackstreet.sixeswild.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.HashMap;
 
+import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.game.Tile;
 
@@ -16,12 +18,14 @@ public class TileView extends JPanel {
 
 	private SWApplication application;
 
+	private Slot modelContainer;
 	private Tile tile;
 
 	private boolean selected;
 
-	public TileView(SWApplication application, Tile tile){
+	public TileView(SWApplication application, Slot modelContainer, Tile tile){
 		this.application = application;
+		this.modelContainer = modelContainer;
 		this.tile = tile;
 
 		JLabel value = new JLabel(tile.getValue() + "");
@@ -67,6 +71,7 @@ public class TileView extends JPanel {
 			g.drawString(mult + "x", super.getWidth()-15,super.getHeight()-5);
 		}
 		this.renderSelectionGraphic(g);
+		this.renderBordering(g);
 	}
 
 	private void renderSelectionGraphic(Graphics g){
@@ -81,7 +86,7 @@ public class TileView extends JPanel {
 				g.setColor(new Color(0,255,0));
 			else
 				g.setColor(new Color(255,0,0));
-			
+
 			int thickness = 3; //pixels
 			for(int n=0;n<thickness;n++){
 				g.drawRect(0+n,0+n,super.getWidth()-n*2-1,super.getHeight()-n*2-1);
@@ -89,5 +94,22 @@ public class TileView extends JPanel {
 			g.setColor(Color.black);
 			g.drawRect(0+thickness,0+thickness,super.getWidth()-thickness*2-1,super.getHeight()-thickness*2-1);
 		}
+	}
+
+	private void renderBordering(Graphics g){
+		g.setColor(Color.black);
+		HashMap<Location,Slot> board = application.getModel().getLevel().getBoard();
+		Slot up = board.get(this.modelContainer.getLoc().pullNearbyLocation(0,-1));
+		Slot right = board.get(this.modelContainer.getLoc().pullNearbyLocation(1,0));
+		Slot down = board.get(this.modelContainer.getLoc().pullNearbyLocation(0,1));
+		Slot left = board.get(this.modelContainer.getLoc().pullNearbyLocation(-1,0));
+		if(up == null)
+			g.drawLine(0, 0, super.getWidth(), 0);
+		if(right == null)
+			g.drawLine(super.getWidth()-1, 0, super.getWidth()-1, super.getHeight()-1);
+		if(down == null)
+			g.drawLine(0, super.getHeight()-1, super.getWidth()-1, super.getHeight()-1);
+		if(left == null)
+			g.drawLine(0, 0, 0, super.getHeight()-1);
 	}
 }

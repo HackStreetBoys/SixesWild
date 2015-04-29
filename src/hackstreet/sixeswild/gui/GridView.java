@@ -46,7 +46,7 @@ public class GridView extends JPanel {
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.setColor(Color.black);
-		g.drawRect(1,1,super.getWidth()-3,super.getHeight()-3);
+		//g.drawRect(1,1,super.getWidth()-3,super.getHeight()-3);
 	}
 	
 	private void addController(SWApplication application){
