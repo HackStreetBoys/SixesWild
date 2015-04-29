@@ -38,6 +38,7 @@ public class HintMove extends AbstractGameMove {
 			
 			ArrayList<Location> anyValidMove = new ArrayList<Location>();
 			anyValidMove = level.getAi().calculateValidMove();
+			
 			// change display of tile
 			// anyValidMove.get(0)
 			
