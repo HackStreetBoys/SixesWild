@@ -17,7 +17,7 @@ public abstract class AbstractScreen extends JPanel{
 		this.application = application;
 		
 		super.setLayout(null);
-		//super.setBackground(Color.yellow); //TODO
+		super.setBackground(Color.white);
 		
 		this.title = new JLabel(title);
 		this.title.setSize(200,75);
@@ -36,28 +36,7 @@ public abstract class AbstractScreen extends JPanel{
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-//		g.setColor(Color.black);
-//		Color cornsilk = new Color(255,248,220);
-//		Color blanchedalmond = new Color(255,235,205);
-//		Color bisque = new Color(255,228,196);
-//		Color navajowhite = new Color(255,222,173);
-//		Color wheat = new Color(245,222,179);
-//		Color burlywood = new Color(222,184,135);
-//		Color tan = new Color(210,180,140);
-//		Color[] colors = {
-//				cornsilk,
-//				blanchedalmond,
-//				bisque,
-//				navajowhite,
-//				wheat,
-//				burlywood,
-//				tan};
-//		for(int x=0; x<800; x+=10){
-//			for(int y=0; y<600; y+=10){
-//				g.setColor(colors[(int)(7*Math.random())]);
-//				g.fillRect(x,y,10,10);
-//			}
-//		}
+		
 	}
 	
 	private void setupFont(){

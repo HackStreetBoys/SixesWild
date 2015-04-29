@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.controller;
 
+import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.gui.ActiveGameScreen;
@@ -25,12 +26,13 @@ public class SwipeController extends MouseAdapter{
 
 	public void mousePressed(MouseEvent e){
 		AbstractLevel level = application.getModel().getLevel();
+		ActiveGameScreen gameScreen = (ActiveGameScreen)application.getActiveScreen();
+		int size = gameScreen.getGridView().getWidth()/9;
+		int x = e.getX()/size;
+		int y = e.getY()/size;
+		Location loc = new Location(x,y);
 		if(level.isRemoveMoveSelected()){
-			ActiveGameScreen gameScreen = (ActiveGameScreen)application.getActiveScreen();
-			int size = gameScreen.getGridView().getWidth()/9;
-			int x = e.getX()/size;
-			int y = e.getY()/size;
-			level.addToSelection(new Location(x,y));
+			level.addToSelection(loc);
 			
 			RemoveTileMove move = new RemoveTileMove(level);
 			move.doMove();
@@ -39,6 +41,9 @@ public class SwipeController extends MouseAdapter{
 			this.repaint();
 		}
 		else{
+			Slot slot = level.getBoard().get(loc);
+			if(!(slot instanceof InertSlot) && slot.getTile().getValue()==6)
+				return;
 			this.accepting = true;
 		}
 	}
@@ -54,11 +59,12 @@ public class SwipeController extends MouseAdapter{
 			int y = e.getY()/size;
 
 			Location loc = new Location(x,y);
+			Slot slot = level.getBoard().get(loc);
+			if(!(slot instanceof InertSlot) && slot.getTile().getValue()==6)
+				return;
 			if(!selectedSlots.contains(level.getBoard().get(loc))){
 				application.getModel().getLevel().addToSelection(loc);
-				System.out.println(selectedSlots.toString());
-				application.revalidate();
-				this.repaint();
+				application.repaint();
 			}
 
 			if(level.isSwapMoveSelected()&&selectedSlots.size()==2){

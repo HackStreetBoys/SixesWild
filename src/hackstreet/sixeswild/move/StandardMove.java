@@ -31,9 +31,7 @@ public class StandardMove extends AbstractGameMove {
 
 	@Override
 	public void doMove() {
-		System.out.println("Attempting to execute standard move");
 		if (this.isValid()){
-			System.out.println("Move is Valid");
 			// adjust the score
 			int scoreIncrease = 0;
 			int scoreMultiplier = 1;
@@ -49,8 +47,6 @@ public class StandardMove extends AbstractGameMove {
 			}
 			level.repopulateSlots();
 		}
-		else
-			System.out.println("Move is not valid");
 
 		level.getSelectedSlots().clear();
 	}
