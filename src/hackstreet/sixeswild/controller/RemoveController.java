@@ -2,30 +2,21 @@ package hackstreet.sixeswild.controller;
 
 import hackstreet.sixeswild.gui.ActiveGameScreen;
 import hackstreet.sixeswild.gui.SWApplication;
-import hackstreet.sixeswild.level.AbstractLevel;
-import hackstreet.sixeswild.move.ShuffleBoardMove;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.awt.event.*;
-import javax.swing.*;
-
-public class ShuffleController implements ActionListener{
+public class RemoveController implements ActionListener{
 
 	private SWApplication application;
 	
-	public ShuffleController(SWApplication application){
+	public RemoveController(SWApplication application){
 		this.application = application;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		AbstractLevel level = this.application.getModel().getLevel();
-		ShuffleBoardMove move = new ShuffleBoardMove(level);
-		
-		move.doMove();
-		level.getMoveStack().push(move);
+		application.getModel().getLevel().setRemoveMoveSelected(true);
 		repaint();
 	}
 	

@@ -2,15 +2,15 @@ package hackstreet.sixeswild.config;
 
 /**
  * 
- * @author Nicholas
- *
+ * @author Pat
+ * 
  */
-public class PuzzleLevelConfig extends AbstractLevelConfig {
+public class ReleaseLevelConfig extends AbstractLevelConfig {
 	
 	private int numMoves;
 	
-	public PuzzleLevelConfig(int numMoves){
-		super("Puzzle");
+	public ReleaseLevelConfig(int numMoves){
+		super("Release");
 		this.numMoves = numMoves;
 	}
 	

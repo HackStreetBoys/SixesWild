@@ -7,6 +7,10 @@ package hackstreet.sixeswild.game;
  *
  */
 public class Slot {
+	
+	//-----Very Very Bad TODO
+	public boolean selected = false;
+	//-----GET RID BAD CODE NO NO NO
 
 	/** The Location of the tile, [0][0] to [8][8]. */
 	private Location loc;
@@ -35,7 +39,12 @@ public class Slot {
 	 * @return
 	 */
 	public boolean hasTile() {
-		return !(this.tile == null);
+		return this.tile != null;
+	}
+	
+	@Override
+	public String toString(){
+		return "Slot"+loc.toString();
 	}
 
 }

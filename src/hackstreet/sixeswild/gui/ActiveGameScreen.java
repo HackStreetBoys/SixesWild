@@ -1,5 +1,8 @@
 package hackstreet.sixeswild.gui;
 
+import hackstreet.sixeswild.controller.RemoveController;
+import hackstreet.sixeswild.controller.ShuffleController;
+import hackstreet.sixeswild.controller.SwapController;
 import hackstreet.sixeswild.controller.ToLevelSelectScreenController;
 
 import java.awt.Color;
@@ -57,6 +60,7 @@ public class ActiveGameScreen extends AbstractScreen {
 		this.removeTileButton.setSize(30,30);
 		this.removeTileButton.setLocation(640,150);
 		this.removeTileButton.setFocusable(false);
+		this.removeTileButton.addActionListener(new RemoveController(application));
 		this.removeTileLabel = new JLabel("Remove Tile");
 		this.removeTileLabel.setSize(150,50);
 		this.removeTileLabel.setLocation(this.removeTileButton.getX()+this.removeTileButton.getWidth()+20,
@@ -67,6 +71,7 @@ public class ActiveGameScreen extends AbstractScreen {
 		this.switchTilesButton.setSize(30,30);
 		this.switchTilesButton.setLocation(640,225);
 		this.switchTilesButton.setFocusable(false);
+		this.switchTilesButton.addActionListener(new SwapController(application));
 		this.switchTilesLabel = new JLabel("Switch Tiles");
 		this.switchTilesLabel.setSize(150,50);
 		this.switchTilesLabel.setLocation(this.switchTilesButton.getX()+this.switchTilesButton.getWidth()+20,
@@ -77,6 +82,7 @@ public class ActiveGameScreen extends AbstractScreen {
 		this.shuffleBoardButton.setSize(30,30);
 		this.shuffleBoardButton.setLocation(640,300);
 		this.shuffleBoardButton.setFocusable(false);
+		this.shuffleBoardButton.addActionListener(new ShuffleController(application));
 		this.shuffleBoardLabel = new JLabel("Shuffle Board");
 		this.shuffleBoardLabel.setSize(150,50);
 		this.shuffleBoardLabel.setLocation(this.shuffleBoardButton.getX()+this.shuffleBoardButton.getWidth()+20,

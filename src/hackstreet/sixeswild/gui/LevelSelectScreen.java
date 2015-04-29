@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.gui;
 
+import hackstreet.sixeswild.config.SavedLevelData;
 import hackstreet.sixeswild.controller.ToGameScreenController;
 import hackstreet.sixeswild.controller.ToMainScreenController;
 
@@ -34,19 +35,13 @@ public class LevelSelectScreen extends AbstractScreen {
 		for (int x = 1; x <= 20; x++) {
 			JButton button = new JButton(x+"");
 			
-			setImages(button, x);
+			this.prepareButton(button, x);
 			button.setBorderPainted(true);
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
 			button.setHorizontalTextPosition(SwingConstants.CENTER);
 			
-			if (x > 4) { 
-				button.setEnabled(false);
-				button.setForeground(Color.black);
-			}
-			
-			
-			button.addActionListener(new ToGameScreenController(super.getApplication()));
+			button.addActionListener(new ToGameScreenController(super.getApplication(),x));
 			
 			levelPanel.add(button);
 		}
@@ -66,15 +61,16 @@ public class LevelSelectScreen extends AbstractScreen {
 	 * @param x
 	 * @return
 	 */
-	private void setImages(JButton b, int x) {
-		
-		// for now..
-		int stars = -1;
-		if (x < 5) 
-			stars = 1 + (int)(Math.random()*3);
-		
-		
-		// supposed to switch on actual value
+	private void prepareButton(JButton b, int x) {		
+		if(super.getApplication().getModel().getSavedLevelDataList().size() < x){
+			b.setIcon(new ImageIcon("images/locked-button.png"));
+			b.setEnabled(false);
+			return;
+		}
+		SavedLevelData data = super.getApplication().getModel().getSavedLevelDataList().get(x-1);
+		int stars = data.getStarsEarned();
+		b.setEnabled(data.isUnlocked());
+
 		switch(stars) {
 			case 0:
 				b.setIcon(new ImageIcon("images/0-stars-unpressed.png"));
@@ -92,13 +88,10 @@ public class LevelSelectScreen extends AbstractScreen {
 			case 3:
 				b.setIcon(new ImageIcon("images/3-stars-unpressed.png"));
 				b.setPressedIcon(new ImageIcon("images/3-stars-pressed.png"));
-				break;
-			
-			default: 
-				b.setIcon(new ImageIcon("images/locked-button.png"));
-				break;
-				
+				break;			
 		}
+		if(!data.isUnlocked())
+			b.setIcon(new ImageIcon("images/locked-button.png"));
 		return;
 	}
 

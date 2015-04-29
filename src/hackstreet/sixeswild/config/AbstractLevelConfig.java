@@ -1,5 +1,7 @@
 package hackstreet.sixeswild.config;
 
+import hackstreet.sixeswild.game.Location;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -13,10 +15,7 @@ public class AbstractLevelConfig {
 
 	protected String Type; // Added so that we can load files. It is protected b/c sub classes need to know this information;
 	private String name;
-	private int height;
-	private int width;
-	private ArrayList<hackstreet.sixeswild.game.Location> nullLocations;
-	private double[] percentage = new double[6];
+	private ArrayList<Location> nullLocations;
 	private int numShuffle;
 	private int numSwap;
 	private int numRemove;
@@ -37,17 +36,8 @@ public class AbstractLevelConfig {
 	/**
 	 * 
 	 */
-	public AbstractLevelConfig(){
-		
-	}
-	
-
-	public String getType() {
-		return Type;
-	}
-
-	public void setType(String type) {
-		Type = type;
+	public AbstractLevelConfig(String type){
+		this.Type = type;
 	}
 
 	public String getName() {
@@ -58,37 +48,13 @@ public class AbstractLevelConfig {
 		this.name = name;
 	}
 
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public ArrayList<hackstreet.sixeswild.game.Location> getNullLocations() {
+	public ArrayList<Location> getNullLocations() {
 		return nullLocations;
 	}
 
 	public void setNullLocations(
-			ArrayList<hackstreet.sixeswild.game.Location> nullLocations) {
+			ArrayList<Location> nullLocations) {
 		this.nullLocations = nullLocations;
-	}
-
-	public double[] getPercentage() {
-		return percentage;
-	}
-
-	public void setPercentage(double[] percentage) {
-		this.percentage = percentage;
 	}
 
 	public int getNumShuffle() {
@@ -217,6 +183,10 @@ public class AbstractLevelConfig {
 
 	public void setFile(File file) {
 		File = file;
+	}
+
+	public String getType() {
+		return this.Type;
 	}
 
 }

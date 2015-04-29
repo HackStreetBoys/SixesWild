@@ -57,6 +57,9 @@ public class AbstractLevel {
 		this.isShuffleMoveSelected = false;
 		this.isAISelected = false;
 		this.moveStack = new Stack<AbstractGameMove>();
+
+		this.initBoard(this.savedLevelData.getLevelConfig().getNullLocations());
+		this.populateBoard();
 	}
 
 	/**
@@ -66,47 +69,9 @@ public class AbstractLevel {
 	public void addToSelection(Location loc){
 		if (isValidSelectionAddition(loc)){
 			selectedSlots.add(board.get(loc));
+			board.get(loc).selected=true;
 		}
-		else
-			throw new IllegalArgumentException();
 	}
-
-	/**
-	 * Validate whether a location can be added to the selected slots.
-	 * @param loc
-	 * @return boolean
-	 */
-	private boolean isValidSelectionAddition(Location loc){
-		return (this.getAllAdjacentLocations().contains(loc));
-	}
-
-	/**
-	 * Gets the raw adjacent locations of a loc, and then filters to make sure
-	 * that none of them are Inert, Elimination, or already added.
-	 * 
-	 * @return a list of all valid adjacent tiles to the selected tiles
-	 */
-	private ArrayList<Location> getAllAdjacentLocations(){
-
-		ArrayList<Location> answer = new ArrayList<Location>();
-		ArrayList<Location> temp = new ArrayList<Location>();
-
-		// run check for every selected slot
-		for (Slot slot : selectedSlots){
-			temp = slot.getLoc().getRawAdjacentLocations();
-
-			for (Location loc : temp){
-
-				// do not add location to answer if the loc is Inert, Elimination, or already added
-				if ( !(board.get(loc) instanceof InertSlot) && !(board.get(loc) instanceof EliminationSlot) &&
-						(!selectedSlots.contains(board.get(loc)))){
-					answer.add(loc);
-				}
-			}
-		}
-		return answer;
-	}
-
 
 	public SavedLevelData getSavedLevelData() {
 		return savedLevelData;
@@ -271,67 +236,46 @@ public class AbstractLevel {
 	 */
 	public void repopulateSlots(){
 		this.applyGravity();
-		
-		// go over each column
-		for (int col = 0; col < 9; col++) {
-			
-			// repopulate each cell
-			for (int row = 0; row < 9; row++) {
-				
-				Location loc = new Location(col,row);
-				
-				// if slot is not intert and does not have tile, give it a new tile
-				if (!(board.get(loc) instanceof InertSlot) && !(board.get(loc).hasTile())) {
-					
-					int val = this.generateRandomValue();
-					int mult = this.generateRandomMultiplier();
-					
-					Tile t = new Tile(val, mult);
-					board.get(loc).setTile(t);
-					
-				}
-			}
-		}	
+
+		this.populateBoard();
 	}
 
 	/**
 	 * Apply gravity to sift down existing tiles into null spaces.
 	 */
 	public void applyGravity() {
-		
+
 		// apply gravity to all columns individually
 		for (int col=0; col < 9; col++) {
 			this.applyGravityInColumn(col);
 		}
-		
+
 	}
 
 	/**
 	 * Apply gravity in given column, stacking tiles in column on the bottom.
 	 * @param column
 	 */
-	public void applyGravityInColumn(int column) {
-		
-		// column to go through
-		int col = column;
-		
+	public void applyGravityInColumn(int col) {
+
 		for (int row = 8; row > 0; row--) {
 			Location loc = new Location(col, row);
-			
+
 			// if slot is not inert and does not have a tile, find one in column above to move down
 			if (!(board.get(loc) instanceof InertSlot) && !(board.get(loc).hasTile())) {
-				
+
 				// look through slots above
 				for (int row2 = row-1; row2 >= 0; row2--) {
 					Location loc2 = new Location(col, row2);
-					
+
 					// if this slot has a tile, move it down
 					if (!(board.get(loc2) instanceof InertSlot) && (board.get(loc2).hasTile())) {
-						
+
 						// copy down value to first slot
 						board.get(loc).setTile(board.get(loc2).getTile());	
 						// set tile in slot over to null
 						board.get(loc2).setTile(null);
+						break;
 					}
 				}
 			}
@@ -349,28 +293,21 @@ public class AbstractLevel {
 		double freq3 = this.getSavedLevelData().getLevelConfig().getFreq3();
 		double freq4 = this.getSavedLevelData().getLevelConfig().getFreq4();
 		double freq5 = this.getSavedLevelData().getLevelConfig().getFreq5();
-		double freq6 = this.getSavedLevelData().getLevelConfig().getFreq6();
 
-		double denom = freq1+freq2+freq3+freq4+freq5+freq6;
 		double r = Math.random();
-		double p = freq1/denom;
 
-		if (r < p)
+		if (r < freq1)
 			return 1;
-		p = (freq1+freq2)/denom;
-		if (r < p)
+		else if (r < freq1 + freq2)
 			return 2;
-		p = (freq1+freq2+freq3)/denom;
-		if (r < p)
+		else if (r < freq1+freq2+freq3)
 			return 3;
-		p = (freq1+freq2+freq3+freq4)/denom;
-		if (r < p)
+		else if (r < freq1+freq2+freq3+freq4)
 			return 4;
-		p = (freq1+freq2+freq3+freq4+freq5)/denom;
-		if (r < p)
+		else if (r < freq1+freq2+freq3+freq4+freq5)
 			return 5;
-
-		return 6;
+		else
+			return 6;
 	}
 
 	/**
@@ -378,8 +315,8 @@ public class AbstractLevel {
 	 * @return the new multiplier for a tile {1-3}
 	 */
 	public int generateRandomMultiplier(){
-//		double mult2Freq = this.getSavedLevelData().getLevelConfig().getFreqMult2();
-//		double mult3Freq = this.getSavedLevelData().getLevelConfig().getFreqMult3();
+		//		double mult2Freq = this.getSavedLevelData().getLevelConfig().getFreqMult2();
+		//		double mult3Freq = this.getSavedLevelData().getLevelConfig().getFreqMult3();
 
 		return 1;
 	}
@@ -400,7 +337,76 @@ public class AbstractLevel {
 		this.pointsEarned += delta;
 	}
 
+	private void initBoard(ArrayList<Location> inertLocs){
+		for(int row=0; row<9; row++){
+			for(int col=0; col<9; col++){
+				Location loc = new Location(col,row);
+				if(inertLocs.contains(loc))
+					board.put(loc, new InertSlot(loc));
+				else
+					board.put(loc, new Slot(loc));
+			}
+		}
+	}
 
+	public void populateBoard(){
+		// go over each column
+		for (int col = 0; col < 9; col++) {
 
+			// repopulate each cell
+			for (int row = 0; row < 9; row++) {
 
+				Location loc = new Location(col,row);
+
+				// if slot is not inert and does not have tile, give it a new tile
+				if (!(board.get(loc) instanceof InertSlot) && !(board.get(loc).hasTile())) {
+
+					int val = this.generateRandomValue();
+					int mult = this.generateRandomMultiplier();
+
+					Tile t = new Tile(val, mult);
+					board.get(loc).setTile(t);
+
+				}
+			}
+		}	
+	}
+
+	/**
+	 * Validate whether a location can be added to the selected slots.
+	 * @param loc
+	 * @return boolean
+	 */
+	private boolean isValidSelectionAddition(Location loc){
+		return this.selectedSlots.isEmpty() || this.getAllAdjacentLocations().contains(loc);
+	}
+
+	/**
+	 * Gets the raw adjacent locations of a loc, and then filters to make sure
+	 * that none of them are Inert, Elimination, or already added.
+	 * 
+	 * @return a list of all valid adjacent tiles to the selected tiles
+	 */
+	private ArrayList<Location> getAllAdjacentLocations(){
+
+		ArrayList<Location> answer = new ArrayList<Location>();
+		ArrayList<Location> temp = new ArrayList<Location>();
+
+		// run check for every selected slot
+		for (Slot slot : selectedSlots){
+			temp = slot.getLoc().getRawAdjacentLocations();
+
+			for (Location loc : temp){
+
+				Slot s = board.get(loc);
+
+				// do not add location to answer if the loc is Inert, Elimination, or already added
+				if ( !(s instanceof InertSlot) && !selectedSlots.contains(s)
+						&& !answer.contains(s)){
+					answer.add(loc);
+				}
+			}
+		}
+		return answer;
+	}
 }

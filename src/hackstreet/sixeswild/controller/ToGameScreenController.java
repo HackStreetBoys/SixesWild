@@ -10,13 +10,16 @@ import javax.swing.JButton;
 
 public class ToGameScreenController implements ActionListener{
 	SWApplication application;
+	int number;
 	
-	public ToGameScreenController(SWApplication application){
+	public ToGameScreenController(SWApplication application, int number){
 		this.application = application;
+		this.number = number;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e){
-		application.enterGameScreen(Integer.parseInt(((JButton)e.getSource()).getText()));
+		application.getModel().prepareLevel(this.number);
+		application.enterGameScreen(this.number);
 	}
 }

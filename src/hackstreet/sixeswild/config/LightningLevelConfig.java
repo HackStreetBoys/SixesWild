@@ -5,6 +5,7 @@ public class LightningLevelConfig extends AbstractLevelConfig{
 	private int seconds;
 	
 	public LightningLevelConfig(int numMoves){
+		super("Lightning");
 		this.seconds = numMoves;
 	}
 	

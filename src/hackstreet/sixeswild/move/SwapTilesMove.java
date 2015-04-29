@@ -31,11 +31,8 @@ public class SwapTilesMove extends AbstractGameMove {
 			tempTile = level.getSelectedSlots().get(0).getTile();
 			level.getSelectedSlots().get(0).setTile(level.getSelectedSlots().get(1).getTile());
 			level.getSelectedSlots().get(1).setTile(tempTile);
-			
-			// TODO repaint grid;
 		}
-		else
-			throw new IllegalStateException();
+		level.getSelectedSlots().clear();
 	}
 
 }

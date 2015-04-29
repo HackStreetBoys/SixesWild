@@ -2,6 +2,7 @@ package hackstreet.sixeswild.controller;
 
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
+import hackstreet.sixeswild.gui.ActiveGameScreen;
 import hackstreet.sixeswild.gui.SWApplication;
 import hackstreet.sixeswild.level.AbstractLevel;
 import hackstreet.sixeswild.move.RemoveTileMove;
@@ -25,9 +26,17 @@ public class SwipeController extends MouseAdapter{
 	public void mousePressed(MouseEvent e){
 		AbstractLevel level = application.getModel().getLevel();
 		if(level.isRemoveMoveSelected()){
+			ActiveGameScreen gameScreen = (ActiveGameScreen)application.getActiveScreen();
+			int size = gameScreen.getGridView().getWidth()/9;
+			int x = e.getX()/size;
+			int y = e.getY()/size;
+			level.addToSelection(new Location(x,y));
+			
 			RemoveTileMove move = new RemoveTileMove(level);
 			move.doMove();
 			level.getMoveStack().push(move);
+			application.getModel().getLevel().setRemoveMoveSelected(false);
+			this.repaint();
 		}
 		else{
 			this.accepting = true;
@@ -39,18 +48,26 @@ public class SwipeController extends MouseAdapter{
 		if(this.accepting){
 			AbstractLevel level = application.getModel().getLevel();
 			ArrayList<Slot> selectedSlots = level.getSelectedSlots();
-			int x = e.getX()/9;
-			int y = e.getY()/9;
+			ActiveGameScreen gameScreen = (ActiveGameScreen)application.getActiveScreen();
+			int size = gameScreen.getGridView().getWidth()/9;
+			int x = e.getX()/size;
+			int y = e.getY()/size;
 
 			Location loc = new Location(x,y);
-			if(!selectedSlots.contains(loc))
+			if(!selectedSlots.contains(level.getBoard().get(loc))){
 				application.getModel().getLevel().addToSelection(loc);
+				System.out.println(selectedSlots.toString());
+				application.revalidate();
+				this.repaint();
+			}
 
 			if(level.isSwapMoveSelected()&&selectedSlots.size()==2){
 				SwapTilesMove move = new SwapTilesMove(level);
 				move.doMove();
 				level.getMoveStack().push(move);
 				this.accepting = false;
+				application.getModel().getLevel().setSwapMoveSelected(false);
+				this.repaint();
 			}
 		}
 	}
@@ -63,7 +80,14 @@ public class SwipeController extends MouseAdapter{
 			move.doMove();
 			level.getMoveStack().push(move);
 			this.accepting = false;
+			this.repaint();
 		}
+	}
+
+	private void repaint(){
+		((ActiveGameScreen)application.getActiveScreen()).getGridView().refreshSlots();
+		application.revalidate();
+		application.repaint();
 	}
 
 }

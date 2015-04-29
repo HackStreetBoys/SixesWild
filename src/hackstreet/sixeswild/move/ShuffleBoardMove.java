@@ -1,11 +1,12 @@
 package hackstreet.sixeswild.move;
 
-import hackstreet.sixeswild.game.EliminationSlot;
+import java.util.ArrayList;
+import java.util.List;
+
 import hackstreet.sixeswild.game.InertSlot;
-import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
+import hackstreet.sixeswild.game.Tile;
 import hackstreet.sixeswild.level.AbstractLevel;
-import java.util.Map;
 
 /**
  * 
@@ -24,24 +25,35 @@ public class ShuffleBoardMove extends AbstractGameMove {
 
 	@Override
 	public boolean isValid() {
-		return (level.getSelectedSlots().size() == 0);
+		return true;
 	}
 
 	@Override
 	public void doMove() {
 		if (this.isValid()){
 			// set all Slots that are not EliminationSlot or InertSlot to have a NULL tile
-			for (Map.Entry<Location, Slot> entry : level.getBoard().entrySet()){
-				if (!(entry instanceof EliminationSlot || entry instanceof InertSlot)){
-					entry.getValue().setTile(null);
+			List<Tile> tileList = new ArrayList<Tile>();
+			for (Slot slot: level.getBoard().values()){
+				if (!(slot instanceof InertSlot)){
+					tileList.add(slot.getTile());
+					slot.setTile(null);
 				}
 			}
-			level.repopulateSlots();
-			
-			// TODO repaint
+
+			int numSwaps = 200;
+			for(int n=0; n<numSwaps; n++){
+				int randomIndex = (int)(tileList.size()*Math.random());
+				Tile temp = tileList.get(randomIndex);
+				tileList.set(randomIndex,tileList.get(0));
+				tileList.set(0,temp);
+			}
+
+			for (Slot slot: level.getBoard().values()){
+				if(!(slot instanceof InertSlot))
+					slot.setTile(tileList.remove(0));
+			}
 		}
-		else
-			throw new IllegalStateException();
+		
 	}
 
 }

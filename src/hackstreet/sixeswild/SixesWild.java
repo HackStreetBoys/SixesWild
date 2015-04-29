@@ -3,6 +3,11 @@ package hackstreet.sixeswild;
 import hackstreet.sixeswild.achievement.AbstractAchievement;
 import hackstreet.sixeswild.config.SavedLevelData;
 import hackstreet.sixeswild.level.AbstractLevel;
+import hackstreet.sixeswild.level.EliminationLevel;
+import hackstreet.sixeswild.level.LightningLevel;
+import hackstreet.sixeswild.level.PuzzleLevel;
+import hackstreet.sixeswild.level.ReleaseLevel;
+
 import java.util.ArrayList;
 
 /**
@@ -14,12 +19,14 @@ import java.util.ArrayList;
  */
 public class SixesWild {
 
-	ArrayList<AbstractAchievement> achievements;
 	ArrayList<SavedLevelData> savedLevelData;
+	ArrayList<AbstractAchievement> achievements;
+	
 	AbstractLevel activeLevel;
 
-	public SixesWild(){
-		// empty
+	public SixesWild(ArrayList<SavedLevelData> savedLevelData, ArrayList<AbstractAchievement> achievements){
+		this.savedLevelData = savedLevelData;
+		this.achievements = achievements;
 	}
 	
 	private void winLevel(SixesWild sw)
@@ -54,7 +61,28 @@ public class SixesWild {
 		*/
 	}
 	
+	public void prepareLevel(int level){
+		SavedLevelData levelData = this.savedLevelData.get(level-1);
+		String type = levelData.getLevelConfig().getType();
+		if(type.equals("Elimination")){
+			this.activeLevel = new EliminationLevel(levelData);
+		}
+		else if(type.equals("Lightning")){
+			this.activeLevel = new LightningLevel(levelData);
+		}
+		else if(type.equals("Puzzle")){
+			this.activeLevel = new PuzzleLevel(levelData);
+		}
+		else if(type.equals("Release")){
+			this.activeLevel = new ReleaseLevel(levelData);
+		}
+	}
+	
 	public AbstractLevel getLevel(){
 		return this.activeLevel;
+	}
+	
+	public ArrayList<SavedLevelData> getSavedLevelDataList(){
+		return this.savedLevelData;
 	}
 }

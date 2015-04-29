@@ -23,15 +23,8 @@ public class Location {
 	 * @param y The y-coordinate of the tile, {0-8}.
 	 */
 	public Location(int x, int y){
-		if (x >= 0 && x <= 8)
-			this.x = x;
-		else
-			throw new IllegalArgumentException("x must be between 0 and 8.");
-		
-		if (y >= 0 && y <= 8)
-			this.y = y;
-		else
-			throw new IllegalArgumentException("y must be between 0 and 8.");
+		this.x = x;
+		this.y = y;
 	}
 	
 	public int getX(){
@@ -40,6 +33,11 @@ public class Location {
 	
 	public int getY(){
 		return this.y;
+	}
+	
+	@Override
+	public int hashCode(){
+		return 13 * x + y;
 	}
 	
 	@Override
@@ -58,89 +56,33 @@ public class Location {
 	 * 
 	 * @return List of adjacent locations
 	 */
-	public ArrayList<Location> getRawAdjacentLocations()
-	{	
-		int size = 9;
-		ArrayList<Location> adj = new ArrayList<Location>();
+	public ArrayList<Location> getRawAdjacentLocations() {	
+		ArrayList<Location> adjacentLocs = new ArrayList<Location>();
+		Location aboveLoc = new Location(this.x,this.y-1);
+		if(aboveLoc.isValid())
+			adjacentLocs.add(aboveLoc);
 		
-		// not along an edge
-		if ((this.getX() != 0) && (this.getY() != 0) && (this.getX() != size-1) && (this.getY() != size-1))
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX()-1,this.getY()),
-					new Location(this.getX(),this.getY()-1), new Location(this.getX(),this.getY()+1),
-					new Location(this.getX()+1,this.getY())
-					));
-		}
-		// top left corner
-		else if (this.getX() == 0 && this.getY() == 0)
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX(),this.getY()+1),
-					new Location(this.getX()+1,this.getY())
-					));
-		}
-		// top right corner
-		else if (this.getX() == 0 && this.getY() == size-1)
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX(),this.getY()-1),
-					new Location(this.getX()+1,this.getY())
-					));
-		}
-		// bottom right corner
-		else if (this.getX() == size-1 && this.getY() == size-1)
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX()-1,this.getY()),
-					new Location(this.getX(),this.getY()-1)
-					));
-		}
-		// bottom left corner
-		else if (this.getX() == size-1 && this.getY() == 0)
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX()-1,this.getY()),
-					new Location(this.getX(),this.getY()+1)
-					));
-		}
-		// top edge
-		else if (this.getX() == 0 && this.getY() == 0)
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX(),this.getY()-1), new Location(this.getX(),this.getY()+1),
-					new Location(this.getX()+1,this.getY())
-					));
-		}
-		// left edge
-		else if (this.getX() == size-1 && this.getY() == 0)
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX()-1,this.getY()),
-					new Location(this.getX(),this.getY()+1),
-					new Location(this.getX()+1,this.getY())
-					));
-		}
-		// bottom edge
-		else if (this.getX() == size-1 && this.getY() == size-1)
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX()-1,this.getY()),
-					new Location(this.getX(),this.getY()-1), new Location(this.getX(),this.getY()+1)
-					));
-		}
-		// right edge
-		else if (this.getX() == 0 && this.getY() == size-1)
-		{
-			adj.addAll(Arrays.asList(
-					new Location(this.getX()-1,this.getY()),
-					new Location(this.getX(),this.getY()-1),
-					new Location(this.getX()+1,this.getY())
-					));
-		}
-		else
-			throw new IllegalStateException("Location.getAdjacentRawLocations(): logic error");		
-
-		return adj;
+		Location rightLoc = new Location(this.x+1,this.y);
+		if(rightLoc.isValid())
+			adjacentLocs.add(rightLoc);
+		
+		Location belowLoc = new Location(this.x,this.y+1);
+		if(belowLoc.isValid())
+			adjacentLocs.add(belowLoc);
+		
+		Location leftLoc = new Location(this.x-1,this.y);
+		if(leftLoc.isValid())
+			adjacentLocs.add(leftLoc);
+		
+		return adjacentLocs;
+	}
+	
+	public boolean isValid(){
+		return this.x>=0 && this.x<=8 && this.y>=0 && this.y<=8;
+	}
+	
+	@Override
+	public String toString(){
+		return "(" + x + "," + y + ")";
 	}
 }
