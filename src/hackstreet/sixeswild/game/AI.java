@@ -12,8 +12,13 @@ import java.util.HashMap;
  */
 public class AI {
 
+	/** A copy of the ActiveLevel's board of Slots. */
 	HashMap<Location, Slot> board;
 	
+	/**
+	 * AI constructor.
+	 * @param board The game board from the ActiveLevel.
+	 */
 	public AI(HashMap<Location, Slot> board){
 		this.board = board;
 	}
@@ -28,9 +33,11 @@ public class AI {
 		
 		// run starting on each tile, and return first answer found
 		for (Location loc : board.keySet()){
-			answer = findValidMoveFromLoc(loc, new ArrayList<Location>(Arrays.asList(loc)));
-			if (answer != null)
-				break;
+			if (!(board.get(loc) instanceof EliminationSlot) && !(board.get(loc) instanceof InertSlot)){
+				answer = findValidMoveFromLoc(loc, new ArrayList<Location>(Arrays.asList(loc)));
+				if (answer != null)
+					break;
+			}
 		}
 		
 		// print out answer
