@@ -69,24 +69,33 @@ public class TileView extends JPanel {
 	}
 	
 	public void blink(){
-		this.timer = new Timer(400,new ActionListener(){
-			int numBlinks = 10;
+		this.timer = new Timer(200,new ActionListener(){
+			int numBlinks = 20; // divided by 2
 			@Override
 			public void actionPerformed(ActionEvent e){
 				if(numBlinks%2==0)
-					blink = false;
+					setBlink(false);
 				else
-					blink = true;
+					setBlink(true);
 				if(numBlinks==0)
 					timer.stop();
-				repaint();
+				numBlinks--;
+
+				application.revalidate();
+				application.repaint();
 			}
 		});
+		this.timer.start();
+	}
+	
+	private void setBlink(boolean blink){
+		this.blink = blink;
 	}
 
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		
 		g.setColor(Color.black);
 		if(this.tile.getMultiplier()>1){
 			int mult = this.tile.getMultiplier();

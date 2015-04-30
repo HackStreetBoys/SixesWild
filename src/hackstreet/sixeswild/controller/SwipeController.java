@@ -30,7 +30,8 @@ public class SwipeController extends MouseAdapter{
 		int size = gameScreen.getGridView().getWidth()/9;
 		int x = e.getX()/size;
 		int y = e.getY()/size;
-		Location loc = new Location(x,y);
+		Location loc = new Location(x,y); // TODO
+
 		if(level.isRemoveMoveSelected()){
 			level.addToSelection(loc);
 			

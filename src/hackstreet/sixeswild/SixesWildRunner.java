@@ -1,5 +1,10 @@
 package hackstreet.sixeswild;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import hackstreet.sixeswild.achievement.AbstractAchievement;
@@ -15,6 +20,25 @@ import javax.swing.UIManager.LookAndFeelInfo;
 public class SixesWildRunner {
 
 	public static void main(String[] args){
+		loadNimbus();
+		loadFonts();
+
+		SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
+		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
+		ArrayList<SavedLevelData> savedLevelData = new ArrayList<SavedLevelData>();
+		savedLevelData.add(getFakeLevel());
+		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
+		//------------------------------------------------------------------------------
+		splash.showSplash();
+
+
+		SixesWild model = new SixesWild(savedLevelData,achievements);
+
+		SWApplication application = new SWApplication(model);
+		application.setVisible(true);
+	}
+
+	private static void loadNimbus(){
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -26,22 +50,18 @@ public class SixesWildRunner {
 		catch (Exception e) { 
 			// none
 		}
-
-		SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
-		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
-		ArrayList<SavedLevelData> savedLevelData = new ArrayList<SavedLevelData>();
-		savedLevelData.add(getFakeLevel());
-		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
-		//------------------------------------------------------------------------------
-		splash.showSplash();
-		
-		
-		SixesWild model = new SixesWild(savedLevelData,achievements);
-
-		SWApplication application = new SWApplication(model);
-		application.setVisible(true);
 	}
-	
+
+	private static void loadFonts(){
+		try {
+			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("images/RioGrande.ttf"));
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(font);
+		} catch (IOException|FontFormatException e) {
+			System.out.println("Nopes");
+		}
+	}
+
 	private static SavedLevelData getFakeLevel(){
 		AbstractLevelConfig config = new EliminationLevelConfig(40);
 		config.setFreq1(.8);
