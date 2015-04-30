@@ -11,6 +11,7 @@ public class PuzzleLevelConfig extends AbstractLevelConfig {
 	
 	public PuzzleLevelConfig(int numMoves){
 		super("Puzzle");
+		this.Type = "Puzzle";
 		this.numMoves = numMoves;
 	}
 	
