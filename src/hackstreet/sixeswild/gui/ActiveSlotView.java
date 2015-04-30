@@ -28,6 +28,8 @@ public class ActiveSlotView extends JPanel{
 	}
 
 	public void refreshTileView(){
+		if(this.tileView != null && this.tileView.isBlink())
+			return;
 		if(slot.getTile() == null)
 			return;
 		this.tileView = new TileView(application,slot,slot.getTile());
@@ -73,6 +75,10 @@ public class ActiveSlotView extends JPanel{
 		}
 		return false;
 
+	}
+	
+	public TileView getTileView(){
+		return this.tileView;
 	}
 	
 	public void blink(){

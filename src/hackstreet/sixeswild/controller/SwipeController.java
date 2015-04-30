@@ -76,6 +76,11 @@ public class SwipeController extends MouseAdapter{
 				application.getModel().getLevel().setSwapMoveSelected(false);
 				this.repaint();
 			}
+			
+			for(Slot s:selectedSlots){
+				Location l = s.getLoc();
+				gameScreen.getGridView().getSlotView(l).getTileView().setBlink(false);
+			}
 		}
 	}
 
