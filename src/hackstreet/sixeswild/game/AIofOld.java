@@ -2,35 +2,25 @@ package hackstreet.sixeswild.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
- * Generates a list of board moves (a max of one from each origin Location)
- * and then picks one from the list to return.
- * 
  * Handles automatic move calculations.
  * 
  * @author Nicholas
  *
  */
-public class AI {
+public class AIofOld {
 
 	/** A copy of the ActiveLevel's board of Slots. */
 	HashMap<Location, Slot> board;
-	
-	/** A list of possible moves to choose from */
-	ArrayList<ArrayList<Location>> moveList;
-	
+
 	/**
 	 * AI constructor.
 	 * @param board The game board from the ActiveLevel.
 	 */
-	public AI(HashMap<Location, Slot> board){
+	public AIofOld(HashMap<Location, Slot> board){
 		this.board = board;
-		this.moveList = new ArrayList<ArrayList<Location>>();
 	}
 	
 	/**
@@ -39,28 +29,16 @@ public class AI {
 	 * @return ArrayList<Slot>
 	 */
 	public ArrayList<Location> calculateValidMove(){
-
-		
 		System.out.println("============| AI |============");
 		
 		ArrayList<Location> answer = null;
 		
 		// run starting on each tile, and return first answer found
-		
-		// each time you want a different order.
-		ArrayList<Location> keyList = new ArrayList<Location>();
-		keyList.addAll(board.keySet());
-		Collections.shuffle(keyList);
-		
-		for (Location loc : keyList){
+		for (Location loc : board.keySet()){
 			if (!(board.get(loc) instanceof EliminationSlot) && !(board.get(loc) instanceof InertSlot)){
 				answer = findValidMoveFromLoc(loc, new ArrayList<Location>(Arrays.asList(loc)));
-				if (answer != null){
-					if (!moveList.contains(answer)){
-						moveList.add(answer);
-						break;
-					}
-				}
+				if (answer != null)
+					break;
 			}
 		}
 		
@@ -70,16 +48,12 @@ public class AI {
 			System.out.println("AI ERROR: No valid moves in board");
 		}
 		else{
-			/*
-			for (ArrayList<Location> list : moveList){
-				for (Location loc : list){
-					System.out.println(loc.toString());
-				}
+			for (Location loc : answer){
+				System.out.println(loc.toString());
 			}
-			*/
 		}
 		
-		return moveList.get(moveList.size()-1);
+		return answer;
 	}
 	
 	/**
