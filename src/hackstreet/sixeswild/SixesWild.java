@@ -1,6 +1,10 @@
 package hackstreet.sixeswild;
 
 import hackstreet.sixeswild.achievement.AbstractAchievement;
+import hackstreet.sixeswild.config.EliminationLevelConfig;
+import hackstreet.sixeswild.config.LightningLevelConfig;
+import hackstreet.sixeswild.config.PuzzleLevelConfig;
+import hackstreet.sixeswild.config.ReleaseLevelConfig;
 import hackstreet.sixeswild.config.SavedLevelData;
 import hackstreet.sixeswild.level.AbstractLevel;
 import hackstreet.sixeswild.level.EliminationLevel;
@@ -8,7 +12,20 @@ import hackstreet.sixeswild.level.LightningLevel;
 import hackstreet.sixeswild.level.PuzzleLevel;
 import hackstreet.sixeswild.level.ReleaseLevel;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
 /**
  * Over-arching master class which will contain all data, 
@@ -62,20 +79,30 @@ public class SixesWild {
 	}
 	
 	public void prepareLevel(int level){
+
 		SavedLevelData levelData = this.savedLevelData.get(level-1);
-		String type = levelData.getLevelConfig().getType();
-		if(type.equals("Elimination")){
+		
+
+		System.out.println(levelData.getLevelConfig().getType());
+		if(levelData.getLevelConfig().getType().equals( "Elimination")){
 			this.activeLevel = new EliminationLevel(levelData);
-		}
-		else if(type.equals("Lightning")){
+			System.out.println("E");
+			}
+			else if(levelData.getLevelConfig().getType().equals("Lightning")){
 			this.activeLevel = new LightningLevel(levelData);
-		}
-		else if(type.equals("Puzzle")){
-			this.activeLevel = new PuzzleLevel(levelData);
-		}
-		else if(type.equals("Release")){
+			System.out.println("L");
+			}
+			else if(levelData.getLevelConfig().getType().equals("Puzzle")){
+				
+				System.out.println("P");
+				this.activeLevel = new PuzzleLevel(levelData);
+			
+			}
+			else if(levelData.getLevelConfig().getType().equals( "Release")){
 			this.activeLevel = new ReleaseLevel(levelData);
-		}
+			System.out.println("R");
+			}
+
 	}
 	
 	public AbstractLevel getLevel(){
@@ -85,4 +112,6 @@ public class SixesWild {
 	public ArrayList<SavedLevelData> getSavedLevelDataList(){
 		return this.savedLevelData;
 	}
+	
+
 }

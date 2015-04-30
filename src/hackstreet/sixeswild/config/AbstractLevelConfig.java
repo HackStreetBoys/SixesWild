@@ -38,6 +38,7 @@ public class AbstractLevelConfig {
 	 */
 	public AbstractLevelConfig(String type){
 		this.Type = type;
+		nullLocations = new ArrayList<Location>();
 	}
 
 	public String getName() {
@@ -49,6 +50,8 @@ public class AbstractLevelConfig {
 	}
 
 	public ArrayList<Location> getNullLocations() {
+		if (nullLocations == null)
+			return new ArrayList<Location>();
 		return nullLocations;
 	}
 
