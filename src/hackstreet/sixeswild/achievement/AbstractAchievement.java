@@ -4,6 +4,12 @@ import hackstreet.sixeswild.SixesWild;
 
 import java.util.Date;
 
+/**
+ * Abstract class for an achievement.
+ * 
+ * @author Tim 
+ *
+ */
 public abstract class AbstractAchievement {
 	protected String name;
 	protected boolean achieved;
