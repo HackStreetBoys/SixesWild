@@ -11,9 +11,16 @@ import java.util.Date;
  *
  */
 public abstract class AbstractAchievement {
+	
+	/** Name of achievement */
 	protected String name;
+	
+	/** Has the achievement been achieved */
 	protected boolean achieved;
+	
+	/** Date achievement was achieved */
 	protected Date dateAchieved;
+	
 	
 	public abstract boolean isAchieved(SixesWild model);
 	
