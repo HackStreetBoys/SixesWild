@@ -1,6 +1,5 @@
 package hackstreet.sixeswild.controller;
 
-import hackstreet.sixeswild.gui.ActiveGameScreen;
 import hackstreet.sixeswild.gui.SWApplication;
 import hackstreet.sixeswild.level.AbstractLevel;
 import hackstreet.sixeswild.move.HintMove;
@@ -27,7 +26,6 @@ public class HintController implements ActionListener{
 	}
 	
 	private void repaint(){
-		((ActiveGameScreen)application.getActiveScreen()).getGridView().refreshSlots();
 		application.revalidate();
 		application.repaint();
 	}

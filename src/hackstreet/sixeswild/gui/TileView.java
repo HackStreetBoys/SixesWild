@@ -77,10 +77,12 @@ public class TileView extends JPanel {
 					setBlink(false);
 				else
 					setBlink(true);
-				if(numBlinks==0)
+				if(numBlinks==0){
 					timer.stop();
+					((ActiveGameScreen)application.getActiveScreen()).getGridView().refreshSlots();
+				}
 				numBlinks--;
-
+				
 				application.revalidate();
 				application.repaint();
 			}
@@ -88,10 +90,14 @@ public class TileView extends JPanel {
 		this.timer.start();
 	}
 	
-	private void setBlink(boolean blink){
+	public void setBlink(boolean blink){
 		this.blink = blink;
 	}
 
+	public boolean isBlink(){
+		return this.blink;
+	}
+	
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
