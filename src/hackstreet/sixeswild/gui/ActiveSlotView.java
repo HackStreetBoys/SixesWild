@@ -4,14 +4,12 @@ package hackstreet.sixeswild.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.swing.JPanel;
 
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
-import hackstreet.sixeswild.level.AbstractLevel;
 
 @SuppressWarnings("serial")
 public class ActiveSlotView extends JPanel{
@@ -75,5 +73,13 @@ public class ActiveSlotView extends JPanel{
 		}
 		return false;
 
+	}
+	
+	public void blink(){
+		this.tileView.blink();
+	}
+	
+	public Slot getSlot(){
+		return this.slot;
 	}
 }

@@ -44,12 +44,12 @@ public class SixesWildRunner {
 	
 	private static SavedLevelData getFakeLevel(){
 		AbstractLevelConfig config = new EliminationLevelConfig(40);
-		config.setFreq1(.2);
+		config.setFreq1(.8);
 		config.setFreq2(.2);
-		config.setFreq3(.2);
-		config.setFreq4(.2);
-		config.setFreq5(.1);
-		config.setFreq6(.1);
+		config.setFreq3(.0);
+		config.setFreq4(.0);
+		config.setFreq5(.0);
+		config.setFreq6(.0);
 		config.setFreqMult2(.1);
 		config.setFreqMult3(.1);
 		config.setName("Our Fake Level 1");

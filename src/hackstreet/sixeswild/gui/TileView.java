@@ -3,6 +3,8 @@ package hackstreet.sixeswild.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import hackstreet.sixeswild.game.Location;
@@ -12,6 +14,7 @@ import hackstreet.sixeswild.game.Tile;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class TileView extends JPanel {
@@ -20,13 +23,17 @@ public class TileView extends JPanel {
 
 	private Slot modelContainer;
 	private Tile tile;
-
 	private boolean selected;
+	
+	private Timer timer;
+	private boolean blink;
 
 	public TileView(SWApplication application, Slot modelContainer, Tile tile){
 		this.application = application;
 		this.modelContainer = modelContainer;
 		this.tile = tile;
+		this.timer = null;
+		this.blink = false;
 
 		JLabel value = new JLabel(tile.getValue() + "");
 		value.setBackground(new Color(0,0,0,0));
@@ -60,6 +67,22 @@ public class TileView extends JPanel {
 		else
 			super.setBackground(new Color(255,100,255));
 	}
+	
+	public void blink(){
+		this.timer = new Timer(400,new ActionListener(){
+			int numBlinks = 10;
+			@Override
+			public void actionPerformed(ActionEvent e){
+				if(numBlinks%2==0)
+					blink = false;
+				else
+					blink = true;
+				if(numBlinks==0)
+					timer.stop();
+				repaint();
+			}
+		});
+	}
 
 	@Override
 	public void paintComponent(Graphics g){
@@ -87,6 +110,15 @@ public class TileView extends JPanel {
 			else
 				g.setColor(new Color(255,0,0));
 
+			int thickness = 3; //pixels
+			for(int n=0;n<thickness;n++){
+				g.drawRect(0+n,0+n,super.getWidth()-n*2-1,super.getHeight()-n*2-1);
+			}
+			g.setColor(Color.black);
+			g.drawRect(0+thickness,0+thickness,super.getWidth()-thickness*2-1,super.getHeight()-thickness*2-1);
+		}
+		else if(this.blink){
+			g.setColor(Color.yellow);
 			int thickness = 3; //pixels
 			for(int n=0;n<thickness;n++){
 				g.drawRect(0+n,0+n,super.getWidth()-n*2-1,super.getHeight()-n*2-1);

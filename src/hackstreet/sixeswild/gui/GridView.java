@@ -36,6 +36,14 @@ public class GridView extends JPanel {
 		}
 	}
 	
+	public ActiveSlotView getSlotView(Location loc){
+		for(ActiveSlotView slot:slotList){
+			if(slot.getSlot().getLoc().equals(loc))
+				return slot;
+		}
+		return null;
+	}
+	
 	public void refreshSlots(){
 		for(ActiveSlotView slotView:this.slotList){
 			slotView.refreshTileView();
