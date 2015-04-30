@@ -51,7 +51,7 @@ public class AbstractLevel {
 		this.pointsEarned = 0;
 		this.board = new HashMap<Location, Slot>();
 		this.selectedSlots = new ArrayList<Slot>();
-		this.ai = new AI();
+		this.ai = new AI(board);
 		this.isRemoveMoveSelected = false;
 		this.isSwapMoveSelected = false;
 		this.isShuffleMoveSelected = false;
@@ -401,7 +401,7 @@ public class AbstractLevel {
 				Slot s = board.get(loc);
 
 				// do not add location to answer if the loc is Inert, Elimination, or already added
-				if ( !(s instanceof InertSlot) && !selectedSlots.contains(s)
+				if ( !(s instanceof InertSlot) && !(s instanceof EliminationSlot) && !selectedSlots.contains(s)
 						&& !answer.contains(s)){
 					answer.add(loc);
 				}

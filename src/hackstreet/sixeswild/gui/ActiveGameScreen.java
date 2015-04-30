@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.gui;
 
+import hackstreet.sixeswild.controller.HintController;
 import hackstreet.sixeswild.controller.RemoveController;
 import hackstreet.sixeswild.controller.ShuffleController;
 import hackstreet.sixeswild.controller.SwapController;
@@ -93,6 +94,7 @@ public class ActiveGameScreen extends AbstractScreen {
 		this.hintButton.setSize(30,30);
 		this.hintButton.setLocation(640,375);
 		this.hintButton.setFocusable(false);
+		this.hintButton.addActionListener(new HintController(application));
 		this.hintLabel = new JLabel("Get Hint");
 		this.hintLabel.setSize(150,50);
 		this.hintLabel.setLocation(this.hintButton.getX()+this.hintButton.getWidth()+20,
