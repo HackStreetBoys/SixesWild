@@ -29,6 +29,8 @@ public class AI {
 	 * @return ArrayList<Slot>
 	 */
 	public ArrayList<Location> calculateValidMove(){
+		System.out.println("============| AI |============");
+		
 		ArrayList<Location> answer = null;
 		
 		// run starting on each tile, and return first answer found
@@ -41,9 +43,14 @@ public class AI {
 		}
 		
 		// print out answer
-		System.out.println("============| AI |============");
-		for (Location loc : answer){
-			System.out.println(loc.toString());
+		
+		if (answer == null){
+			System.out.println("AI ERROR: No valid moves in board");
+		}
+		else{
+			for (Location loc : answer){
+				System.out.println(loc.toString());
+			}
 		}
 		
 		return answer;
@@ -59,36 +66,49 @@ public class AI {
 	 */
 	public ArrayList<Location> findValidMoveFromLoc(Location inLoc, ArrayList<Location> alreadySelected){
 		
+		System.out.println("Analyze: " + inLoc.toString());
 		ArrayList<Location> answer = null;
 		
 		// calculate the current value of all the selected slots
-		int currentValue = 0;
-		for (Location selectedLoc : alreadySelected){
-			currentValue += board.get(selectedLoc).getTile().getValue();
-		}
+		int currentValue = this.sumLocations(alreadySelected);
 		
 		// explore every path in the adjacent locations
 		for (Location adj : this.getAllAdjacentLocations(inLoc, alreadySelected)){
 			
+			System.out.println("	Analyze adj: " + adj.toString());
+			
 			int adjValue = board.get(adj).getTile().getValue();
+			currentValue = this.sumLocations(alreadySelected);
 			
 			// Found a valid move: RETURN
 			if (currentValue + adjValue == 6){
+				System.out.println("	Move discovered!");
 				alreadySelected.add(adj);
 				answer = alreadySelected;
 				break;
 			}
 			// Found a possible path to a valid move: CONTINUE RECURSION
 			else if (currentValue + adjValue < 6){
+				System.out.println("		Add: " + adj.toString());
 				alreadySelected.add(adj);
 				answer = findValidMoveFromLoc(adj, alreadySelected);
+				if (this.sumLocations(alreadySelected)==6)
+					break;
+				else{
+					alreadySelected.remove(adj);
+					continue;
+				}
+					
 			}
-			// Found a dead path: return null
+			// Found a dead path: keep searching through the list
 			else{
+				System.out.println("		Dead: " + adj.toString());
 				answer = null;
-				break;
+				continue;
 			}
+			
 		}
+		System.out.println();
 		return answer;
 	}
 	
@@ -115,5 +135,18 @@ public class AI {
 		}
 		
 		return answer;
+	}
+	
+	/**
+	 * Sums all the values of a Location list.
+	 * @param list
+	 * @return int
+	 */
+	private int sumLocations(ArrayList<Location> list){
+		int currentValue = 0;
+		for (Location selectedLoc : list){
+			currentValue += board.get(selectedLoc).getTile().getValue();
+		}
+		return currentValue;
 	}
 }

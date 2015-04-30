@@ -1,9 +1,9 @@
 package hackstreet.sixeswild.controller;
 
-import hackstreet.sixeswild.game.AI;
 import hackstreet.sixeswild.gui.ActiveGameScreen;
 import hackstreet.sixeswild.gui.SWApplication;
-
+import hackstreet.sixeswild.level.AbstractLevel;
+import hackstreet.sixeswild.move.HintMove;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,12 +18,11 @@ public class HintController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		application.getModel().getLevel().setAISelected(true);
+		AbstractLevel level = this.application.getModel().getLevel();
+		HintMove move = new HintMove(level, application);
 		
-		AI ai = application.getModel().getLevel().getAi();
-		ai.calculateValidMove();
-		
-		// TODO here?
-		
+		move.doMove();
+		level.getMoveStack().push(move);
 		repaint();
 	}
 	
