@@ -7,44 +7,32 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Achievement class for achievement achieved when all levels in game have been completed.
+ * Achievement class for achievement achieved when first level in game has been completed.
  * Completed here means that it is unlocked and at least one star has been earned.
  * 
  * @author Tim 
  *
  */
-public class AchievementAllLevelsCompleted extends AbstractAchievement {
-	
-	
-	
-	public AchievementAllLevelsCompleted(boolean achieved, Date dateAchieved) {
-		super(achieved, dateAchieved);
-		super.name = "All levels competed";
-	}
+public class AchievementFirstLevelCompleted extends AbstractAchievement {
 
+	public AchievementFirstLevelCompleted(boolean achieved, Date dateAchieved) {
+		super(achieved, dateAchieved);
+		super.name = "First level completed";
+	}
 
 	@Override
 	public boolean isAchieved(SixesWild model) {
-		
 		ArrayList<SavedLevelData> list = model.getSavedLevelDataList();
 		
-		for (SavedLevelData s: list) {
-			if (s.getStarsEarned() == 0 || !s.isUnlocked()) {
+		SavedLevelData s = list.get(0);
+		if (s.getStarsEarned() == 0 || !s.isUnlocked()) {
 				return false;
-			}
 		}
 		
 		this.achieved = true;
 		this.dateAchieved = new Date();
 		
 		return this.achieved;
-
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
