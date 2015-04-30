@@ -53,7 +53,7 @@ public class SavedLevelData {
 		
 		if (config == null)
 		{
-			
+			file = new File( System.getProperty("user.dir")+file.toPath() );
 			String filebuffer = "";
 			System.out.println(file.toPath()+" exists? "+file.exists());
 			try {
