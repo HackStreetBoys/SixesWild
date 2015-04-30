@@ -43,6 +43,12 @@ public class SavedLevelData {
 		this.starsEarned = 0;
 	}
 	
+	public SavedLevelData(AbstractLevelConfig config){
+		this.config = config;
+		this.isUnlocked = false;
+		this.starsEarned = 0;
+	}
+	
 	public AbstractLevelConfig getLevelConfig() {
 		if (config == null)
 		{
