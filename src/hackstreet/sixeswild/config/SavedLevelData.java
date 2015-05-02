@@ -50,10 +50,12 @@ public class SavedLevelData {
 	}
 	
 	public AbstractLevelConfig getLevelConfig() {
+		
 		if (config == null)
 		{
-			
+			file = new File( System.getProperty("user.dir")+file.toPath() );
 			String filebuffer = "";
+			System.out.println(file.toPath()+" exists? "+file.exists());
 			try {
 				FileReader fr = new FileReader(file);
 			} catch (FileNotFoundException e) {
@@ -96,11 +98,10 @@ public class SavedLevelData {
 			else if(type.equals("Release")){
 				config = 	gson.fromJson(filebuffer, ReleaseLevelConfig.class);
 				return config;
-			}
+			}	System.out.println(type);
 
 			System.out.println(type);
 		}
-
 		return config;
 	}
 

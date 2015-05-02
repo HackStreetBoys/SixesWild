@@ -12,6 +12,7 @@ public class EliminationLevelConfig extends AbstractLevelConfig {
 	public EliminationLevelConfig(int numMoves){
 		super("Elimination");
 		this.numMoves = numMoves;
+		this.Type = "Elimination";
 	}
 	
 	public int getNumMoves() {

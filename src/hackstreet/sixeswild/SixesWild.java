@@ -83,7 +83,7 @@ public class SixesWild {
 		SavedLevelData levelData = this.savedLevelData.get(level-1);
 		
 
-		System.out.println(levelData.getLevelConfig().getType());
+		System.out.println(levelData.getLevelConfig());
 		if(levelData.getLevelConfig().getType().equals( "Elimination")){
 			this.activeLevel = new EliminationLevel(levelData);
 			System.out.println("E");

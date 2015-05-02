@@ -11,6 +11,7 @@ public class ReleaseLevelConfig extends AbstractLevelConfig {
 	
 	public ReleaseLevelConfig(int numMoves){
 		super("Release");
+		this.Type = "Release";
 		this.numMoves = numMoves;
 	}
 	

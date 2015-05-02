@@ -47,9 +47,7 @@ public class SixesWildRunner {
 		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
 		//------------------------------------------------------------------------------
 		splash.showSplash();
-		ArrayList<SavedLevelData> savedLevelData = new ArrayList<SavedLevelData>();//= LoadManifest();
-		addFakeLevel(savedLevelData);
-		savedLevelData.get(0).setUnlocked(true);
+		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 
 		SWApplication application = new SWApplication(model);
@@ -102,7 +100,7 @@ public class SixesWildRunner {
 		d.setStarsEarned(0);
 		d.setUnlocked(true);
 		data.add(d);
-	}
+	}=
 
 	private static void loadFonts(){
 		try {
@@ -118,8 +116,8 @@ public class SixesWildRunner {
 
 		String filebuffer = "";
 
-		File manifestFile = new File("./data/manifest.json");
-
+		File manifestFile = new File(System.getProperty("user.dir")+ "/data/manifest.json");
+		
 		if ( manifestFile.exists() == true ){
 
 
@@ -146,6 +144,7 @@ public class SixesWildRunner {
 			for (int i = 0; i < savedLevelData.size();i++)
 			{
 				savedLevelData.get(i).getLevelConfig();
+
 			}
 			return savedLevelData;
 		}
