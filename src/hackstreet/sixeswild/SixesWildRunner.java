@@ -57,13 +57,13 @@ public class SixesWildRunner {
 	}
 
 	private static void addFakeLevel(ArrayList<SavedLevelData> data){
-		AbstractLevelConfig config = new EliminationLevelConfig(40);
-		config.setFreq1(.2);
+		AbstractLevelConfig config = new EliminationLevelConfig(100);
+		config.setFreq1(.4);
 		config.setFreq2(.2);
 		config.setFreq3(.2);
-		config.setFreq4(.2);
-		config.setFreq5(.1);
-		config.setFreq6(.1);
+		config.setFreq4(.1);
+		config.setFreq5(.05);
+		config.setFreq6(.05);
 		config.setFreqMult2(.1);
 		config.setFreqMult3(.1);
 		config.setName("Our Fake Level 1");
@@ -95,9 +95,9 @@ public class SixesWildRunner {
 		config.setNumRemove(1);
 		config.setNumShuffle(1);
 		config.setNumSwap(1);
-		config.setPointsStar1(10);
-		config.setPointsStar2(20);
-		config.setPointsStar3(30);
+		config.setPointsStar1(800);
+		config.setPointsStar2(1600);
+		config.setPointsStar3(4000);
 		SavedLevelData d = new SavedLevelData(config);
 		d.setStarsEarned(0);
 		d.setUnlocked(true);

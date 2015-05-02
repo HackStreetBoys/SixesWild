@@ -103,10 +103,10 @@ public class TileView extends JPanel {
 		super.paintComponent(g);
 		
 		g.setColor(Color.black);
-		if(this.tile.getMultiplier()>1){
+		if(this.tile.getMultiplier()>1&&this.tile.getValue()!=6){
 			int mult = this.tile.getMultiplier();
 			g.setFont(new Font("Serif",Font.BOLD,10));
-			g.drawString(mult + "x", super.getWidth()-15,super.getHeight()-5);
+			g.drawString(mult + "x", super.getWidth()-15,super.getHeight()-10);
 		}
 		this.renderSelectionGraphic(g);
 		this.renderBordering(g);

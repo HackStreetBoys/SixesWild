@@ -315,10 +315,16 @@ public class AbstractLevel {
 	 * @return the new multiplier for a tile {1-3}
 	 */
 	public int generateRandomMultiplier(){
-		//		double mult2Freq = this.getSavedLevelData().getLevelConfig().getFreqMult2();
-		//		double mult3Freq = this.getSavedLevelData().getLevelConfig().getFreqMult3();
+		double mult2Freq = this.getSavedLevelData().getLevelConfig().getFreqMult2();
+		double mult3Freq = this.getSavedLevelData().getLevelConfig().getFreqMult3();
 
-		return 1;
+		double rand = Math.random();
+		if(rand<mult2Freq)
+			return 2;
+		else if(rand<mult2Freq+mult3Freq)
+			return 3;
+		else
+			return 1;
 	}
 
 	public ArrayList<Slot> getSelectedSlots() {

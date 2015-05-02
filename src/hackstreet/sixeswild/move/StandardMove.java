@@ -39,10 +39,10 @@ public class StandardMove extends AbstractGameMove {
 	public void doMove() {
 		if (this.isValid()){
 			// adjust the score
-			int scoreIncrease = 0;
+			int scoreIncrease = 1;
 			int scoreMultiplier = 1;
 			for (Slot slot : level.getSelectedSlots()){
-				scoreIncrease += slot.getTile().getValue();
+				scoreIncrease *= 2;
 				scoreMultiplier *= slot.getTile().getMultiplier();
 			}
 			level.addPointsEarned(scoreIncrease * scoreMultiplier);

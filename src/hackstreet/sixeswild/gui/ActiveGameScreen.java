@@ -37,7 +37,7 @@ public class ActiveGameScreen extends AbstractScreen {
 	public ActiveGameScreen(SWApplication application, int level) {
 		super(application, "Level " + level); //TODO adjust to actual level
 
-		this.scoreLabel = new JLabel("Score: ");
+		this.scoreLabel = new JLabel("Score: 0");
 		this.scoreLabel.setSize(100,35);
 		this.scoreLabel.setLocation(15,25);
 
@@ -46,6 +46,10 @@ public class ActiveGameScreen extends AbstractScreen {
 		this.movesLeftLabel.setLocation(15,85);
 
 		this.progressView = new ProgressView();
+		int star1 = application.getModel().getLevel().getSavedLevelData().getLevelConfig().getPointsStar1();
+		int star2 = application.getModel().getLevel().getSavedLevelData().getLevelConfig().getPointsStar2();
+		int star3 = application.getModel().getLevel().getSavedLevelData().getLevelConfig().getPointsStar3();
+		this.progressView.setCaps(star1,star2,star3);
 		this.progressView.setLocation(15,145);
 
 		this.backButton = new JButton("Back");
@@ -149,6 +153,14 @@ public class ActiveGameScreen extends AbstractScreen {
 
 	public GridView getGridView(){
 		return this.gridView;
+	}
+	
+	public ProgressView getProgressView(){
+		return this.progressView;
+	}
+	
+	public JLabel getScoreLabel(){
+		return this.scoreLabel;
 	}
 
 }

@@ -97,7 +97,11 @@ public class SwipeController extends MouseAdapter{
 	}
 
 	private void repaint(){
-		((ActiveGameScreen)application.getActiveScreen()).getGridView().refreshSlots();
+		ActiveGameScreen game = ((ActiveGameScreen)application.getActiveScreen());
+		game.getGridView().refreshSlots();
+		AbstractLevel level = application.getModel().getLevel();
+		game.getProgressView().setValue(level.getPointsEarned());
+		game.getScoreLabel().setText("Score: " + level.getPointsEarned());
 		application.revalidate();
 		application.repaint();
 	}
