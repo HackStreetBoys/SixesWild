@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.gui;
 
+import hackstreet.sixeswild.controller.ToAchievementsScreenController;
 import hackstreet.sixeswild.controller.ToLevelSelectScreenController;
 
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ public class SWMainScreen extends AbstractScreen {
 	    achievementsBtn = new JButton("Achievements");
 	    achievementsBtn.setSize(150,50);
 	    achievementsBtn.setLocation(325,250);
+	    achievementsBtn.addActionListener(new ToAchievementsScreenController(super.getApplication()));
 	    
 	    super.add(playBtn);
 	    super.add(achievementsBtn);

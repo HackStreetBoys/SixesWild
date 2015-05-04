@@ -16,9 +16,7 @@ import javax.swing.SwingConstants;
  * 
  * Screen for selecting which level to play.
  * 
- * @author Tim Petri | tapetri@wpi.edu
- * Apr 26, 2015
- *
+ * @author Tim 
  */
 public class LevelSelectScreen extends AbstractScreen {
 	

@@ -17,6 +17,11 @@ import java.util.Stack;
  */
 public class AchievementAllOnes extends AbstractAchievement {
 
+	public AchievementAllOnes() {
+		super(false, null);
+		super.name = "Six ones in one move";
+	}
+	
 	public AchievementAllOnes(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
 		super.name = "Six ones in one move";

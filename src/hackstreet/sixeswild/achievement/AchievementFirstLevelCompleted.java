@@ -15,6 +15,11 @@ import java.util.Date;
  */
 public class AchievementFirstLevelCompleted extends AbstractAchievement {
 
+	public AchievementFirstLevelCompleted() {
+		super(false, null);
+		super.name = "First level completed";
+	}
+	
 	public AchievementFirstLevelCompleted(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
 		super.name = "First level completed";

@@ -15,7 +15,10 @@ import java.util.Date;
  */
 public class AchievementAllLevelsCompleted extends AbstractAchievement {
 	
-	
+	public AchievementAllLevelsCompleted() {
+		super(false, null);
+		super.name = "All levels competed";
+	}
 	
 	public AchievementAllLevelsCompleted(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);

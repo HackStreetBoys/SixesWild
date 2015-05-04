@@ -113,5 +113,9 @@ public class SixesWild {
 		return this.savedLevelData;
 	}
 	
+	public ArrayList<AbstractAchievement> getAchievements() {
+		return this.achievements;
+	}
+	
 
 }

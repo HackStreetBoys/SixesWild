@@ -11,6 +11,7 @@ public class SWApplication extends JFrame{
 
 	private SWMainScreen mainScreen;
 	private LevelSelectScreen levelSelectScreen;
+	private AchievementScreen achievementScreen;
 
 	private AbstractScreen activeScreen;
 
@@ -19,6 +20,7 @@ public class SWApplication extends JFrame{
 
 		this.mainScreen = new SWMainScreen(this);
 		this.levelSelectScreen = new LevelSelectScreen(this);
+		this.achievementScreen = new AchievementScreen(this);
 
 		super.setLocation(50,50);
 		super.setSize(800,600);
@@ -40,6 +42,10 @@ public class SWApplication extends JFrame{
 
 	public void enterGameScreen(int level){
 		this.enterScreen(new ActiveGameScreen(this,level));
+	}
+	
+	public void enterAchievementsScreen() {
+		this.enterScreen(this.achievementScreen);
 	}
 
 	public SixesWild getModel(){
