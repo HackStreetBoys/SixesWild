@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -31,7 +32,7 @@ import com.google.gson.stream.JsonReader;
  * Over-arching master class which will contain all data, 
  * and handle file I/O.
  * 
- * @author Nicholas
+ * @author Nicholas, Tim
  *
  */
 public class SixesWild {
@@ -115,6 +116,19 @@ public class SixesWild {
 	
 	public ArrayList<AbstractAchievement> getAchievements() {
 		return this.achievements;
+	}
+	
+	public List<AbstractAchievement> updateAchievements() {
+		
+		
+		List<AbstractAchievement> achievementList = new ArrayList<AbstractAchievement>();
+		
+		for (AbstractAchievement a: this.achievements) {
+			if (a.isAchieved(this))
+				achievementList.add(a);
+		}
+		
+		return achievementList;
 	}
 	
 

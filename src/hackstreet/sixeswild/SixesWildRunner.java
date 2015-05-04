@@ -51,6 +51,7 @@ public class SixesWildRunner {
 		achievements.add(new AchievementAllLevelsCompleted());
 		achievements.add(new AchievementThousandPointMove());
 		achievements.add(new AchievementAllStars());
+		achievements.add(new AchievementTenThousandPoints());
 		//------------------------------------------------------------------------------
 		//splash.showSplash();
 		ArrayList<SavedLevelData> savedLevelData = LoadManifest();

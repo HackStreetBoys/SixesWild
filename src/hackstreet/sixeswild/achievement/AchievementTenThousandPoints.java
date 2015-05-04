@@ -12,18 +12,18 @@ import java.util.Date;
 import java.util.Stack;
 
 /**
- * @author Tim Petri
+ * @author Tim
  */
-public class AchievementThousandPointMove extends AbstractAchievement {
+public class AchievementTenThousandPoints extends AbstractAchievement {
 
-	public AchievementThousandPointMove() {
+	public AchievementTenThousandPoints() {
 		this(false,null);
 	}
 	
-	public AchievementThousandPointMove(boolean achieved, Date dateAchieved) {
+	public AchievementTenThousandPoints(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
-		super.name = "That's a fuck-ton of points";
-		super.description = "Make a move worth over 1000 points";
+		super.name = "That's a metric fuck-ton of points";
+		super.description = "Make a move worth over 10000 points";
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class AchievementThousandPointMove extends AbstractAchievement {
 			
 			int scoreForMove =  latestMove.getScore();
 			
-			if (scoreForMove >= 1000) {
+			if (scoreForMove >= 10000) {
 				super.achieved = true;
 				super.dateAchieved = new Date();
 				return true;
