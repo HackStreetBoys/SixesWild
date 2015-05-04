@@ -35,7 +35,7 @@ public class AchievementScreen extends AbstractScreen {
 		this.achievementPanel.setBackground(Color.WHITE);
 		this.achievementPanel.setLocation(250,50);
 		this.achievementPanel.setSize(300, 500);
-		this.achievementPanel.setLayout(new GridLayout(1,5,10,10));	
+		this.achievementPanel.setLayout(new GridLayout(5,1,10,10));	
 		super.add(achievementPanel);
 		
 		for (AbstractAchievement a: this.getApplication().getModel().getAchievements()) {

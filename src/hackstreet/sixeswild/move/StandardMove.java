@@ -17,6 +17,9 @@ public class StandardMove extends AbstractGameMove {
 	/** Slots involved with move. */
 	ArrayList<Slot> slotsInvolvedInMove;
 	
+	/** Points associated with the move. */
+	private int score;
+	
 	/**
 	 * StandardMove constructor.
 	 * @param level
@@ -45,7 +48,8 @@ public class StandardMove extends AbstractGameMove {
 				scoreIncrease *= 2;
 				scoreMultiplier *= slot.getTile().getMultiplier();
 			}
-			level.addPointsEarned(scoreIncrease * scoreMultiplier);
+			this.score = scoreIncrease*scoreMultiplier;
+			level.addPointsEarned(this.score);
 			
 			// remove tiles
 			for (Slot slot : level.getSelectedSlots()){
@@ -60,6 +64,10 @@ public class StandardMove extends AbstractGameMove {
 	
 	public ArrayList<Slot> getSlotsInMove() {
 		return this.slotsInvolvedInMove;
+	}
+	
+	public int getScore() {
+		return this.score;
 	}
 
 }

@@ -39,13 +39,13 @@ public class AchievementView extends JPanel {
 		this.name = new JLabel(this.achievement.getName());
 		this.name.setFont(new Font("Serif",Font.BOLD,14));
 		this.name.setLocation(70,5);
-		this.name.setSize(50, 14);
+		this.name.setSize(180, 14);
 		super.add(name);
 		
 		this.description = new JLabel("Description goes here!!");
 		this.description.setFont(new Font("Serif",Font.BOLD,12));
-		this.name.setLocation(60,20);
-		this.name.setSize(80, 30);
+		this.name.setLocation(70,20);
+		this.name.setSize(180, 30);
 		super.add(name);
 		
 		try {

@@ -12,8 +12,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-import hackstreet.sixeswild.achievement.AbstractAchievement;
-import hackstreet.sixeswild.achievement.AchievementAllOnes;
+import hackstreet.sixeswild.achievement.*;
 import hackstreet.sixeswild.config.AbstractLevelConfig;
 import hackstreet.sixeswild.config.EliminationLevelConfig;
 import hackstreet.sixeswild.config.SavedLevelData;
@@ -47,6 +46,8 @@ public class SixesWildRunner {
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
 		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
 		achievements.add(new AchievementAllOnes());
+		achievements.add(new AchievementAllLevelsCompleted());
+		achievements.add(new AchievementFirstLevelCompleted());
 		//------------------------------------------------------------------------------
 		splash.showSplash();
 		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
