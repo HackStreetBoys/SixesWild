@@ -12,13 +12,16 @@ import java.util.Date;
  */
 public abstract class AbstractAchievement {
 	
-	/** Name of achievement */
+	/** Name of achievement. */
 	protected String name;
 	
-	/** Has the achievement been achieved */
+	/** Description of achievement. */
+	protected String description;
+	
+	/** Has the achievement been achieved. */
 	protected boolean achieved;
 	
-	/** Date achievement was achieved */
+	/** Date achievement was achieved. */
 	protected Date dateAchieved;
 	
 	
@@ -52,6 +55,14 @@ public abstract class AbstractAchievement {
 	
 	public void setDateAchieved(Date d) {
 		this.dateAchieved = d;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+	
+	public void setDescription(String d) {
+		this.description = d;
 	}
 	
 	

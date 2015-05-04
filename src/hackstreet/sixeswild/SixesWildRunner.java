@@ -42,14 +42,17 @@ public class SixesWildRunner {
 
 		loadFonts();
 
-		SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
+		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
 		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
+		achievements.add(new AchievementFirstLevelCompleted());
+		achievements.add(new AchievementOneOfEachLevel());
 		achievements.add(new AchievementAllOnes());
 		achievements.add(new AchievementAllLevelsCompleted());
-		achievements.add(new AchievementFirstLevelCompleted());
+		achievements.add(new AchievementThousandPointMove());
+		achievements.add(new AchievementAllStars());
 		//------------------------------------------------------------------------------
-		splash.showSplash();
+		//splash.showSplash();
 		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 

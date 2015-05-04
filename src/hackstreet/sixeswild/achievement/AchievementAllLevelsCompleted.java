@@ -16,13 +16,13 @@ import java.util.Date;
 public class AchievementAllLevelsCompleted extends AbstractAchievement {
 	
 	public AchievementAllLevelsCompleted() {
-		super(false, null);
-		super.name = "All levels competed";
+		this(false,null);
 	}
 	
 	public AchievementAllLevelsCompleted(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
 		super.name = "All levels competed";
+		super.description = "Win all playable levels";
 	}
 
 

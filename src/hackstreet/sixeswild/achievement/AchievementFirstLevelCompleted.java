@@ -16,13 +16,13 @@ import java.util.Date;
 public class AchievementFirstLevelCompleted extends AbstractAchievement {
 
 	public AchievementFirstLevelCompleted() {
-		super(false, null);
-		super.name = "First level completed";
+		this(false,null);
 	}
 	
 	public AchievementFirstLevelCompleted(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
-		super.name = "First level completed";
+		super.name = "It's a start";
+		super.description = "Successfully complete the first level";
 	}
 
 	@Override

@@ -17,13 +17,13 @@ import java.util.Stack;
 public class AchievementThousandPointMove extends AbstractAchievement {
 
 	public AchievementThousandPointMove() {
-		super(false, null);
-		super.name = "Thousand points in one move";
+		this(false,null);
 	}
 	
 	public AchievementThousandPointMove(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
-		super.name = "Thousand points in one move";
+		super.name = "That's a fuck-ton of points";
+		super.description = "Make a move worth over 1000 points";
 	}
 
 	@Override

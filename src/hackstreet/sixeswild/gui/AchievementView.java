@@ -13,7 +13,6 @@ import hackstreet.sixeswild.achievement.AbstractAchievement;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /**
  * Shows information about an achievement.
@@ -32,21 +31,21 @@ public class AchievementView extends JPanel {
 	
 	public AchievementView(AbstractAchievement achievement) {
 		this.achievement = achievement;
-		this.setSize(new Dimension(150,50));
+		this.setSize(new Dimension(350,50));
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		
 		this.name = new JLabel(this.achievement.getName());
 		this.name.setFont(new Font("Serif",Font.BOLD,14));
-		this.name.setLocation(70,5);
-		this.name.setSize(180, 14);
+		this.name.setSize(280, 14);
+		this.name.setLocation(55,5);
 		super.add(name);
 		
-		this.description = new JLabel("Description goes here!!");
+		this.description = new JLabel(this.achievement.getDescription());
 		this.description.setFont(new Font("Serif",Font.BOLD,12));
-		this.name.setLocation(70,20);
-		this.name.setSize(180, 30);
-		super.add(name);
+		this.description.setSize(280, 30);
+		this.description.setLocation(55,24);
+		super.add(this.description);
 		
 		try {
 			this.img = ImageIO.read(new File(getImagePath()));
@@ -66,7 +65,13 @@ public class AchievementView extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(this.img, 5, 50, null);
+		g.drawImage(this.img, 5, 5, null);
+		
+		if (!this.achievement.getAchieved()) {
+			g.setColor(new Color(0,0,0,100));
+			g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		
+		}
 		g.setColor(Color.black);
 		g.drawRect(0, 0, super.getWidth()-1, super.getHeight()-1);
 		
