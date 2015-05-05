@@ -24,6 +24,8 @@ public abstract class AbstractAchievement {
 	/** Date achievement was achieved. */
 	protected Date dateAchieved;
 	
+	/** Name of image that corresponds to this achievement */
+	protected String imgPath;
 	
 	public abstract boolean isAchieved(SixesWild model);
 	
@@ -31,6 +33,7 @@ public abstract class AbstractAchievement {
 		// names are set in subclasses
 		this.achieved = achieved;
 		this.dateAchieved = dateAchieved;
+		this.imgPath = "images/heineman-achievement.png";
 	}
 	
 	public String getName() {
@@ -65,7 +68,9 @@ public abstract class AbstractAchievement {
 		this.description = d;
 	}
 	
-	
+	public String getImgPath() {
+		return this.imgPath;
+	}
 	
 	
 	

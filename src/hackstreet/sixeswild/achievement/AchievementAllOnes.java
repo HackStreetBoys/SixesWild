@@ -25,6 +25,7 @@ public class AchievementAllOnes extends AbstractAchievement {
 		super(achieved, dateAchieved);
 		super.name = "SixesWild";
 		super.description = "Make a move consisting of six 1-tiles.";
+		super.imgPath = "images/nick-achievement.png";
 	}
 
 	@Override

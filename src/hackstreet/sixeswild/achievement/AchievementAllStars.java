@@ -20,6 +20,7 @@ public class AchievementAllStars extends AbstractAchievement {
 		super(achieved, dateAchieved);
 		super.name = "True all-star";
 		super.description = "Complete all available levels with three stars";
+		super.imgPath = "images/himanshu-achievement.png";
 	}
 
 	@Override
