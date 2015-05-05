@@ -1,7 +1,22 @@
 [
 {
 	"isUnlocked":true,
-	"starsEarned":3,
-	"file":{"path":"/data/level0.level"}
+	"starsEarned":1,
+	"file":{"path":"/data/puzzle_1.level"}
+},
+{
+	"isUnlocked":true,
+	"starsEarned":1,
+	"file":{"path":"/data/lightning_2.level"}
+},
+{
+	"isUnlocked":true,
+	"starsEarned":1,
+	"file":{"path":"/data/elimination_3.level"}
+},
+{
+	"isUnlocked":true,
+	"starsEarned":0,
+	"file":{"path":"/data/release_4.level"}
 }
 ]

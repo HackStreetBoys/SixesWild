@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 
 import hackstreet.sixeswild.game.BucketSlot;
+import hackstreet.sixeswild.game.EliminationSlot;
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
@@ -74,9 +75,27 @@ public class ActiveSlotView extends JPanel{
 	private void drawBucket(Graphics g){
 		g.setColor(new Color(0,0,0,50));
 		g.fillRect(0,0,super.getWidth(),super.getHeight());
+		g.setColor(Color.black);
+		g.drawRect(0, 0, super.getWidth()-1, super.getHeight()-1);HashMap<Location,Slot> board = application.getModel().getLevel().getBoard();
+		Slot up = board.get(this.slot.getLoc().pullNearbyLocation(0,-1));
+		Slot right = board.get(this.slot.getLoc().pullNearbyLocation(1,0));
+		Slot down = board.get(this.slot.getLoc().pullNearbyLocation(0,1));
+		Slot left = board.get(this.slot.getLoc().pullNearbyLocation(-1,0));
+		if(up == null)
+			g.drawLine(0, 1, super.getWidth()-1, 1);
+		if(right ==null)
+			g.drawLine(super.getWidth()-2, 0, super.getWidth()-2, super.getHeight()-1);
+		if(down == null)
+			g.drawLine(0, super.getHeight()-2, super.getWidth()-1, super.getHeight()-2);
+		if(left == null)
+			g.drawLine(1, 0, 1, super.getHeight()-1);
 		if(((BucketSlot)this.slot).isOccupied()){
-			g.setColor(new Color(255,255,255,150));
-			g.fillRect(5,5,super.getWidth()-6,super.getHeight()-6);
+			g.setColor(new Color(255,100,255));
+			g.fillOval(super.getWidth()/4,super.getHeight()/4,super.getWidth()/2,super.getHeight()/2);
+		}
+		else{
+			g.setColor(new Color(255,255,255,50));
+			g.fillOval(super.getWidth()/4,super.getHeight()/4,super.getWidth()/2,super.getHeight()/2);
 		}
 	}
 

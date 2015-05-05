@@ -2,6 +2,7 @@ package hackstreet.sixeswild.level;
 
 import java.util.ArrayList;
 
+import hackstreet.sixeswild.config.AbstractLevelConfig;
 import hackstreet.sixeswild.config.ReleaseLevelConfig;
 import hackstreet.sixeswild.config.SavedLevelData;
 import hackstreet.sixeswild.game.BucketSlot;
@@ -12,13 +13,16 @@ import hackstreet.sixeswild.game.Tile;
 
 public class ReleaseLevel extends AbstractLevel {
 
-	private boolean initializing = true;
+	private boolean initializing;
 	private int numMovesLeft;
-	
+
 	public ReleaseLevel(SavedLevelData savedLevelData) {
 		super(savedLevelData);
 		if (savedLevelData.getLevelConfig() instanceof ReleaseLevelConfig){
 			numMovesLeft = (((ReleaseLevelConfig) savedLevelData.getLevelConfig()).getNumMoves());
+			super.clearTiles();
+			this.initializing = true;
+			this.populateBoard();
 		}
 		else
 			throw new IllegalArgumentException();
@@ -58,35 +62,56 @@ public class ReleaseLevel extends AbstractLevel {
 	public void populateBoard(){
 		// go over each column
 		for (int col = 0; col < 9; col++) {
-
-			// repopulate each cell
-			for (int row = 0; row < 9; row++) {
-
+			for(int row = 0; row < 9; row++){
 				Location loc = new Location(col,row);
-
-				// if slot is not inert and does not have tile, give it a new tile
 				Slot slot = super.getBoard().get(loc);
-				if (!(slot instanceof InertSlot) && !(slot instanceof BucketSlot) && !(slot.hasTile())) {
-
-					int val = this.generateRandomValue();
+				if(!(slot instanceof InertSlot || slot instanceof BucketSlot) && !slot.hasTile()){
 					ReleaseLevelConfig config = (ReleaseLevelConfig)super.getSavedLevelData().getLevelConfig();
-					if(this.initializing && config.getSixLocations().contains(loc))
-						val=6;
+					double f1 = config.getFreq1();
+					double f2 = config.getFreq2();
+					double f3 = config.getFreq3();
+					double f4 = config.getFreq4();
+					double f5 = config.getFreq5();
 					
-					int mult = this.generateRandomMultiplier();
-
-					Tile t = new Tile(val, mult);
-					super.getBoard().get(loc).setTile(t);
-
+					double mult2 = config.getFreqMult2();
+					double mult3 = config.getFreqMult3();
+					
+					int value = 0;
+					double rand = Math.random();
+					if(rand<f1)
+						value = 1;
+					else if(rand<f1+f2)
+						value = 2;
+					else if(rand<f1+f2+f3)
+						value = 3;
+					else if(rand<f1+f2+f3+f4)
+						value = 4;
+					else if(rand<f1+f2+f3+f4+f5)
+						value = 5;
+					else
+						value = 6;
+				
+					if(config.getSixLocations().contains(loc) && this.initializing)
+						value = 6;
+					
+					rand = Math.random();
+					int mult = 1;
+					if(rand<mult2)
+						mult = 2;
+					else if(rand<mult2+mult3)
+						mult = 3;
+					
+					Tile tile = new Tile(value,mult);
+					slot.setTile(tile);
 				}
 			}
-		}	
+		}
 		this.initializing = false;
 	}
-	
+
 	@Override
 	public void applyGravityInColumn(int col) {
-		
+
 		/*
 		 * Handle InertSlots the same way plus following:
 		 * Move sixes down to empty slots unless a bucket has been encountered in which case the sixes 
@@ -94,13 +119,13 @@ public class ReleaseLevel extends AbstractLevel {
 		 * non-empty slot. If other tile is found above, move focus to empty  slot above bucket.
 		 */
 
-		
-		
+
+
 		for (int row = 8; row > 0; row--) {
 			Location loc = new Location(col, row);
 
 			// if slot is not inert and does not have a tile, find one in column above to move down
-			if (!(super.getBoard().get(loc) instanceof InertSlot) && !(super.getBoard().get(loc).hasTile())) {
+			if (!(getBoard().get(loc) instanceof BucketSlot) && !(super.getBoard().get(loc) instanceof InertSlot) && !(super.getBoard().get(loc).hasTile())) {
 				
 				boolean noBucketAbove = true;
 
@@ -146,7 +171,7 @@ public class ReleaseLevel extends AbstractLevel {
 						// Slot with tile has been found, if 6 move down, else stop all this shit
 						if (super.getBoard().get(loc2).getTile().getValue() == 6) {
 							// copy down value to first slot
-							super.getBoard().get(loc).setTile(super.getBoard().get(loc2).getTile());	
+							((BucketSlot)super.getBoard().get(loc)).setOccupied();	
 							// set tile in slot over to null
 							super.getBoard().get(loc2).setTile(null);
 						}
@@ -156,5 +181,6 @@ public class ReleaseLevel extends AbstractLevel {
 			}
 			
 		}
+
 	}
 }

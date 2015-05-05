@@ -3,6 +3,7 @@ package hackstreet.sixeswild.move;
 import java.util.ArrayList;
 
 import hackstreet.sixeswild.SixesWild;
+import hackstreet.sixeswild.game.EliminationSlot;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.level.AbstractLevel;
 
@@ -56,6 +57,10 @@ public class StandardMove extends AbstractGameMove {
 			for (Slot slot : level.getSelectedSlots()){
 				slotsInvolvedInMove.add(slot);
 				slot.setTile(null);
+				if(slot instanceof EliminationSlot){
+					EliminationSlot eSlot = (EliminationSlot)slot;
+					eSlot.setEliminated();
+				}
 			}
 			level.repopulateSlots();
 		}		

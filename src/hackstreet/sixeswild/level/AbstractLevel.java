@@ -2,7 +2,7 @@ package hackstreet.sixeswild.level;
 
 import hackstreet.sixeswild.config.SavedLevelData;
 import hackstreet.sixeswild.game.AI;
-import hackstreet.sixeswild.game.EliminationSlot;
+import hackstreet.sixeswild.game.BucketSlot;
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
@@ -60,8 +60,8 @@ public abstract class AbstractLevel {
 		this.isAISelected = false;
 		this.moveStack = new Stack<AbstractGameMove>();
 
-		this.initBoard(this.savedLevelData.getLevelConfig().getNullLocations());
-		this.populateBoard();
+		initBoard(this.savedLevelData.getLevelConfig().getNullLocations());
+		populateBoard();
 	}
 	
 	/**
@@ -242,6 +242,14 @@ public abstract class AbstractLevel {
 		this.populateBoard();
 	}
 
+	public void clearTiles(){
+		for(Location loc:this.board.keySet()){
+			Slot slot = this.board.get(loc);
+			if(slot.hasTile())
+				slot.setTile(null);
+		}
+	}
+	
 	/**
 	 * Apply gravity to sift down existing tiles into null spaces.
 	 */
@@ -263,20 +271,21 @@ public abstract class AbstractLevel {
 		for (int row = 8; row > 0; row--) {
 			Location loc = new Location(col, row);
 
+			Slot slot = board.get(loc);
 			// if slot is not inert and does not have a tile, find one in column above to move down
-			if (!(board.get(loc) instanceof InertSlot) && !(board.get(loc).hasTile())) {
+			if (!(slot instanceof InertSlot) && !(slot.hasTile())) {
 
 				// look through slots above
 				for (int row2 = row-1; row2 >= 0; row2--) {
 					Location loc2 = new Location(col, row2);
-
+					Slot slot2 = board.get(loc2);
 					// if this slot has a tile, move it down
-					if (!(board.get(loc2) instanceof InertSlot) && (board.get(loc2).hasTile())) {
+					if (!(slot2 instanceof InertSlot) && (slot2.hasTile())) {
 
 						// copy down value to first slot
-						board.get(loc).setTile(board.get(loc2).getTile());	
+						slot.setTile(slot2.getTile());	
 						// set tile in slot over to null
-						board.get(loc2).setTile(null);
+						slot2.setTile(null);
 						break;
 					}
 				}
@@ -408,8 +417,8 @@ public abstract class AbstractLevel {
 
 				Slot s = board.get(loc);
 
-				// do not add location to answer if the loc is Inert, Elimination, or already added
-				if ( !(s instanceof InertSlot) && !(s instanceof EliminationSlot) && !selectedSlots.contains(s)
+				// do not add location to answer if the loc is Inert, or already added
+				if ( !(s instanceof InertSlot) && !(s instanceof BucketSlot) && !selectedSlots.contains(s)
 						&& !answer.contains(s)){
 					answer.add(loc);
 				}

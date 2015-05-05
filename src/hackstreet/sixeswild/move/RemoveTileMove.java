@@ -1,6 +1,8 @@
 package hackstreet.sixeswild.move;
 
 import hackstreet.sixeswild.SixesWild;
+import hackstreet.sixeswild.game.EliminationSlot;
+import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.level.AbstractLevel;
 
 /**
@@ -27,7 +29,12 @@ public class RemoveTileMove extends AbstractGameMove {
 	public boolean doMove() {
 		boolean valid = this.isValid();
 		if (valid) {
-			level.getSelectedSlots().get(0).setTile(null);
+			Slot slot = level.getSelectedSlots().get(0);
+			if(slot instanceof EliminationSlot){
+				EliminationSlot eSlot = (EliminationSlot)slot;
+				eSlot.setEliminated();
+			}
+			slot.setTile(null);
 			level.repopulateSlots();
 			level.setRemoveMoveSelected(false);
 		}

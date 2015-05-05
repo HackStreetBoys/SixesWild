@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
+import hackstreet.sixeswild.game.EliminationSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.game.Tile;
@@ -108,6 +109,10 @@ public class TileView extends JPanel {
 			int mult = this.tile.getMultiplier();
 			g.setFont(new Font("Serif",Font.BOLD,10));
 			g.drawString(mult + "x", super.getWidth()-15,super.getHeight()-10);
+		}
+		if(this.modelContainer instanceof EliminationSlot && !((EliminationSlot)this.modelContainer).isEliminated()){
+			g.setColor(new Color(255,255,255,150));
+			g.fillRect(0,0, super.getWidth(),super.getHeight());
 		}
 		this.renderSelectionGraphic(g);
 		this.renderBordering(g);

@@ -14,6 +14,10 @@ public class Tile {
 	/** The value of the multiplier, {1-3}. */
 	private int multiplier;
 	
+	public Tile(Tile other){
+		this.value = other.value;
+		this.multiplier = other.multiplier;
+	}
 	/**
 	 * Tile constructor.
 	 * @param value The value of the tile, {1-6}.
