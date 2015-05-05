@@ -39,7 +39,7 @@ public class HintMove extends AbstractGameMove {
 	}
 
 	@Override
-	public void doMove() {
+	public boolean doMove() {
 		System.out.println("Attempting to execute HINT move");
 		if (this.isValid()) {
 			System.out.println("Move is valid");
@@ -58,10 +58,12 @@ public class HintMove extends AbstractGameMove {
 			
 			level.setAISelected(false);
 		}
-		else
+		else{
 			System.out.println("Move is not valid");
+			return false;
+		}
 		level.getSelectedSlots().clear();
-		super.manageAchievements();
+		return true;
 	}
 
 }

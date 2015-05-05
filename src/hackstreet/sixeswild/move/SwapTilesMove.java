@@ -26,7 +26,7 @@ public class SwapTilesMove extends AbstractGameMove {
 	}
 
 	@Override
-	public void doMove() {
+	public boolean doMove() {
 		if (this.isValid()){
 			Tile tempTile;
 			tempTile = level.getSelectedSlots().get(0).getTile();
@@ -34,7 +34,7 @@ public class SwapTilesMove extends AbstractGameMove {
 			level.getSelectedSlots().get(1).setTile(tempTile);
 		}
 		level.getSelectedSlots().clear();
-		super.manageAchievements();
+		return this.isValid();
 	}
 
 }

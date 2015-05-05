@@ -1,5 +1,9 @@
 package hackstreet.sixeswild.level;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
 import hackstreet.sixeswild.config.LightningLevelConfig;
 import hackstreet.sixeswild.config.SavedLevelData;
 
@@ -26,9 +30,14 @@ public class LightningLevel extends AbstractLevel {
 			throw new IllegalArgumentException();
 	}
 	
-	public long getTimeLeft() {
+	public void decrementTime(){
+		this.secondsLeft--;
+	}
+	
+	public int getTimeLeft() {
 		return this.secondsLeft;
 	}
+	
 
 	@Override
 	public void handlePostMove() {

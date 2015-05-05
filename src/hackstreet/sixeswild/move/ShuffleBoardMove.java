@@ -30,7 +30,7 @@ public class ShuffleBoardMove extends AbstractGameMove {
 	}
 
 	@Override
-	public void doMove() {
+	public boolean doMove() {
 		if (this.isValid()){
 			// set all Slots that are not EliminationSlot or InertSlot to have a NULL tile
 			List<Tile> tileList = new ArrayList<Tile>();
@@ -54,7 +54,7 @@ public class ShuffleBoardMove extends AbstractGameMove {
 					slot.setTile(tileList.remove(0));
 			}
 		}
-		super.manageAchievements();
+		return this.isValid();
 	}
 
 }

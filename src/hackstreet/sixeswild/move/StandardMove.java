@@ -40,7 +40,7 @@ public class StandardMove extends AbstractGameMove {
 	}
 
 	@Override
-	public void doMove() {
+	public boolean doMove() {
 		if (this.isValid()){
 			// adjust the score
 			int scoreIncrease = 1;
@@ -60,7 +60,7 @@ public class StandardMove extends AbstractGameMove {
 			level.repopulateSlots();
 		}		
 		level.getSelectedSlots().clear();
-		super.manageAchievements();
+		return this.isValid();
 	}
 	
 	public ArrayList<Slot> getSlotsInMove() {

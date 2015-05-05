@@ -40,14 +40,15 @@ public class SwipeController extends MouseAdapter{
 
 		if(level.isRemoveMoveSelected()){
 			level.addToSelection(loc);
-			
+
 			RemoveTileMove move = new RemoveTileMove(this.application.getModel(), level);
-			move.doMove();
-			level.getMoveStack().push(move);
-			application.getModel().getLevel().setRemoveMoveSelected(false);
-			
-			level.handlePostMove();
-			this.updateMoveLabelIfRelevant(level);
+			if(move.doMove()){
+				level.getMoveStack().push(move);
+				application.getModel().getLevel().setRemoveMoveSelected(false);
+
+				level.handlePostMove();
+				this.updateMoveLabelIfRelevant(level);
+			}
 			this.repaint();
 		}
 		else{
@@ -88,7 +89,7 @@ public class SwipeController extends MouseAdapter{
 				this.updateMoveLabelIfRelevant(level);
 				this.repaint();
 			}
-			
+
 			for(Slot s:selectedSlots){
 				Location l = s.getLoc();
 				gameScreen.getGridView().getSlotView(l).getTileView().setBlink(false);
@@ -120,7 +121,7 @@ public class SwipeController extends MouseAdapter{
 		application.revalidate();
 		application.repaint();
 	}
-	
+
 	private void updateMoveLabelIfRelevant(AbstractLevel level){
 		String type = level.getSavedLevelData().getLevelConfig().getType();
 		if(type.equals("Elimination")){

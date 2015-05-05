@@ -32,13 +32,6 @@ public abstract class AbstractGameMove {
 		this.level = level;
 	}
 	
-	public void manageAchievements(){
-		List<AbstractAchievement> achievements = model.updateAchievements();
-		for(AbstractAchievement a:achievements){
-			//TODO manage achievement stuff
-		}
-	}
-	
 	public abstract boolean isValid();
-	public abstract void doMove();
+	public abstract boolean doMove();
 }
