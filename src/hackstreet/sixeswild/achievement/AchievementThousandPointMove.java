@@ -24,6 +24,7 @@ public class AchievementThousandPointMove extends AbstractAchievement {
 		super(achieved, dateAchieved);
 		super.name = "That's a fuck-ton of points";
 		super.description = "Make a move worth over 1000 points";
+		super.imgPath = "images/wpi-achievement.png";
 	}
 
 	@Override

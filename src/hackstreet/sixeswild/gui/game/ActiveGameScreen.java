@@ -13,8 +13,12 @@ import hackstreet.sixeswild.gui.SWApplication;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -38,6 +42,8 @@ public abstract class ActiveGameScreen extends AbstractScreen {
 	private JLabel switchTilesLabel;
 	private JLabel shuffleBoardLabel;
 	private JLabel hintLabel;
+	
+	private BufferedImage selectedImage;
 
 	public ActiveGameScreen(SWApplication application, int level) {
 		super(application, "Level " + level); //TODO adjust to actual level
@@ -81,6 +87,12 @@ public abstract class ActiveGameScreen extends AbstractScreen {
 		super.add(this.shuffleBoardLabel);
 		super.add(this.hintButton);
 		super.add(this.hintLabel);
+		
+		try {
+			this.selectedImage = ImageIO.read(new File("images/select-special-move.png"));
+		} catch(IOException e) {
+			System.out.println("Error: " + e);
+		}
 	}
 
 	private void setupRemoveTileButton(){
@@ -156,6 +168,14 @@ public abstract class ActiveGameScreen extends AbstractScreen {
 		super.paintComponent(g);
 		g.setColor(Color.black);
 		g.drawLine(120, 0, 120, 600);
+		
+		if (super.getApplication().getModel().getLevel().isSwapMoveSelected()) {
+			g.drawImage(this.selectedImage, this.switchTilesButton.getX()-3, this.switchTilesButton.getY()-3, null);
+		}
+		if (super.getApplication().getModel().getLevel().isRemoveMoveSelected()) {
+			g.drawImage(this.selectedImage, this.removeTileButton.getX()-3, this.removeTileButton.getY()-3, null);
+			
+		}
 	}
 
 	public GridView getGridView(){
