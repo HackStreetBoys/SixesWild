@@ -60,7 +60,7 @@ public class SixesWildRunner {
 		SWApplication application = new SWApplication(model);
 		application.setVisible(true);
 	}
-
+/*
 	private static void addFakeLevel(ArrayList<SavedLevelData> data){
 		AbstractLevelConfig config = new EliminationLevelConfig(100);
 		config.setFreq1(.4);
@@ -108,8 +108,8 @@ public class SixesWildRunner {
 		d.setUnlocked(true);
 		data.add(d);
 	}
-
-	private static void loadFonts(){
+*/
+	public static void loadFonts(){
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("images/RioGrande.ttf"));
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -119,7 +119,7 @@ public class SixesWildRunner {
 		}
 	}
 
-	private static ArrayList<SavedLevelData> LoadManifest(){
+	public static ArrayList<SavedLevelData> LoadManifest(){
 
 		String filebuffer = "";
 

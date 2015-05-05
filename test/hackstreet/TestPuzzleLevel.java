@@ -2,6 +2,7 @@ package hackstreet;
 
 import static org.junit.Assert.*;
 import hackstreet.sixeswild.SixesWild;
+import hackstreet.sixeswild.SixesWildRunner;
 import hackstreet.sixeswild.achievement.AbstractAchievement;
 import hackstreet.sixeswild.achievement.AchievementAllLevelsCompleted;
 import hackstreet.sixeswild.achievement.AchievementAllOnes;
@@ -26,29 +27,15 @@ import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.game.Tile;
 import hackstreet.sixeswild.gui.SWApplication;
 import hackstreet.sixeswild.gui.game.ActiveGameScreen;
-import hackstreet.sixeswild.move.StandardMove;
 import hackstreet.sixeswild.move.SwapTilesMove;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.junit.Test;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * I wrote code structured this way for the government, and they successfully loaded it onto 
@@ -80,7 +67,7 @@ public class TestPuzzleLevel {
 			// none
 		}
 
-		loadFonts();
+		SixesWildRunner.loadFonts();
 
 		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
@@ -94,7 +81,7 @@ public class TestPuzzleLevel {
 		achievements.add(new AchievementTenThousandPoints());
 		//------------------------------------------------------------------------------
 		//splash.showSplash();
-		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		ArrayList<SavedLevelData> savedLevelData = SixesWildRunner.LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 
 		SWApplication application = new SWApplication(model);
@@ -144,7 +131,7 @@ public class TestPuzzleLevel {
 			// none
 		}
 
-		loadFonts();
+		SixesWildRunner.loadFonts();
 
 		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
@@ -158,7 +145,7 @@ public class TestPuzzleLevel {
 		achievements.add(new AchievementTenThousandPoints());
 		//------------------------------------------------------------------------------
 		//splash.showSplash();
-		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		ArrayList<SavedLevelData> savedLevelData = SixesWildRunner.LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 
 		SWApplication application = new SWApplication(model);
@@ -220,7 +207,7 @@ public class TestPuzzleLevel {
 			// none
 		}
 
-		loadFonts();
+		SixesWildRunner.loadFonts();
 
 		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
@@ -234,7 +221,7 @@ public class TestPuzzleLevel {
 		achievements.add(new AchievementTenThousandPoints());
 		//------------------------------------------------------------------------------
 		//splash.showSplash();
-		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		ArrayList<SavedLevelData> savedLevelData = SixesWildRunner.LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 
 		SWApplication application = new SWApplication(model);
@@ -299,7 +286,7 @@ public class TestPuzzleLevel {
 			// none
 		}
 
-		loadFonts();
+		SixesWildRunner.loadFonts();
 
 		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
@@ -313,7 +300,7 @@ public class TestPuzzleLevel {
 		achievements.add(new AchievementTenThousandPoints());
 		//------------------------------------------------------------------------------
 		//splash.showSplash();
-		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		ArrayList<SavedLevelData> savedLevelData = SixesWildRunner.LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 
 		SWApplication application = new SWApplication(model);
@@ -380,7 +367,7 @@ public class TestPuzzleLevel {
 			// none
 		}
 
-		loadFonts();
+		SixesWildRunner.loadFonts();
 
 		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
@@ -394,7 +381,7 @@ public class TestPuzzleLevel {
 		achievements.add(new AchievementTenThousandPoints());
 		//------------------------------------------------------------------------------
 		//splash.showSplash();
-		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		ArrayList<SavedLevelData> savedLevelData = SixesWildRunner.LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 
 		SWApplication application = new SWApplication(model);
@@ -457,7 +444,7 @@ public class TestPuzzleLevel {
 			// none
 		}
 
-		loadFonts();
+		SixesWildRunner.loadFonts();
 
 		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
@@ -471,7 +458,7 @@ public class TestPuzzleLevel {
 		achievements.add(new AchievementTenThousandPoints());
 		//------------------------------------------------------------------------------
 		//splash.showSplash();
-		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		ArrayList<SavedLevelData> savedLevelData = SixesWildRunner.LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 
 		SWApplication application = new SWApplication(model);
@@ -529,61 +516,6 @@ public class TestPuzzleLevel {
 		SwapTilesMove swapTilesMove = new SwapTilesMove(model, model.getLevel());
 		swapTilesMove.doMove();
 		
-	}
-	
-	private static void loadFonts(){
-		try {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("images/RioGrande.ttf"));
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			ge.registerFont(font);
-		} catch (IOException|FontFormatException e) {
-			System.out.println("Nopes");
-		}
-	}	
-	
-	private static ArrayList<SavedLevelData> LoadManifest(){
-
-		String filebuffer = "";
-
-		File manifestFile = new File(System.getProperty("user.dir")+ "/data/manifest.json");
-		
-		if ( manifestFile.exists() == true ){
-
-
-			try (InputStream in = Files.newInputStream(manifestFile.toPath());
-					BufferedReader reader =
-							new BufferedReader(new InputStreamReader(in))) {
-				String line = null;
-				while ((line = reader.readLine()) != null) {
-					filebuffer += line;
-				}
-			} catch (IOException x) {
-				System.err.println(x);
-			}
-
-			Gson gson = new Gson();
-
-			Type collectionType = new TypeToken<ArrayList<SavedLevelData>>() {
-			}.getType();
-
-
-			ArrayList<SavedLevelData> savedLevelData = gson.fromJson(filebuffer,collectionType);
-			savedLevelData = gson.fromJson(filebuffer, collectionType);
-
-			for (int i = 0; i < savedLevelData.size();i++)
-			{
-				savedLevelData.get(i).getLevelConfig();
-
-			}
-			return savedLevelData;
-		}
-		else
-		{
-			System.err.println("No manifest");
-		}
-		//		System.exit(1);
-		return null;
-
 	}
 
 }
