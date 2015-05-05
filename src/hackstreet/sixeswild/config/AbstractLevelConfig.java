@@ -55,8 +55,7 @@ public class AbstractLevelConfig {
 		return nullLocations;
 	}
 
-	public void setNullLocations(
-			ArrayList<Location> nullLocations) {
+	public void setNullLocations(ArrayList<Location> nullLocations) {
 		this.nullLocations = nullLocations;
 	}
 

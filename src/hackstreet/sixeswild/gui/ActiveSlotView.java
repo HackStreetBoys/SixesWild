@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.swing.JPanel;
 
+import hackstreet.sixeswild.game.BucketSlot;
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
@@ -66,6 +67,17 @@ public class ActiveSlotView extends JPanel{
 		}
 		else
 			g.drawRect(0,0, super.getWidth()-1, super.getHeight()-1);
+		if(this.slot instanceof BucketSlot)
+			this.drawBucket(g);
+	}
+
+	private void drawBucket(Graphics g){
+		g.setColor(new Color(0,0,0,50));
+		g.fillRect(0,0,super.getWidth(),super.getHeight());
+		if(((BucketSlot)this.slot).isOccupied()){
+			g.setColor(new Color(255,255,255,150));
+			g.fillRect(5,5,super.getWidth()-6,super.getHeight()-6);
+		}
 	}
 
 	public boolean equals(Object o){
@@ -76,15 +88,15 @@ public class ActiveSlotView extends JPanel{
 		return false;
 
 	}
-	
+
 	public TileView getTileView(){
 		return this.tileView;
 	}
-	
+
 	public void blink(){
 		this.tileView.blink();
 	}
-	
+
 	public Slot getSlot(){
 		return this.slot;
 	}

@@ -345,7 +345,7 @@ public abstract class AbstractLevel {
 		this.pointsEarned += delta;
 	}
 
-	private void initBoard(ArrayList<Location> inertLocs){
+	protected void initBoard(ArrayList<Location> inertLocs){
 		for(int row=0; row<9; row++){
 			for(int col=0; col<9; col++){
 				Location loc = new Location(col,row);

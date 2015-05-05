@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.controller;
 
+import hackstreet.sixeswild.game.BucketSlot;
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
@@ -55,7 +56,7 @@ public class SwipeController extends MouseAdapter{
 		}
 		else{
 			Slot slot = level.getBoard().get(loc);
-			if(!(slot instanceof InertSlot) && slot.getTile().getValue()==6)
+			if(!(slot instanceof BucketSlot) && !(slot instanceof InertSlot) && slot.getTile().getValue()==6)
 				return;
 			this.accepting = true;
 		}
@@ -73,7 +74,7 @@ public class SwipeController extends MouseAdapter{
 
 			Location loc = new Location(x,y);
 			Slot slot = level.getBoard().get(loc);
-			if(!(slot instanceof InertSlot) && slot.getTile().getValue()==6)
+			if(!(slot instanceof BucketSlot) && !(slot instanceof InertSlot) && slot.getTile().getValue()==6)
 				return;
 			if(!selectedSlots.contains(level.getBoard().get(loc))){
 				application.getModel().getLevel().addToSelection(loc);
