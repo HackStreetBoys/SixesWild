@@ -60,7 +60,7 @@ import com.google.gson.reflect.TypeToken;
 public class TestPuzzleLevel {
 
 	@Test
-	public void testAll() {
+	public void testNavigation() {
 	
 		/*======================================================================================*/
 		/*								MIMIC RUNNER											*/
@@ -121,7 +121,139 @@ public class TestPuzzleLevel {
 		// verify puzzle level initial conditions
 		assertTrue(model.getLevel().getSavedLevelData().config.getType().compareTo("Puzzle") == 0);
 		assertTrue(model.getLevel().getPointsEarned() == 0);
+	}
+	
+	@Test
+	public void testStandardMove() {
+	
+		/*======================================================================================*/
+		/*								MIMIC RUNNER											*/
+		/*======================================================================================*/
 		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} 
+		catch (Exception e) { 
+			// none
+		}
+
+		loadFonts();
+
+		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
+		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
+		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
+		achievements.add(new AchievementFirstLevelCompleted());
+		achievements.add(new AchievementOneOfEachLevel());
+		achievements.add(new AchievementAllOnes());
+		achievements.add(new AchievementAllLevelsCompleted());
+		achievements.add(new AchievementThousandPointMove());
+		achievements.add(new AchievementAllStars());
+		achievements.add(new AchievementTenThousandPoints());
+		//------------------------------------------------------------------------------
+		//splash.showSplash();
+		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		SixesWild model = new SixesWild(savedLevelData,achievements);
+
+		SWApplication application = new SWApplication(model);
+		application.setVisible(true);
+		
+		/*======================================================================================*/
+		/*								NAVIGATION 												*/
+		/*======================================================================================*/
+
+		// Enter Level Select Screen
+		ToLevelSelectScreenController toLevelSelectScreenController = new ToLevelSelectScreenController(application);
+		toLevelSelectScreenController.actionPerformed(null);
+		
+		// Enter Game Screen
+		ToGameScreenController toGameScreenController = new ToGameScreenController(application, 1);
+		toGameScreenController.actionPerformed(null);
+		
+		// verify puzzle level initial conditions
+		assertTrue(model.getLevel().getSavedLevelData().config.getType().compareTo("Puzzle") == 0);
+		assertTrue(model.getLevel().getPointsEarned() == 0);
+
+		/*======================================================================================*/
+		/*								Normal Moves											*/
+		/*======================================================================================*/
+		
+		SwipeController swipeController = (SwipeController) ((ActiveGameScreen) (application.getActiveScreen())).getGridView().getMouseListeners()[0];
+		
+		ArrayList<Location> validStandardMove= model.getLevel().getAi().calculateValidMove();
+		int tempScore = model.getLevel().getPointsEarned();
+		int x1 = 10+48*validStandardMove.get(0).getX();
+		int y1 = 10+48*validStandardMove.get(0).getY();
+		
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+		for (Location loc : validStandardMove){
+			x1 = 10+48*loc.getX();
+			y1 = 10+48*loc.getY();
+			swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+		}
+		swipeController.mouseReleased(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+		assertTrue(model.getLevel().getPointsEarned() > tempScore);
+	}
+	
+	@Test
+	public void testSpecialHint() {
+	
+		/*======================================================================================*/
+		/*								MIMIC RUNNER											*/
+		/*======================================================================================*/
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} 
+		catch (Exception e) { 
+			// none
+		}
+
+		loadFonts();
+
+		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
+		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
+		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
+		achievements.add(new AchievementFirstLevelCompleted());
+		achievements.add(new AchievementOneOfEachLevel());
+		achievements.add(new AchievementAllOnes());
+		achievements.add(new AchievementAllLevelsCompleted());
+		achievements.add(new AchievementThousandPointMove());
+		achievements.add(new AchievementAllStars());
+		achievements.add(new AchievementTenThousandPoints());
+		//------------------------------------------------------------------------------
+		//splash.showSplash();
+		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		SixesWild model = new SixesWild(savedLevelData,achievements);
+
+		SWApplication application = new SWApplication(model);
+		application.setVisible(true);
+		
+		/*======================================================================================*/
+		/*								NAVIGATION 												*/
+		/*======================================================================================*/
+
+		// Enter Level Select Screen
+		ToLevelSelectScreenController toLevelSelectScreenController = new ToLevelSelectScreenController(application);
+		toLevelSelectScreenController.actionPerformed(null);
+		
+		// Enter Game Screen
+		ToGameScreenController toGameScreenController = new ToGameScreenController(application, 1);
+		toGameScreenController.actionPerformed(null);
+		
+		// verify puzzle level initial conditions
+		assertTrue(model.getLevel().getSavedLevelData().config.getType().compareTo("Puzzle") == 0);
+		assertTrue(model.getLevel().getPointsEarned() == 0);
+
 		/*======================================================================================*/
 		/*								Hint													*/
 		/*======================================================================================*/
@@ -142,8 +274,64 @@ public class TestPuzzleLevel {
 				
 			}
 			else
-				System.out.println("	NULL");			
+				System.out.println("	NULL");		
 		}
+	}
+	
+	@Test
+	public void testSpecialShuffle() {
+	
+		/*======================================================================================*/
+		/*								MIMIC RUNNER											*/
+		/*======================================================================================*/
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} 
+		catch (Exception e) { 
+			// none
+		}
+
+		loadFonts();
+
+		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
+		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
+		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
+		achievements.add(new AchievementFirstLevelCompleted());
+		achievements.add(new AchievementOneOfEachLevel());
+		achievements.add(new AchievementAllOnes());
+		achievements.add(new AchievementAllLevelsCompleted());
+		achievements.add(new AchievementThousandPointMove());
+		achievements.add(new AchievementAllStars());
+		achievements.add(new AchievementTenThousandPoints());
+		//------------------------------------------------------------------------------
+		//splash.showSplash();
+		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		SixesWild model = new SixesWild(savedLevelData,achievements);
+
+		SWApplication application = new SWApplication(model);
+		application.setVisible(true);
+		
+		/*======================================================================================*/
+		/*								NAVIGATION 												*/
+		/*======================================================================================*/
+
+		// Enter Level Select Screen
+		ToLevelSelectScreenController toLevelSelectScreenController = new ToLevelSelectScreenController(application);
+		toLevelSelectScreenController.actionPerformed(null);
+		
+		// Enter Game Screen
+		ToGameScreenController toGameScreenController = new ToGameScreenController(application, 1);
+		toGameScreenController.actionPerformed(null);
+		
+		// verify puzzle level initial conditions
+		assertTrue(model.getLevel().getSavedLevelData().config.getType().compareTo("Puzzle") == 0);
+		assertTrue(model.getLevel().getPointsEarned() == 0);
 		
 		/*======================================================================================*/
 		/*								Shuffle													*/
@@ -169,6 +357,62 @@ public class TestPuzzleLevel {
 			}
 		}
 		assertTrue(numShuffled > 20);
+	}
+	
+	@Test
+	public void testSpecialRemove() {
+	
+		/*======================================================================================*/
+		/*								MIMIC RUNNER											*/
+		/*======================================================================================*/
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} 
+		catch (Exception e) { 
+			// none
+		}
+
+		loadFonts();
+
+		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
+		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
+		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
+		achievements.add(new AchievementFirstLevelCompleted());
+		achievements.add(new AchievementOneOfEachLevel());
+		achievements.add(new AchievementAllOnes());
+		achievements.add(new AchievementAllLevelsCompleted());
+		achievements.add(new AchievementThousandPointMove());
+		achievements.add(new AchievementAllStars());
+		achievements.add(new AchievementTenThousandPoints());
+		//------------------------------------------------------------------------------
+		//splash.showSplash();
+		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		SixesWild model = new SixesWild(savedLevelData,achievements);
+
+		SWApplication application = new SWApplication(model);
+		application.setVisible(true);
+		
+		/*======================================================================================*/
+		/*								NAVIGATION 												*/
+		/*======================================================================================*/
+
+		// Enter Level Select Screen
+		ToLevelSelectScreenController toLevelSelectScreenController = new ToLevelSelectScreenController(application);
+		toLevelSelectScreenController.actionPerformed(null);
+		
+		// Enter Game Screen
+		ToGameScreenController toGameScreenController = new ToGameScreenController(application, 1);
+		toGameScreenController.actionPerformed(null);
+		
+		// verify puzzle level initial conditions
+		assertTrue(model.getLevel().getSavedLevelData().config.getType().compareTo("Puzzle") == 0);
+		assertTrue(model.getLevel().getPointsEarned() == 0);
 		
 		/*======================================================================================*/
 		/*								Remove													*/
@@ -176,53 +420,102 @@ public class TestPuzzleLevel {
 
 		
 		// Remove - must pass MouseEvent. Assert that the file is not referencing the old tile.
+		ArrayList<Location> validRemoveMove = model.getLevel().getAi().calculateValidMove();
+		int xRem1 = 10+48*validRemoveMove.get(0).getX();
+		int yRem1 = 10+48*validRemoveMove.get(0).getY();
+		
 		Tile removedTile = model.getLevel().getBoard().get(new Location(3,3)).getTile();
 		RemoveController removeController = new RemoveController(application);
 		removeController.actionPerformed(null);
 		SwipeController swipeController = (SwipeController) ((ActiveGameScreen) (application.getActiveScreen())).getGridView().getMouseListeners()[0];
-		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+10, 3*48+10, 0, false));
-		Tile newTile = model.getLevel().getBoard().get(new Location (3,3)).getTile();
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, xRem1, yRem1, 0, false));
+		Tile newTile = model.getLevel().getBoard().get(validRemoveMove.get(0)).getTile();
 		assertTrue(removedTile != newTile);
 		removedTile = newTile;
 		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 60, 0, false));
 		assertTrue(removedTile == newTile);
+	}
+
+	@Test
+	public void testSpecialSwap() {
+	
+		/*======================================================================================*/
+		/*								MIMIC RUNNER											*/
+		/*======================================================================================*/
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} 
+		catch (Exception e) { 
+			// none
+		}
+
+		loadFonts();
+
+		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
+		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
+		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
+		achievements.add(new AchievementFirstLevelCompleted());
+		achievements.add(new AchievementOneOfEachLevel());
+		achievements.add(new AchievementAllOnes());
+		achievements.add(new AchievementAllLevelsCompleted());
+		achievements.add(new AchievementThousandPointMove());
+		achievements.add(new AchievementAllStars());
+		achievements.add(new AchievementTenThousandPoints());
+		//------------------------------------------------------------------------------
+		//splash.showSplash();
+		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
+		SixesWild model = new SixesWild(savedLevelData,achievements);
+
+		SWApplication application = new SWApplication(model);
+		application.setVisible(true);
+		
+		/*======================================================================================*/
+		/*								NAVIGATION 												*/
+		/*======================================================================================*/
+
+		// Enter Level Select Screen
+		ToLevelSelectScreenController toLevelSelectScreenController = new ToLevelSelectScreenController(application);
+		toLevelSelectScreenController.actionPerformed(null);
+		
+		// Enter Game Screen
+		ToGameScreenController toGameScreenController = new ToGameScreenController(application, 1);
+		toGameScreenController.actionPerformed(null);
+		
+		// verify puzzle level initial conditions
+		assertTrue(model.getLevel().getSavedLevelData().config.getType().compareTo("Puzzle") == 0);
+		assertTrue(model.getLevel().getPointsEarned() == 0);
 		
 		/*======================================================================================*/
 		/*								Swap													*/
 		/*======================================================================================*/
 
+		SwipeController swipeController = (SwipeController) ((ActiveGameScreen) (application.getActiveScreen())).getGridView().getMouseListeners()[0];
 		
-		// Swap Location(3,3) and (3,4)
-		Tile tile1 = model.getLevel().getBoard().get(new Location(3,3)).getTile();
-		Tile tile2 = model.getLevel().getBoard().get(new Location(3,4)).getTile();
+		// Swap adjacent locations (luckily, we have an AI that will give us those locations. heheheh)
+		ArrayList<Location> validSwapMove= model.getLevel().getAi().calculateValidMove();
+		int xSwap1 = 10+48*validSwapMove.get(0).getX();
+		int ySwap1 = 10+48*validSwapMove.get(0).getY();
+		int xSwap2 = 10+48*validSwapMove.get(1).getX();
+		int ySwap2 = 10+48*validSwapMove.get(1).getY();
+		
+		Tile tile1 = model.getLevel().getBoard().get(validSwapMove.get(0)).getTile();
+		Tile tile2 = model.getLevel().getBoard().get(validSwapMove.get(1)).getTile();
 		SwapController swapController = new SwapController(application);
 		swapController.actionPerformed(null);
-		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+10, 3*48+10, 0, false));
-		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+11, 3*48+11, 0, false));
-		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+10, 4*48+10, 0, false));
-		assertTrue(tile1 == model.getLevel().getBoard().get(new Location(3,4)).getTile());
-		assertTrue(tile2 == model.getLevel().getBoard().get(new Location(3,3)).getTile());
-		
-		/*======================================================================================*/
-		/*								Normal Moves											*/
-		/*======================================================================================*/
-		
-		ArrayList<Location> validStandardMove= model.getLevel().getAi().calculateValidMove();
-		int tempScore = model.getLevel().getPointsEarned();
-		int x1 = 10+48*validStandardMove.get(0).getX();
-		int y1 = 10+48*validStandardMove.get(0).getY();
-		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
-		for (Location loc : validStandardMove){
-			x1 = 10+48*loc.getX();
-			y1 = 10+48*loc.getY();
-			swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
-		}
-		swipeController.mouseReleased(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
-		assertTrue(model.getLevel().getPointsEarned() > tempScore);
-		
-		
-		System.exit(0); // close the application
-}
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, xSwap1, ySwap1, 0, false));
+		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, xSwap1, ySwap1, 0, false));
+		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, xSwap2, ySwap2, 0, false));
+		Tile tile1new = model.getLevel().getBoard().get(validSwapMove.get(1)).getTile();
+		Tile tile2new = model.getLevel().getBoard().get(validSwapMove.get(0)).getTile();
+		assertTrue(tile1 == tile1new);
+		assertTrue(tile2 == tile2new);
+	}
 	
 	private static void loadFonts(){
 		try {
