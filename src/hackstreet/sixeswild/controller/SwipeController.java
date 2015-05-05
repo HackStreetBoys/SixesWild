@@ -3,9 +3,15 @@ package hackstreet.sixeswild.controller;
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
-import hackstreet.sixeswild.gui.ActiveGameScreen;
 import hackstreet.sixeswild.gui.SWApplication;
+import hackstreet.sixeswild.gui.game.ActiveGameScreen;
+import hackstreet.sixeswild.gui.game.EliminationGameScreen;
+import hackstreet.sixeswild.gui.game.PuzzleGameScreen;
+import hackstreet.sixeswild.gui.game.ReleaseGameScreen;
 import hackstreet.sixeswild.level.AbstractLevel;
+import hackstreet.sixeswild.level.EliminationLevel;
+import hackstreet.sixeswild.level.PuzzleLevel;
+import hackstreet.sixeswild.level.ReleaseLevel;
 import hackstreet.sixeswild.move.RemoveTileMove;
 import hackstreet.sixeswild.move.StandardMove;
 import hackstreet.sixeswild.move.SwapTilesMove;
@@ -35,10 +41,13 @@ public class SwipeController extends MouseAdapter{
 		if(level.isRemoveMoveSelected()){
 			level.addToSelection(loc);
 			
-			RemoveTileMove move = new RemoveTileMove(level);
+			RemoveTileMove move = new RemoveTileMove(this.application.getModel(), level);
 			move.doMove();
 			level.getMoveStack().push(move);
 			application.getModel().getLevel().setRemoveMoveSelected(false);
+			
+			level.handlePostMove();
+			this.updateMoveLabelIfRelevant(level);
 			this.repaint();
 		}
 		else{
@@ -69,11 +78,14 @@ public class SwipeController extends MouseAdapter{
 			}
 
 			if(level.isSwapMoveSelected()&&selectedSlots.size()==2){
-				SwapTilesMove move = new SwapTilesMove(level);
+				SwapTilesMove move = new SwapTilesMove(this.application.getModel(),level);
 				move.doMove();
 				level.getMoveStack().push(move);
 				this.accepting = false;
 				application.getModel().getLevel().setSwapMoveSelected(false);
+
+				level.handlePostMove();
+				this.updateMoveLabelIfRelevant(level);
 				this.repaint();
 			}
 			
@@ -88,10 +100,13 @@ public class SwipeController extends MouseAdapter{
 	public void mouseReleased(MouseEvent e){
 		if(this.accepting){
 			AbstractLevel level = application.getModel().getLevel();
-			StandardMove move = new StandardMove(level);
+			StandardMove move = new StandardMove(this.application.getModel(),level);
 			move.doMove();
 			level.getMoveStack().push(move);
 			this.accepting = false;
+
+			level.handlePostMove();
+			this.updateMoveLabelIfRelevant(level);
 			this.repaint();
 		}
 	}
@@ -104,6 +119,22 @@ public class SwipeController extends MouseAdapter{
 		game.getScoreLabel().setText("Score: " + level.getPointsEarned());
 		application.revalidate();
 		application.repaint();
+	}
+	
+	private void updateMoveLabelIfRelevant(AbstractLevel level){
+		String type = level.getSavedLevelData().getLevelConfig().getType();
+		if(type.equals("Elimination")){
+			int numMovesLeft = ((EliminationLevel)level).getNumMovesLeft();
+			((EliminationGameScreen)application.getActiveScreen()).getMovesLabel().setText("Moves Left: " + numMovesLeft);
+		}
+		else if(type.equals("Puzzle")){
+			int numMovesLeft = ((PuzzleLevel)level).getNumMovesLeft();
+			((PuzzleGameScreen)application.getActiveScreen()).getMovesLabel().setText("Moves Left: " + numMovesLeft);
+		}
+		else if(type.equals("Release")){
+			int numMovesLeft = ((ReleaseLevel)level).getNumMovesLeft();
+			((ReleaseGameScreen)application.getActiveScreen()).getMovesLabel().setText("Moves Left: " + numMovesLeft);
+		}
 	}
 
 }

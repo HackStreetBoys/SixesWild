@@ -1,6 +1,12 @@
 package hackstreet.sixeswild.gui;
 
 import hackstreet.sixeswild.SixesWild;
+import hackstreet.sixeswild.gui.game.ActiveGameScreen;
+import hackstreet.sixeswild.gui.game.EliminationGameScreen;
+import hackstreet.sixeswild.gui.game.LightningGameScreen;
+import hackstreet.sixeswild.gui.game.PuzzleGameScreen;
+import hackstreet.sixeswild.gui.game.ReleaseGameScreen;
+import hackstreet.sixeswild.level.AbstractLevel;
 
 import javax.swing.JFrame;
 
@@ -26,7 +32,7 @@ public class SWApplication extends JFrame{
 		super.setSize(800,600);
 		super.setResizable(false);
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		this.activeScreen = this.mainScreen;
 		super.add(this.activeScreen);
 		this.enterMainScreen();
@@ -40,10 +46,19 @@ public class SWApplication extends JFrame{
 		this.enterScreen(this.levelSelectScreen);
 	}
 
-	public void enterGameScreen(int level){
-		this.enterScreen(new ActiveGameScreen(this,level));
+	public void enterGameScreen(int levelNumber){
+		AbstractLevel level = this.model.getLevel();
+		String type = level.getSavedLevelData().getLevelConfig().getType();
+		if(type.equals("Elimination"))
+			this.enterScreen(new EliminationGameScreen(this,levelNumber));
+		else if(type.equals("Lightning"))
+			this.enterScreen(new LightningGameScreen(this,levelNumber));
+		else if(type.equals("Puzzle"))
+			this.enterScreen(new PuzzleGameScreen(this,levelNumber));
+		else if(type.equals("Release"))
+			this.enterScreen(new ReleaseGameScreen(this,levelNumber));
 	}
-	
+
 	public void enterAchievementsScreen() {
 		this.enterScreen(this.achievementScreen);
 	}
@@ -59,7 +74,7 @@ public class SWApplication extends JFrame{
 		super.revalidate();
 		super.repaint();
 	}
-	
+
 	public AbstractScreen getActiveScreen(){
 		return this.activeScreen;
 	}

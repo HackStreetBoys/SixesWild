@@ -18,7 +18,7 @@ public class HintController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		application.getModel().getLevel().setAISelected(true);
 		AbstractLevel level = this.application.getModel().getLevel();
-		HintMove move = new HintMove(level, application);
+		HintMove move = new HintMove(application.getModel(), level, application);
 		
 		move.doMove();
 		level.getMoveStack().push(move);

@@ -20,7 +20,7 @@ import java.util.Stack;
  * @author Tim, Nicholas
  *
  */
-public class AbstractLevel {
+public abstract class AbstractLevel {
 
 	/** The data used to create the level. */
 	private SavedLevelData savedLevelData;
@@ -37,6 +37,8 @@ public class AbstractLevel {
 	private boolean isShuffleMoveSelected;
 	private boolean isAISelected;
 	private Stack<AbstractGameMove> moveStack;
+	
+	public abstract void handlePostMove();
 
 	/**
 	 * AbstractLevel constructor.
@@ -61,7 +63,7 @@ public class AbstractLevel {
 		this.initBoard(this.savedLevelData.getLevelConfig().getNullLocations());
 		this.populateBoard();
 	}
-
+	
 	/**
 	 * If the addition is valid, add a Slot to the selectedSlot ArrayList.
 	 * @param loc

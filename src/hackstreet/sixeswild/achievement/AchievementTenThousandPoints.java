@@ -33,7 +33,7 @@ public class AchievementTenThousandPoints extends AbstractAchievement {
 		Stack<AbstractGameMove> moveStack = level.getMoveStack();
 		
 		
-		if (moveStack.peek() instanceof StandardMove) {
+		if (!moveStack.isEmpty() && moveStack.peek() instanceof StandardMove) {
 			StandardMove latestMove = (StandardMove) moveStack.peek();
 			
 			int scoreForMove =  latestMove.getScore();

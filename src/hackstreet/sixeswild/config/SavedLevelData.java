@@ -32,7 +32,7 @@ public class SavedLevelData {
 	public AbstractLevelConfig config;
 	public boolean isUnlocked;
 	public int starsEarned;
-	
+
 	/**
 	 * SavedLevelData constructor;
 	 * @param config
@@ -42,48 +42,42 @@ public class SavedLevelData {
 		this.isUnlocked = false;
 		this.starsEarned = 0;
 	}
-	
+
 	public SavedLevelData(AbstractLevelConfig config){
 		this.config = config;
 		this.isUnlocked = false;
 		this.starsEarned = 0;
 	}
-	
+
 	public AbstractLevelConfig getLevelConfig() {
-		
-		if (config == null)
-		{
+
+		if (config == null) {
 			file = new File( System.getProperty("user.dir")+file.toPath() );
 			String filebuffer = "";
 			System.out.println(file.toPath()+" exists? "+file.exists());
-			try {
-				FileReader fr = new FileReader(file);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try (InputStream in = Files.newInputStream(file.toPath());
-				    BufferedReader reader =
-				      new BufferedReader(new InputStreamReader(in))) {
-				    String line = null;
-				    while ((line = reader.readLine()) != null) {
-				        filebuffer = line;
-				    }
-				} 
-			catch (IOException x) {
-				    System.err.println(x);
-				}
 			
+			try {
+				InputStream in = Files.newInputStream(file.toPath()); 
+				BufferedReader reader = new BufferedReader(new InputStreamReader(in)); 
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					filebuffer = line;
+				}
+			} 
+			catch (IOException x) {
+				System.err.println(x);
+			}
+
 			Gson gson = new Gson();
 			JsonParser parser = new JsonParser();
-			
+
 			JsonObject obj = parser.parse(filebuffer).getAsJsonObject();
 			String type = obj.get("Type").getAsString();
-			
+
 			System.out.println("Loading Config");
-			
+
 			if(type.equals("Elimination")){
-				
+
 				config = gson.fromJson(filebuffer, EliminationLevelConfig.class);
 				return config;
 			}

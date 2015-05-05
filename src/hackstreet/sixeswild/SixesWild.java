@@ -39,14 +39,14 @@ public class SixesWild {
 
 	ArrayList<SavedLevelData> savedLevelData;
 	ArrayList<AbstractAchievement> achievements;
-	
+
 	AbstractLevel activeLevel;
 
 	public SixesWild(ArrayList<SavedLevelData> savedLevelData, ArrayList<AbstractAchievement> achievements){
 		this.savedLevelData = savedLevelData;
 		this.achievements = achievements;
 	}
-	
+
 	private void winLevel(SixesWild sw)
 	{
 		/*
@@ -63,73 +63,59 @@ public class SixesWild {
 		catch (IOException x) {
 			    System.err.println(x);
 			}
-		
+
 		Gson gson = new Gson();
 		gson.fromJson(filebuffer, sw.activeLevel.class)
-		
+
 		SavedLevelData sld = new SavedLevelData(sw.activeLevel);
 
 		sld.setStars( WHATEVER VARIABLE GOES IN HERE)
 		sld.setUnlocked( WHATEVER VARIABLE GOES IN HERE);s
-	
+
 		FileWriter fw = new FileWriter(sw.activeLevel.File);
 		fw.write(gson.toJson(sld));
-		
-		return true;
-		*/
-	}
-	
-	public void prepareLevel(int level){
 
+		return true;
+		 */
+	}
+
+	public void prepareLevel(int level){
 		SavedLevelData levelData = this.savedLevelData.get(level-1);
 		
-
-		System.out.println(levelData.getLevelConfig());
-		if(levelData.getLevelConfig().getType().equals( "Elimination")){
+		if(levelData.getLevelConfig().getType().equals( "Elimination"))
 			this.activeLevel = new EliminationLevel(levelData);
-			System.out.println("E");
-			}
-			else if(levelData.getLevelConfig().getType().equals("Lightning")){
+		else if(levelData.getLevelConfig().getType().equals("Lightning"))
 			this.activeLevel = new LightningLevel(levelData);
-			System.out.println("L");
-			}
-			else if(levelData.getLevelConfig().getType().equals("Puzzle")){
-				
-				System.out.println("P");
-				this.activeLevel = new PuzzleLevel(levelData);
-			
-			}
-			else if(levelData.getLevelConfig().getType().equals( "Release")){
+		else if(levelData.getLevelConfig().getType().equals("Puzzle"))
+			this.activeLevel = new PuzzleLevel(levelData);
+		else if(levelData.getLevelConfig().getType().equals( "Release"))
 			this.activeLevel = new ReleaseLevel(levelData);
-			System.out.println("R");
-			}
-
 	}
-	
+
 	public AbstractLevel getLevel(){
 		return this.activeLevel;
 	}
-	
+
 	public ArrayList<SavedLevelData> getSavedLevelDataList(){
 		return this.savedLevelData;
 	}
-	
+
 	public ArrayList<AbstractAchievement> getAchievements() {
 		return this.achievements;
 	}
-	
+
 	public List<AbstractAchievement> updateAchievements() {
-		
-		
+
+
 		List<AbstractAchievement> achievementList = new ArrayList<AbstractAchievement>();
-		
+
 		for (AbstractAchievement a: this.achievements) {
 			if (a.isAchieved(this))
 				achievementList.add(a);
 		}
-		
+
 		return achievementList;
 	}
-	
+
 
 }

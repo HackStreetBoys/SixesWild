@@ -1,7 +1,7 @@
 package hackstreet.sixeswild.controller;
 
-import hackstreet.sixeswild.gui.ActiveGameScreen;
 import hackstreet.sixeswild.gui.SWApplication;
+import hackstreet.sixeswild.gui.game.ActiveGameScreen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

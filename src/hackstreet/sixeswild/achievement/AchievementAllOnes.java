@@ -34,7 +34,7 @@ public class AchievementAllOnes extends AbstractAchievement {
 		Stack<AbstractGameMove> moveStack = level.getMoveStack();
 		
 		// if latest move was a standard move determine if it used 6 slots (i.e 6 1-tiles)
-		if (moveStack.peek() instanceof StandardMove) {
+		if (!moveStack.isEmpty() && moveStack.peek() instanceof StandardMove) {
 			StandardMove latestMove = (StandardMove) moveStack.peek();
 			
 			if (latestMove.getSlotsInMove().size() == 6) {

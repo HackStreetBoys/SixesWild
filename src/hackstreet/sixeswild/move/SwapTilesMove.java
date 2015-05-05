@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.move;
 
+import hackstreet.sixeswild.SixesWild;
 import hackstreet.sixeswild.game.Tile;
 import hackstreet.sixeswild.level.AbstractLevel;
 
@@ -15,8 +16,8 @@ public class SwapTilesMove extends AbstractGameMove {
 	 * SwapTilesMove constructor.
 	 * @param level The current level being played.
 	 */
-	public SwapTilesMove(AbstractLevel level){
-		super(level);
+	public SwapTilesMove(SixesWild model, AbstractLevel level) {
+		super(model,level);
 	}
 
 	@Override
@@ -33,6 +34,7 @@ public class SwapTilesMove extends AbstractGameMove {
 			level.getSelectedSlots().get(1).setTile(tempTile);
 		}
 		level.getSelectedSlots().clear();
+		super.manageAchievements();
 	}
 
 }

@@ -24,6 +24,12 @@ public class EliminationLevel extends AbstractLevel {
 		else
 			throw new IllegalArgumentException();
 	}
+	
+	@Override
+	public void handlePostMove(){
+		this.decreaseNumMovesLeft();
+		//TODO Win/Lose conditions
+	}
 
 	public int getNumMovesLeft() {
 		return numMovesLeft;

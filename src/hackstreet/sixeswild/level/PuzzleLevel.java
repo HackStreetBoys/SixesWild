@@ -32,4 +32,10 @@ public class PuzzleLevel extends AbstractLevel {
 	public void decreaseNumMovesLeft() {
 		this.numMovesLeft--;
 	}
+
+	@Override
+	public void handlePostMove() {
+		this.decreaseNumMovesLeft();
+		//TODO Win/Lose conditions
+	}
 }

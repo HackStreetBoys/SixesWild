@@ -3,6 +3,7 @@ package hackstreet.sixeswild.move;
 import java.util.ArrayList;
 import java.util.List;
 
+import hackstreet.sixeswild.SixesWild;
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.game.Tile;
@@ -19,8 +20,8 @@ public class ShuffleBoardMove extends AbstractGameMove {
 	 * ShuffleBoardMove constructor.
 	 * @param level The current level being played.
 	 */
-	public ShuffleBoardMove(AbstractLevel level) {
-		super(level);
+	public ShuffleBoardMove(SixesWild model, AbstractLevel level) {
+		super(model,level);
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class ShuffleBoardMove extends AbstractGameMove {
 					slot.setTile(tileList.remove(0));
 			}
 		}
-		
+		super.manageAchievements();
 	}
 
 }

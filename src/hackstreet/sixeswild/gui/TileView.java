@@ -10,6 +10,7 @@ import java.util.HashMap;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.game.Tile;
+import hackstreet.sixeswild.gui.game.ActiveGameScreen;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

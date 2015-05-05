@@ -2,6 +2,7 @@ package hackstreet.sixeswild.move;
 
 import java.util.ArrayList;
 
+import hackstreet.sixeswild.SixesWild;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.level.AbstractLevel;
 
@@ -24,8 +25,8 @@ public class StandardMove extends AbstractGameMove {
 	 * StandardMove constructor.
 	 * @param level
 	 */
-	public StandardMove(AbstractLevel level) {
-		super(level);
+	public StandardMove(SixesWild model, AbstractLevel level) {
+		super(model,level);
 		this.slotsInvolvedInMove = new ArrayList<Slot>();
 	}
 
@@ -57,9 +58,9 @@ public class StandardMove extends AbstractGameMove {
 				slot.setTile(null);
 			}
 			level.repopulateSlots();
-		}
-
+		}		
 		level.getSelectedSlots().clear();
+		super.manageAchievements();
 	}
 	
 	public ArrayList<Slot> getSlotsInMove() {

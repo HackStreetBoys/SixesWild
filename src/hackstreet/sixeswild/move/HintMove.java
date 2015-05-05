@@ -2,11 +2,12 @@ package hackstreet.sixeswild.move;
 
 import java.util.ArrayList;
 
+import hackstreet.sixeswild.SixesWild;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.gui.GridView;
 import hackstreet.sixeswild.gui.SWApplication;
 import hackstreet.sixeswild.level.AbstractLevel;
-import hackstreet.sixeswild.gui.ActiveGameScreen;
+import hackstreet.sixeswild.gui.game.ActiveGameScreen;
 
 /**
  * Move: display a tile that can be used in a move.
@@ -21,8 +22,8 @@ public class HintMove extends AbstractGameMove {
 	 * HintMove constructor.
 	 * @param level The current level being played.
 	 */
-	public HintMove(AbstractLevel level, SWApplication application) {
-		super(level);
+	public HintMove(SixesWild model, AbstractLevel level, SWApplication application) {
+		super(model,level);
 		this.application = application;
 	}
 
@@ -60,6 +61,7 @@ public class HintMove extends AbstractGameMove {
 		else
 			System.out.println("Move is not valid");
 		level.getSelectedSlots().clear();
+		super.manageAchievements();
 	}
 
 }

@@ -1,10 +1,14 @@
-package hackstreet.sixeswild.gui;
+package hackstreet.sixeswild.gui.game;
 
 import hackstreet.sixeswild.controller.HintController;
 import hackstreet.sixeswild.controller.RemoveController;
 import hackstreet.sixeswild.controller.ShuffleController;
 import hackstreet.sixeswild.controller.SwapController;
 import hackstreet.sixeswild.controller.ToLevelSelectScreenController;
+import hackstreet.sixeswild.gui.AbstractScreen;
+import hackstreet.sixeswild.gui.GridView;
+import hackstreet.sixeswild.gui.ProgressView;
+import hackstreet.sixeswild.gui.SWApplication;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,10 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
-public class ActiveGameScreen extends AbstractScreen {
+public abstract class ActiveGameScreen extends AbstractScreen {
 
 	private JLabel scoreLabel;
-	private JLabel movesLeftLabel;
 	private ProgressView progressView;
 	private JButton backButton;
 
@@ -40,10 +43,6 @@ public class ActiveGameScreen extends AbstractScreen {
 		this.scoreLabel = new JLabel("Score: 0");
 		this.scoreLabel.setSize(100,35);
 		this.scoreLabel.setLocation(15,25);
-
-		this.movesLeftLabel = new JLabel("Moves left: ");
-		this.movesLeftLabel.setSize(100,35);
-		this.movesLeftLabel.setLocation(15,85);
 
 		this.progressView = new ProgressView();
 		int star1 = application.getModel().getLevel().getSavedLevelData().getLevelConfig().getPointsStar1();
@@ -69,7 +68,6 @@ public class ActiveGameScreen extends AbstractScreen {
 		setupHintButton();
 
 		super.add(this.scoreLabel);
-		super.add(this.movesLeftLabel);
 		super.add(this.progressView);
 		super.add(this.backButton);
 		super.add(this.gridView);

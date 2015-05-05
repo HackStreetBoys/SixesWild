@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.move;
 
+import hackstreet.sixeswild.SixesWild;
 import hackstreet.sixeswild.level.AbstractLevel;
 
 /**
@@ -13,8 +14,8 @@ public class RemoveTileMove extends AbstractGameMove {
 	 * RemoveTileMove constructor.
 	 * @param level The current level being played.
 	 */
-	public RemoveTileMove(AbstractLevel level) {
-		super(level);
+	public RemoveTileMove(SixesWild model, AbstractLevel level) {
+		super(model,level);
 	}
 
 	@Override
@@ -30,5 +31,6 @@ public class RemoveTileMove extends AbstractGameMove {
 			level.setRemoveMoveSelected(false);
 		}
 		level.getSelectedSlots().clear();
+		super.manageAchievements();
 	}
 }

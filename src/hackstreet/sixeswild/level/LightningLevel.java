@@ -10,8 +10,7 @@ import hackstreet.sixeswild.config.SavedLevelData;
  */
 public class LightningLevel extends AbstractLevel {
 
-	private long startTime;
-	private long endTime;
+	private int secondsLeft;
 	
 	/**
 	 * 
@@ -20,14 +19,19 @@ public class LightningLevel extends AbstractLevel {
 	public LightningLevel(SavedLevelData savedLevelData) {
 		super(savedLevelData);
 		if (savedLevelData.getLevelConfig() instanceof LightningLevelConfig){
-			startTime = System.currentTimeMillis();
-			endTime = startTime + 1000 * ((LightningLevelConfig) savedLevelData.getLevelConfig()).getSeconds();
+			this.secondsLeft =  ((LightningLevelConfig) savedLevelData.getLevelConfig()).getSeconds();
+			
 		}
 		else
 			throw new IllegalArgumentException();
 	}
 	
-	public long getEndTime() {
-		return endTime;
+	public long getTimeLeft() {
+		return this.secondsLeft;
+	}
+
+	@Override
+	public void handlePostMove() {
+		//TODO Check Win/Lose Conditions
 	}
 }
