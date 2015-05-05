@@ -83,4 +83,78 @@ public class ReleaseLevel extends AbstractLevel {
 		}	
 		this.initializing = false;
 	}
+	
+	@Override
+	public void applyGravityInColumn(int col) {
+		
+		/*
+		 * Handle InertSlots the same way plus following:
+		 * Move sixes down to empty slots unless a bucket has been encountered in which case the sixes 
+		 * are ignored and tiles above are used. When at a bucket, move six down if it is in the first
+		 * non-empty slot. If other tile is found above, move focus to empty  slot above bucket.
+		 */
+
+		
+		
+		for (int row = 8; row > 0; row--) {
+			Location loc = new Location(col, row);
+
+			// if slot is not inert and does not have a tile, find one in column above to move down
+			if (!(super.getBoard().get(loc) instanceof InertSlot) && !(super.getBoard().get(loc).hasTile())) {
+				
+				boolean noBucketAbove = true;
+
+				// look through slots above
+				for (int row2 = row-1; row2 >= 0; row2--) {
+					Location loc2 = new Location(col, row2);
+
+					// if this slot has a tile, move it down
+					if (!(getBoard().get(loc2) instanceof InertSlot) && (super.getBoard().get(loc2).hasTile())) {
+						
+						// if no bucket has been encountered above, any tile can be moved (including six)
+						if (noBucketAbove) {
+							// copy down value to first slot
+							super.getBoard().get(loc).setTile(super.getBoard().get(loc2).getTile());	
+							// set tile in slot over to null
+							super.getBoard().get(loc2).setTile(null);
+							break;
+						
+						// if bucket has been encountered, only non-six tile can be moved down
+						} else if (super.getBoard().get(loc2).getTile().getValue() != 6) {
+							// copy down value to slot
+							super.getBoard().get(loc).setTile(super.getBoard().get(loc2).getTile());	
+							// set tile in slot over to null
+							super.getBoard().get(loc2).setTile(null);
+							break;
+						}
+					}
+					// if slot is bucket, set noBucketAbove to false
+					else if ((getBoard().get(loc2) instanceof BucketSlot)) {
+						noBucketAbove = false;
+					}
+				}
+			}
+			else if ((super.getBoard().get(loc) instanceof BucketSlot) && !(((BucketSlot)super.getBoard().get(loc)).isOccupied())) {
+
+				// look through slots above
+				for (int row2 = row-1; row2 >= 0; row2--) {
+					Location loc2 = new Location(col, row2);
+
+					// if this slot has a tile, move it down
+					if (!(getBoard().get(loc2) instanceof InertSlot) && (super.getBoard().get(loc2).hasTile())) {
+
+						// Slot with tile has been found, if 6 move down, else stop all this shit
+						if (super.getBoard().get(loc2).getTile().getValue() == 6) {
+							// copy down value to first slot
+							super.getBoard().get(loc).setTile(super.getBoard().get(loc2).getTile());	
+							// set tile in slot over to null
+							super.getBoard().get(loc2).setTile(null);
+						}
+						break;
+					}
+				}
+			}
+			
+		}
+	}
 }
