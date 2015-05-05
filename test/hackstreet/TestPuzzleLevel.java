@@ -208,12 +208,18 @@ public class TestPuzzleLevel {
 		/*======================================================================================*/
 		
 		ArrayList<Location> validStandardMove= model.getLevel().getAi().calculateValidMove();
+		int tempScore = model.getLevel().getPointsEarned();
 		int x1 = 10+48*validStandardMove.get(0).getX();
 		int y1 = 10+48*validStandardMove.get(0).getY();
 		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
-		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+11, 3*48+11, 0, false));
+		for (Location loc : validStandardMove){
+			x1 = 10+48*loc.getX();
+			y1 = 10+48*loc.getY();
+			swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+		}
+		swipeController.mouseReleased(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+		assertTrue(model.getLevel().getPointsEarned() > tempScore);
 		
-
 		
 		System.exit(0); // close the application
 }
