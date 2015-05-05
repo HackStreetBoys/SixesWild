@@ -15,16 +15,21 @@ import hackstreet.sixeswild.controller.HintController;
 import hackstreet.sixeswild.controller.RemoveController;
 import hackstreet.sixeswild.controller.ShuffleController;
 import hackstreet.sixeswild.controller.SwapController;
+import hackstreet.sixeswild.controller.SwipeController;
 import hackstreet.sixeswild.controller.ToAchievementsScreenController;
 import hackstreet.sixeswild.controller.ToGameScreenController;
 import hackstreet.sixeswild.controller.ToLevelSelectScreenController;
 import hackstreet.sixeswild.controller.ToMainScreenController;
 import hackstreet.sixeswild.game.Location;
+import hackstreet.sixeswild.game.Slot;
+import hackstreet.sixeswild.game.Tile;
 import hackstreet.sixeswild.gui.SWApplication;
+import hackstreet.sixeswild.gui.game.ActiveGameScreen;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -134,21 +139,46 @@ public class TestPuzzleLevel {
 			System.out.println(i);
 		}
 		
-		// Shuffle
+		// Shuffle - assert that at least some of the Tile values are different
+		ArrayList<Integer> prevList = new ArrayList<Integer>();
+		for (Slot slot : model.getLevel().getBoard().values()){
+			prevList.add(slot.getTile().getValue());
+		}
 		ShuffleController shuffleController = new ShuffleController(application);
 		shuffleController.actionPerformed(null);
+		// check that at least 50 tiles had their values changed  
+		int numShuffled = 0;
+		int i = 0;
+		for (Slot slot: model.getLevel().getBoard().values()){
+			if (slot.getTile().getValue() != prevList.get(i)){
+				numShuffled++;
+			}
+			i++;
+		}
+		assertTrue(numShuffled > 20);
 		
-		// Remove
-		model.getLevel().addToSelection(new Location(1,1));
+		// Remove - must pass MouseEvent. Assert that the file is not referencing the old tile.
+		Tile removedTile = model.getLevel().getBoard().get(new Location(1,1)).getTile();
 		RemoveController removeController = new RemoveController(application);
 		removeController.actionPerformed(null);
+		SwipeController swipeController = (SwipeController) ((ActiveGameScreen) (application.getActiveScreen())).getGridView().getMouseListeners()[0];
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 60, 0, false));
+		Tile newTile = model.getLevel().getBoard().get(new Location (1,1)).getTile();
+		assertTrue(removedTile != newTile);
+		removedTile = newTile;
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 60, 0, false));
+		assertTrue(removedTile == newTile);
 		
-		// Swap
-		model.getLevel().addToSelection(new Location(1,1));
-		model.getLevel().addToSelection(new Location(1,2));
+		// Swap Location(1,1) and (1,2)
+		Tile tile1 = model.getLevel().getBoard().get(new Location(1,1)).getTile();
+		Tile tile2 = model.getLevel().getBoard().get(new Location(1,2)).getTile();
 		SwapController swapController = new SwapController(application);
 		swapController.actionPerformed(null);
-		
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 60, 0, false));
+		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 61, 61, 0, false));
+		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 100, 0, false));
+		assertTrue(tile1 == model.getLevel().getBoard().get(new Location(1,2)).getTile());
+		assertTrue(tile2 == model.getLevel().getBoard().get(new Location(1,1)).getTile());
 		
 		System.exit(0); // close the application
 }

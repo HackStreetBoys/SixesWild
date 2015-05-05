@@ -25,12 +25,13 @@ public class RemoveTileMove extends AbstractGameMove {
 
 	@Override
 	public boolean doMove() {
-		if (this.isValid()) {
+		boolean valid = this.isValid();
+		if (valid) {
 			level.getSelectedSlots().get(0).setTile(null);
 			level.repopulateSlots();
 			level.setRemoveMoveSelected(false);
 		}
 		level.getSelectedSlots().clear();
-		return this.isValid();
+		return valid;
 	}
 }
