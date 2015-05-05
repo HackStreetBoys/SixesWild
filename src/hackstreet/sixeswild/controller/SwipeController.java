@@ -48,6 +48,8 @@ public class SwipeController extends MouseAdapter{
 
 				level.handlePostMove();
 				this.updateMoveLabelIfRelevant(level);
+				ActiveGameScreen screen = (ActiveGameScreen)application.getActiveScreen();
+				screen.popupAchievements(application.getModel().updateAchievements());
 			}
 			this.repaint();
 		}
@@ -87,6 +89,8 @@ public class SwipeController extends MouseAdapter{
 
 				level.handlePostMove();
 				this.updateMoveLabelIfRelevant(level);
+				ActiveGameScreen screen = (ActiveGameScreen)application.getActiveScreen();
+				screen.popupAchievements(application.getModel().updateAchievements());
 				this.repaint();
 			}
 
@@ -108,6 +112,8 @@ public class SwipeController extends MouseAdapter{
 
 			level.handlePostMove();
 			this.updateMoveLabelIfRelevant(level);
+			ActiveGameScreen screen = (ActiveGameScreen)application.getActiveScreen();
+			screen.popupAchievements(application.getModel().updateAchievements());
 			this.repaint();
 		}
 	}

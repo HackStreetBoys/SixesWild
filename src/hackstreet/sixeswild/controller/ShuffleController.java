@@ -32,6 +32,8 @@ public class ShuffleController implements ActionListener{
 
 		level.handlePostMove();
 		this.updateMoveLabelIfRelevant(level);
+		ActiveGameScreen screen = (ActiveGameScreen)application.getActiveScreen();
+		screen.popupAchievements(application.getModel().updateAchievements());
 		repaint();
 	}
 	

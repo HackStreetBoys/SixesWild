@@ -1,5 +1,6 @@
 package hackstreet.sixeswild.gui.game;
 
+import hackstreet.sixeswild.achievement.AbstractAchievement;
 import hackstreet.sixeswild.controller.HintController;
 import hackstreet.sixeswild.controller.RemoveController;
 import hackstreet.sixeswild.controller.ShuffleController;
@@ -12,6 +13,7 @@ import hackstreet.sixeswild.gui.SWApplication;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -142,6 +144,13 @@ public abstract class ActiveGameScreen extends AbstractScreen {
 		this.hintLabel.setVerticalAlignment(SwingConstants.CENTER);
 	}
 
+	public void popupAchievements(List<AbstractAchievement> newAchievements){
+		//TODO Show that you got an achievement!
+		System.out.println("---------------------");
+		for(AbstractAchievement a:newAchievements)
+			System.out.println("You unlocked an achievenemt!");
+	}
+
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -152,11 +161,11 @@ public abstract class ActiveGameScreen extends AbstractScreen {
 	public GridView getGridView(){
 		return this.gridView;
 	}
-	
+
 	public ProgressView getProgressView(){
 		return this.progressView;
 	}
-	
+
 	public JLabel getScoreLabel(){
 		return this.scoreLabel;
 	}
