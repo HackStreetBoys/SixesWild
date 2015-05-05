@@ -11,10 +11,15 @@ import hackstreet.sixeswild.achievement.AchievementOneOfEachLevel;
 import hackstreet.sixeswild.achievement.AchievementTenThousandPoints;
 import hackstreet.sixeswild.achievement.AchievementThousandPointMove;
 import hackstreet.sixeswild.config.SavedLevelData;
+import hackstreet.sixeswild.controller.HintController;
+import hackstreet.sixeswild.controller.RemoveController;
+import hackstreet.sixeswild.controller.ShuffleController;
+import hackstreet.sixeswild.controller.SwapController;
 import hackstreet.sixeswild.controller.ToAchievementsScreenController;
 import hackstreet.sixeswild.controller.ToGameScreenController;
 import hackstreet.sixeswild.controller.ToLevelSelectScreenController;
 import hackstreet.sixeswild.controller.ToMainScreenController;
+import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.gui.SWApplication;
 
 import java.awt.Font;
@@ -98,7 +103,7 @@ public class TestPuzzleLevel {
 		// Enter Main Screen
 		ToMainScreenController toMainScreenController = new ToMainScreenController(application);
 		toMainScreenController.actionPerformed(null);
-		
+
 		// Enter Level Select Screen
 		ToLevelSelectScreenController toLevelSelectScreenController = new ToLevelSelectScreenController(application);
 		toLevelSelectScreenController.actionPerformed(null);
@@ -115,6 +120,34 @@ public class TestPuzzleLevel {
 		/*								SPECIAL MOVES											*/
 		/*======================================================================================*/
 		
+		// Hint
+		HintController hintController = new HintController(application);
+		hintController.actionPerformed(null);
+		// make sure the AI actually works
+		for (int i=0; i<100; i++){
+			ArrayList<Location> recommendation = model.getLevel().getAi().calculateValidMove();
+			int sum = 0;
+			for (Location loc : recommendation){
+				sum += model.getLevel().getBoard().get(loc).getTile().getValue();
+			}
+			assertTrue(sum == 6);
+			System.out.println(i);
+		}
+		
+		// Shuffle
+		ShuffleController shuffleController = new ShuffleController(application);
+		shuffleController.actionPerformed(null);
+		
+		// Remove
+		model.getLevel().addToSelection(new Location(1,1));
+		RemoveController removeController = new RemoveController(application);
+		removeController.actionPerformed(null);
+		
+		// Swap
+		model.getLevel().addToSelection(new Location(1,1));
+		model.getLevel().addToSelection(new Location(1,2));
+		SwapController swapController = new SwapController(application);
+		swapController.actionPerformed(null);
 		
 		
 		System.exit(0); // close the application
