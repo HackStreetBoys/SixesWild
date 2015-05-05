@@ -23,6 +23,7 @@ public class AchievementAllLevelsCompleted extends AbstractAchievement {
 		super(achieved, dateAchieved);
 		super.name = "All levels competed";
 		super.description = "Win all playable levels";
+		super.imgPath = "images/ben-achievement.png";
 	}
 
 

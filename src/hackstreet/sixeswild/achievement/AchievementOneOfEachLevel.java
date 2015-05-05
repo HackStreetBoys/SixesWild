@@ -26,6 +26,7 @@ public class AchievementOneOfEachLevel extends AbstractAchievement {
 		super(achieved, dateAchieved);
 		super.name = "Tried em' all";
 		super.description = "Complete a level of each type";
+		super.imgPath = "images/pat-achievement.png";
 	}
 
 	@Override
