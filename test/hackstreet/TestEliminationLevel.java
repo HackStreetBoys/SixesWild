@@ -93,18 +93,20 @@ public class TestEliminationLevel {
 		SwipeController swipeController = (SwipeController) ((ActiveGameScreen) (application.getActiveScreen())).getGridView().getMouseListeners()[0];
 		
 		int tempScore = model.getLevel().getPointsEarned();
-		ArrayList<Location> validStandardMove= model.getLevel().getAi().calculateValidMove();
-		int x1 = 10+48*validStandardMove.get(0).getX();
-		int y1 = 10+48*validStandardMove.get(0).getY();
-		
-		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
-		for (Location loc : validStandardMove){
-			x1 = 10 + (48*loc.getX());
-			y1 = 10 + (48*loc.getY());
-			swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+		while (model.getLevel().getPointsEarned() == tempScore){
+			ArrayList<Location> validStandardMove= model.getLevel().getAi().calculateValidMove();
+			int x1 = 10+48*validStandardMove.get(0).getX();
+			int y1 = 10+48*validStandardMove.get(0).getY();
+			
+			swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+			for (Location loc : validStandardMove){
+				x1 = 10 + (48*loc.getX());
+				y1 = 10 + (48*loc.getY());
+				swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+			}
+			swipeController.mouseReleased(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
 		}
-		swipeController.mouseReleased(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
-		assertTrue(model.getLevel().getPointsEarned() > tempScore || model.getLevel().getPointsEarned() == tempScore);
+		assertTrue(model.getLevel().getPointsEarned() > tempScore);
 	}
 
 	

@@ -66,6 +66,14 @@ public class SWApplication extends JFrame{
 	public void enterAchievementsScreen() {
 		this.enterScreen(this.achievementScreen);
 	}
+	
+	public void enterVictoryScreen() {
+		this.enterScreen(this.victoryScreen);
+	}
+	
+	public void enterLossScreen() {
+		this.enterScreen(this.lossScreen);
+	}
 
 	public SixesWild getModel(){
 		return this.model;
