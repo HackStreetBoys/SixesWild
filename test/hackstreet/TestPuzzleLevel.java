@@ -20,6 +20,7 @@ import hackstreet.sixeswild.controller.ToAchievementsScreenController;
 import hackstreet.sixeswild.controller.ToGameScreenController;
 import hackstreet.sixeswild.controller.ToLevelSelectScreenController;
 import hackstreet.sixeswild.controller.ToMainScreenController;
+import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.game.Tile;
@@ -59,7 +60,7 @@ import com.google.gson.reflect.TypeToken;
 public class TestPuzzleLevel {
 
 	@Test
-	public void test() {
+	public void testAll() {
 	
 		/*======================================================================================*/
 		/*								MIMIC RUNNER											*/
@@ -122,7 +123,7 @@ public class TestPuzzleLevel {
 		assertTrue(model.getLevel().getPointsEarned() == 0);
 		
 		/*======================================================================================*/
-		/*								SPECIAL MOVES											*/
+		/*								Hint													*/
 		/*======================================================================================*/
 		
 		// Hint
@@ -130,19 +131,29 @@ public class TestPuzzleLevel {
 		hintController.actionPerformed(null);
 		// make sure the AI actually works
 		for (int i=0; i<100; i++){
+			System.out.println(i);
 			ArrayList<Location> recommendation = model.getLevel().getAi().calculateValidMove();
 			int sum = 0;
-			for (Location loc : recommendation){
-				sum += model.getLevel().getBoard().get(loc).getTile().getValue();
+			if (recommendation != null){
+				for (Location loc : recommendation){
+					sum += model.getLevel().getBoard().get(loc).getTile().getValue();
+				}
+				assertTrue(sum == 6);
+				
 			}
-			assertTrue(sum == 6);
-			System.out.println(i);
+			else
+				System.out.println("	NULL");			
 		}
+		
+		/*======================================================================================*/
+		/*								Shuffle													*/
+		/*======================================================================================*/
 		
 		// Shuffle - assert that at least some of the Tile values are different
 		ArrayList<Integer> prevList = new ArrayList<Integer>();
 		for (Slot slot : model.getLevel().getBoard().values()){
-			prevList.add(slot.getTile().getValue());
+			if (!(slot instanceof InertSlot))
+				prevList.add(slot.getTile().getValue());
 		}
 		ShuffleController shuffleController = new ShuffleController(application);
 		shuffleController.actionPerformed(null);
@@ -150,35 +161,59 @@ public class TestPuzzleLevel {
 		int numShuffled = 0;
 		int i = 0;
 		for (Slot slot: model.getLevel().getBoard().values()){
-			if (slot.getTile().getValue() != prevList.get(i)){
-				numShuffled++;
+			if (!(slot instanceof InertSlot)){
+				if (slot.getTile().getValue() != prevList.get(i)){
+					numShuffled++;
+				}
+				i++;
 			}
-			i++;
 		}
 		assertTrue(numShuffled > 20);
 		
+		/*======================================================================================*/
+		/*								Remove													*/
+		/*======================================================================================*/
+
+		
 		// Remove - must pass MouseEvent. Assert that the file is not referencing the old tile.
-		Tile removedTile = model.getLevel().getBoard().get(new Location(1,1)).getTile();
+		Tile removedTile = model.getLevel().getBoard().get(new Location(3,3)).getTile();
 		RemoveController removeController = new RemoveController(application);
 		removeController.actionPerformed(null);
 		SwipeController swipeController = (SwipeController) ((ActiveGameScreen) (application.getActiveScreen())).getGridView().getMouseListeners()[0];
-		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 60, 0, false));
-		Tile newTile = model.getLevel().getBoard().get(new Location (1,1)).getTile();
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+10, 3*48+10, 0, false));
+		Tile newTile = model.getLevel().getBoard().get(new Location (3,3)).getTile();
 		assertTrue(removedTile != newTile);
 		removedTile = newTile;
 		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 60, 0, false));
 		assertTrue(removedTile == newTile);
 		
-		// Swap Location(1,1) and (1,2)
-		Tile tile1 = model.getLevel().getBoard().get(new Location(1,1)).getTile();
-		Tile tile2 = model.getLevel().getBoard().get(new Location(1,2)).getTile();
+		/*======================================================================================*/
+		/*								Swap													*/
+		/*======================================================================================*/
+
+		
+		// Swap Location(3,3) and (3,4)
+		Tile tile1 = model.getLevel().getBoard().get(new Location(3,3)).getTile();
+		Tile tile2 = model.getLevel().getBoard().get(new Location(3,4)).getTile();
 		SwapController swapController = new SwapController(application);
 		swapController.actionPerformed(null);
-		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 60, 0, false));
-		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 61, 61, 0, false));
-		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 60, 100, 0, false));
-		assertTrue(tile1 == model.getLevel().getBoard().get(new Location(1,2)).getTile());
-		assertTrue(tile2 == model.getLevel().getBoard().get(new Location(1,1)).getTile());
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+10, 3*48+10, 0, false));
+		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+11, 3*48+11, 0, false));
+		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+10, 4*48+10, 0, false));
+		assertTrue(tile1 == model.getLevel().getBoard().get(new Location(3,4)).getTile());
+		assertTrue(tile2 == model.getLevel().getBoard().get(new Location(3,3)).getTile());
+		
+		/*======================================================================================*/
+		/*								Normal Moves											*/
+		/*======================================================================================*/
+		
+		ArrayList<Location> validStandardMove= model.getLevel().getAi().calculateValidMove();
+		int x1 = 10+48*validStandardMove.get(0).getX();
+		int y1 = 10+48*validStandardMove.get(0).getY();
+		swipeController.mousePressed(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, x1, y1, 0, false));
+		swipeController.mouseDragged(new MouseEvent(((ActiveGameScreen) (application.getActiveScreen())).getGridView(), 0, 0, 0, 3*48+11, 3*48+11, 0, false));
+		
+
 		
 		System.exit(0); // close the application
 }

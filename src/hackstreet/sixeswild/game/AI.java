@@ -43,15 +43,14 @@ public class AI {
 		
 		ArrayList<Location> answer = null;
 		
-		// run starting on each tile, and return first answer found
-		
 		// each time you want a different order.
 		ArrayList<Location> keyList = new ArrayList<Location>();
 		keyList.addAll(board.keySet());
 		Collections.shuffle(keyList);
 		
+		// run starting on each tile, and return first answer found
 		for (Location loc : keyList){
-			if (!(board.get(loc) instanceof EliminationSlot) && !(board.get(loc) instanceof InertSlot)){
+			if (!(board.get(loc) instanceof BucketSlot) && !(board.get(loc) instanceof InertSlot)){
 				answer = findValidMoveFromLoc(loc, new ArrayList<Location>(Arrays.asList(loc)));
 				if (answer != null){
 					if (!moveList.contains(answer)){
@@ -66,6 +65,7 @@ public class AI {
 		
 		if (answer == null){
 			System.out.println("AI ERROR: No valid moves in board");
+			//return null;
 		}
 		else{
 			/*
@@ -152,7 +152,7 @@ public class AI {
 		for (Location loc : candidates){
 
 			// do not add location to answer if the loc is Inert, Elimination, or already added
-			if ( !(board.get(loc) instanceof InertSlot) && !(board.get(loc) instanceof EliminationSlot) && 
+			if ( !(board.get(loc) instanceof InertSlot) && !(board.get(loc) instanceof BucketSlot) && 
 					!alreadySelected.contains(loc) && !answer.contains(loc)){
 				answer.add(loc);
 			}

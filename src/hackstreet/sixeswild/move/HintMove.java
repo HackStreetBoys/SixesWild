@@ -50,7 +50,6 @@ public class HintMove extends AbstractGameMove {
 			GridView gridView = ((ActiveGameScreen) (application.getActiveScreen())).getGridView();
 			
 			// change display of tile briefly
-			
 			for (Location hintLoc : anyValidMove){
 				gridView.getSlotView(hintLoc).blink();
 			}
