@@ -18,6 +18,7 @@ public class SWApplication extends JFrame{
 	private SWMainScreen mainScreen;
 	private LevelSelectScreen levelSelectScreen;
 	private AchievementScreen achievementScreen;
+	private VictoryScreen victoryScreen;
 
 	private AbstractScreen activeScreen;
 
@@ -27,6 +28,7 @@ public class SWApplication extends JFrame{
 		this.mainScreen = new SWMainScreen(this);
 		this.levelSelectScreen = new LevelSelectScreen(this);
 		this.achievementScreen = new AchievementScreen(this);
+		this.victoryScreen = new VictoryScreen(this);
 
 		super.setLocation(50,50);
 		super.setSize(800,600);
