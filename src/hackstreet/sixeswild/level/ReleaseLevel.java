@@ -8,7 +8,11 @@ import hackstreet.sixeswild.game.BucketSlot;
 import hackstreet.sixeswild.game.InertSlot;
 import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
-
+/**
+ * 
+ * @author Tim 
+ *
+ */
 public class ReleaseLevel extends AbstractLevel {
 
 	private int numMovesLeft;
