@@ -42,7 +42,8 @@ public class StandardMove extends AbstractGameMove {
 
 	@Override
 	public boolean doMove() {
-		if (this.isValid()){
+		boolean valid = this.isValid();
+		if (valid){
 			// adjust the score
 			int scoreIncrease = 1;
 			int scoreMultiplier = 1;
@@ -65,7 +66,7 @@ public class StandardMove extends AbstractGameMove {
 			level.repopulateSlots();
 		}		
 		level.getSelectedSlots().clear();
-		return this.isValid();
+		return valid;
 	}
 	
 	public ArrayList<Slot> getSlotsInMove() {

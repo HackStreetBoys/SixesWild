@@ -107,11 +107,12 @@ public class SwipeController extends MouseAdapter{
 		if(this.accepting){
 			AbstractLevel level = application.getModel().getLevel();
 			StandardMove move = new StandardMove(this.application.getModel(),level);
-			move.doMove();
-			level.getMoveStack().push(move);
+			if(move.doMove()){
+				level.getMoveStack().push(move);
+				level.handlePostMove();
+			}
 			this.accepting = false;
 
-			level.handlePostMove();
 			this.updateMoveLabelIfRelevant(level);
 			ActiveGameScreen screen = (ActiveGameScreen)application.getActiveScreen();
 			screen.popupAchievements(application.getModel().updateAchievements());
