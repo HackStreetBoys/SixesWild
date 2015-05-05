@@ -58,8 +58,9 @@ public class AchievementView extends JPanel {
 	
 
 	public String getImagePath() {
-		return this.achievement.getImgPath();
-		
+		// determine image based on achievement
+		// for now, return place holder
+		return "images/achievement-placeholder.png";
 	}
 	
 	public void paintComponent(Graphics g) {

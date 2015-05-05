@@ -23,7 +23,6 @@ public class AchievementFirstLevelCompleted extends AbstractAchievement {
 		super(achieved, dateAchieved);
 		super.name = "It's a start";
 		super.description = "Successfully complete the first level";
-		super.imgPath = "images/dog-achievement.png";
 	}
 
 	@Override
