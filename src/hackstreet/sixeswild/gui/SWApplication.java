@@ -86,7 +86,7 @@ public class SWApplication extends JFrame{
 		super.revalidate();
 		super.repaint();
 	}
-
+	
 	public AbstractScreen getActiveScreen(){
 		return this.activeScreen;
 	}

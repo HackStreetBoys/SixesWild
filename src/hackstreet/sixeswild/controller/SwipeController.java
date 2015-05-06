@@ -47,7 +47,13 @@ public class SwipeController extends MouseAdapter{
 				level.getMoveStack().push(move);
 				application.getModel().getLevel().setRemoveMoveSelected(false);
 
-				level.handlePostMove();
+				int status = level.handlePostMove();
+				if(status > 0){
+					application.getModel().winLevel();
+					application.enterVictoryScreen();
+				}
+				else if(status < 0)
+					application.enterLossScreen();
 				this.updateMoveLabelIfRelevant(level);
 				ActiveGameScreen screen = (ActiveGameScreen)application.getActiveScreen();
 				screen.popupAchievements(application.getModel().updateAchievements());
@@ -88,7 +94,13 @@ public class SwipeController extends MouseAdapter{
 				this.accepting = false;
 				application.getModel().getLevel().setSwapMoveSelected(false);
 
-				level.handlePostMove();
+				int status = level.handlePostMove();
+				if(status > 0){
+					application.getModel().winLevel();
+					application.enterVictoryScreen();
+				}
+				else if(status < 0)
+					application.enterLossScreen();
 				this.updateMoveLabelIfRelevant(level);
 				ActiveGameScreen screen = (ActiveGameScreen)application.getActiveScreen();
 				screen.popupAchievements(application.getModel().updateAchievements());
@@ -109,7 +121,13 @@ public class SwipeController extends MouseAdapter{
 			StandardMove move = new StandardMove(this.application.getModel(),level);
 			if(move.doMove()){
 				level.getMoveStack().push(move);
-				level.handlePostMove();
+				int status = level.handlePostMove();
+				if(status > 0){
+					application.getModel().winLevel();
+					application.enterVictoryScreen();
+				}
+				else if(status < 0)
+					application.enterLossScreen();
 			}
 			this.accepting = false;
 

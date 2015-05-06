@@ -40,7 +40,15 @@ public class LightningLevel extends AbstractLevel {
 	
 
 	@Override
-	public void handlePostMove() {
-		//TODO Check Win/Lose Conditions
+	public int handlePostMove() {
+		if(this.secondsLeft<=0){
+			int points1 = super.getSavedLevelData().getLevelConfig().getPointsStar1();
+			if(super.getPointsEarned()>=points1){
+				return 1;
+			}
+			else
+				return -1;
+		}
+		return 0;
 	}
 }

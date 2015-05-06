@@ -38,7 +38,7 @@ public abstract class AbstractLevel {
 	private boolean isAISelected;
 	private Stack<AbstractGameMove> moveStack;
 	
-	public abstract void handlePostMove();
+	public abstract int handlePostMove();
 
 	/**
 	 * AbstractLevel constructor.

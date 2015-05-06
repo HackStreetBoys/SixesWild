@@ -1,6 +1,7 @@
 package hackstreet.sixeswild.level;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import hackstreet.sixeswild.config.EliminationLevelConfig;
 import hackstreet.sixeswild.config.SavedLevelData;
@@ -33,9 +34,29 @@ public class EliminationLevel extends AbstractLevel {
 	}
 	
 	@Override
-	public void handlePostMove(){
+	public int handlePostMove(){
 		this.decreaseNumMovesLeft();
-		//TODO Win/Lose conditions
+		boolean boardCleared = true;
+		HashMap<Location,Slot> board = super.getBoard();
+		for(Location loc:board.keySet()){
+			EliminationSlot slot = (EliminationSlot)board.get(loc);
+			if(!slot.isEliminated()){
+				boardCleared = false;
+			}
+		}
+		int points1 = super.getSavedLevelData().getLevelConfig().getPointsStar1();
+		if(boardCleared){
+			if(super.getPointsEarned()>=points1){
+				return 1;
+			}
+			else
+				return -1;
+		}
+		
+		if(this.numMovesLeft<=0){
+			return -1;
+		}
+		return 0;
 	}
 
 	public int getNumMovesLeft() {

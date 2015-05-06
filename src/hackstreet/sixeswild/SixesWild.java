@@ -47,8 +47,7 @@ public class SixesWild {
 		this.achievements = achievements;
 	}
 
-	private void winLevel(SixesWild sw)
-	{
+	public void winLevel() {
 		/*
 	String filebuffer = "";
 		FileReader fr = new FileReader(sw.activeLevel.File);

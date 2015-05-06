@@ -34,8 +34,16 @@ public class PuzzleLevel extends AbstractLevel {
 	}
 
 	@Override
-	public void handlePostMove() {
+	public int handlePostMove() {
 		this.decreaseNumMovesLeft();
-		//TODO Win/Lose conditions
+		if(this.numMovesLeft<=0){
+			int points1 = super.getSavedLevelData().getLevelConfig().getPointsStar1();
+			if(super.getPointsEarned()>=points1){
+				return 1;
+			}
+			else
+				return -1;
+		}
+		return 0;
 	}
 }

@@ -1,6 +1,7 @@
 package hackstreet.sixeswild.level;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hackstreet.sixeswild.config.AbstractLevelConfig;
 import hackstreet.sixeswild.config.ReleaseLevelConfig;
@@ -37,8 +38,29 @@ public class ReleaseLevel extends AbstractLevel {
 	}
 
 	@Override
-	public void handlePostMove() {
+	public int handlePostMove() {
 		this.decreaseNumMovesLeft();
+		ReleaseLevelConfig config = (ReleaseLevelConfig)super.getSavedLevelData().getLevelConfig();
+		List<Location> buckets = config.getBucketLocations();
+		boolean levelCleared = true;
+		for(Location loc:buckets){
+			BucketSlot slot = (BucketSlot)super.getBoard().get(loc);
+			if(!slot.isOccupied())
+				levelCleared = false;
+		}
+		int points1 = super.getSavedLevelData().getLevelConfig().getPointsStar1();
+		if(levelCleared){
+			if(super.getPointsEarned()>=points1){
+				return 1;
+			}
+			else
+				return -1;
+		}
+		
+		if(this.numMovesLeft<=0){
+			return -1;
+		}
+		return 0;
 		//TODO Win/Lose conditions
 	}
 

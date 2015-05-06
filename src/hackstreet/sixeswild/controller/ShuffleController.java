@@ -30,7 +30,13 @@ public class ShuffleController implements ActionListener{
 		level.getMoveStack().push(move);
 		
 
-		level.handlePostMove();
+		int status = level.handlePostMove();
+		if(status > 0){
+			application.getModel().winLevel();
+			application.enterVictoryScreen();
+		}
+		else if(status < 0)
+			application.enterLossScreen();
 		this.updateMoveLabelIfRelevant(level);
 		ActiveGameScreen screen = (ActiveGameScreen)application.getActiveScreen();
 		screen.popupAchievements(application.getModel().updateAchievements());
