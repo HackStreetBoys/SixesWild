@@ -22,7 +22,7 @@ public class AchievementTenThousandPoints extends AbstractAchievement {
 	
 	public AchievementTenThousandPoints(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
-		super.name = "That's a metric fuck-ton of points";
+		super.name = "That's a metric ton of points";
 		super.description = "Make a move worth over 10000 points";
 	}
 

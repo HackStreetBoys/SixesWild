@@ -22,7 +22,7 @@ public class AchievementFirstLevelCompleted extends AbstractAchievement {
 	public AchievementFirstLevelCompleted(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
 		super.name = "It's a start";
-		super.description = "Successfully complete the first level";
+		super.description = "At least one star on one level";
 		super.imgPath = "images/dog-achievement.png";
 	}
 

@@ -22,7 +22,7 @@ public class AchievementThousandPointMove extends AbstractAchievement {
 	
 	public AchievementThousandPointMove(boolean achieved, Date dateAchieved) {
 		super(achieved, dateAchieved);
-		super.name = "That's a fuck-ton of points";
+		super.name = "That's a ton of points";
 		super.description = "Make a move worth over 1000 points";
 		super.imgPath = "images/wpi-achievement.png";
 	}
