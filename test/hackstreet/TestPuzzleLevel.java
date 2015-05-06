@@ -3,6 +3,7 @@ package hackstreet;
 import static org.junit.Assert.*;
 import hackstreet.sixeswild.SixesWild;
 import hackstreet.sixeswild.SixesWildRunner;
+import hackstreet.sixeswild.SplashScreen;
 import hackstreet.sixeswild.achievement.AbstractAchievement;
 import hackstreet.sixeswild.achievement.AchievementAllLevelsCompleted;
 import hackstreet.sixeswild.achievement.AchievementAllOnes;
@@ -55,6 +56,9 @@ public class TestPuzzleLevel {
 		/*								MIMIC RUNNER											*/
 		/*======================================================================================*/
 		
+		SplashScreen splashScreen = new SplashScreen(100, "images/SixesWildSplashScreen.png");
+		splashScreen.showSplash();
+		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -69,7 +73,6 @@ public class TestPuzzleLevel {
 
 		SixesWildRunner.loadFonts();
 
-		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
 		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
 		achievements.add(new AchievementFirstLevelCompleted());
