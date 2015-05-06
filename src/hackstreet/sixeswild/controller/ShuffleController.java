@@ -13,6 +13,7 @@ import hackstreet.sixeswild.move.ShuffleBoardMove;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ShuffleController implements ActionListener{
 
@@ -32,7 +33,12 @@ public class ShuffleController implements ActionListener{
 
 		int status = level.handlePostMove();
 		if(status > 0){
-			application.getModel().winLevel();
+			try {
+				application.getModel().winLevel();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			application.enterVictoryScreen();
 		}
 		else if(status < 0)
