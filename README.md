@@ -1,5 +1,4 @@
 SixesWild
 
-Candy Crush reinvented. Coming May 2015
+Candy Crush reinvented.
 
-Hello everyone!
