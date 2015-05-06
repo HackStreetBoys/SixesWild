@@ -29,7 +29,7 @@ import org.junit.Test;
 
 public class TestLightningLevel {
 
-	//@Test
+	@Test
 	public void testStandardMove() {
 	
 		/*======================================================================================*/
