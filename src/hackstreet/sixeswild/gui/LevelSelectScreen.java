@@ -28,7 +28,7 @@ public class LevelSelectScreen extends AbstractScreen {
 		
 		
 		levelPanel = new JPanel();
-		levelPanel.setBackground(Color.white);
+		levelPanel.setBackground(new Color(0,0,0,0));
 		levelPanel.setBounds(120, 100, 540, 350);
 		levelPanel.setLayout(new GridLayout(4, 5, 10, 10));
 		for (int x = 1; x <= 20; x++) {
