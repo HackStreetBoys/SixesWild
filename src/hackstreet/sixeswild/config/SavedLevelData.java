@@ -115,6 +115,11 @@ public class SavedLevelData {
 		return isUnlocked;
 	}
 
+	public boolean isUnlocked(boolean b) {
+		isUnlocked = b;
+		return isUnlocked;
+	}
+	
 	public void setUnlocked(boolean isUnlocked) {
 		this.isUnlocked = isUnlocked;
 	}

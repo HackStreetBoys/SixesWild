@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,35 +58,62 @@ public class SixesWild {
 		this.achievements = achievements;
 	}
 
-	public void winLevel() {
-		/*
-	String filebuffer = "";
-		FileReader fr = new FileReader(sw.activeLevel.File);
-		try (InputStream in = Files.newInputStream(sw.activeLevel.File.toPath());
-			    BufferedReader reader =
-			      new BufferedReader(new InputStreamReader(in))) {
-			    String line = null;
-			    while ((line = reader.readLine()) != null) {
-			        filebuffer = line;
-			    }
-			} 
-		catch (IOException x) {
-			    System.err.println(x);
+	
+		
+		public void winLevel() throws IOException
+		{
+			int i = savedLevelData.indexOf(activeLevel);
+			SavedLevelData activesld = new SavedLevelData(savedLevelData.get(i).file);
+			
+			
+//		String filebuffer = "";
+//			FileReader fr = new FileReader(System.getProperty("user.dir")+"/data/"+savedLevelData.get(i).file.getName());
+//			try (InputStream in = Files.newInputStream( new File(System.getProperty("user.dir")+"/data/"+savedLevelData.get(i).file.getName()).toPath());
+//				    BufferedReader reader =
+//				      new BufferedReader(new InputStreamReader(in))) {
+//				    String line = null;
+//				    while ((line = reader.readLine()) != null) {
+//				        filebuffer = line;
+//				    }
+//				} 
+//			catch (IOException x) {
+//				    System.err.println(x);
+//				}
+			Gson gson = new Gson();
+			
+			if (activeLevel.getPointsEarned() > activesld.config.getPointsStar1()  )
+			{
+				activesld.setStarsEarned(1);
+				if (i > savedLevelData.size())
+					savedLevelData.get(i++).isUnlocked(true);
+			}
+			else if (activeLevel.getPointsEarned() > activesld.config.getPointsStar2()  )
+				activesld.setStarsEarned(2);
+			else if (activeLevel.getPointsEarned() > activesld.config.getPointsStar3()  )
+				activesld.setStarsEarned(3);
+
+
+			SavedLevelData sld = new SavedLevelData(savedLevelData.get(i).file);
+
+			sld.setStarsEarned(3);
+			sld.setUnlocked( true);
+
+			FileWriter fw = null;
+			try {
+				fw = new FileWriter(new File(System.getProperty("user.dir")+"/data/"+activesld.file.getName()).toPath().toString());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				fw.write(gson.toJson(sld));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
-		Gson gson = new Gson();
-		gson.fromJson(filebuffer, sw.activeLevel.class)
-
-		SavedLevelData sld = new SavedLevelData(sw.activeLevel);
-
-		sld.setStars( WHATEVER VARIABLE GOES IN HERE)
-		sld.setUnlocked( WHATEVER VARIABLE GOES IN HERE);s
-
-		FileWriter fw = new FileWriter(sw.activeLevel.File);
-		fw.write(gson.toJson(sld));
-
-		return true;
-		 */
+			return;
+			 
 	}
 
 	public void prepareLevel(int level){

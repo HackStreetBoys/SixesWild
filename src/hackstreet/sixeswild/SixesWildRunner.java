@@ -12,6 +12,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
+import hackstreet.sixeswild.SixesWild;
 import hackstreet.sixeswild.achievement.*;
 import hackstreet.sixeswild.config.AbstractLevelConfig;
 import hackstreet.sixeswild.config.EliminationLevelConfig;

@@ -23,7 +23,7 @@ public class LossScreen extends AbstractScreen {
 	private JButton levelSelectButton;
 
 	public LossScreen(SWApplication application){
-		super(application, "Loss Screen");
+		super(application, "");
 		this.setBackground(new Color(0,0,0,50));
 		this.setLayout(null);
 		
@@ -32,7 +32,7 @@ public class LossScreen extends AbstractScreen {
 		this.replayButton.setSize(120,50);
 		this.replayButton.setLocation(205,300);
 		// add listener
-		super.add(replayButton);	
+		//super.add(replayButton);	
 		
 		this.levelSelectButton = new JButton("Level Select");
 		this.levelSelectButton.setSize(120,50);
