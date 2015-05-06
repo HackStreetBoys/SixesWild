@@ -27,17 +27,17 @@ public class VictoryScreen extends AbstractScreen {
 	private BufferedImage fullStar;
 	private BufferedImage blackStar;
 
-	public VictoryScreen(SWApplication application){
-		super(application, "Victory Screen");
+	public VictoryScreen(SWApplication application) {
+		super(application, "");
 		this.setBackground(new Color(0,0,0,50));
 		this.setLayout(null);
 		
 		
-		this.replayButton = new JButton("Replay Level");
-		this.replayButton.setSize(120,50);
-		this.replayButton.setLocation(205,300);
-		// add listener
-		super.add(replayButton);	
+//		this.replayButton = new JButton("Replay Level");
+//		this.replayButton.setSize(120,50);
+//		this.replayButton.setLocation(205,300);
+//		// add listener
+//		super.add(replayButton);	
 		
 		this.levelSelectButton = new JButton("Level Select");
 		this.levelSelectButton.setSize(120,50);
@@ -46,11 +46,11 @@ public class VictoryScreen extends AbstractScreen {
 		this.levelSelectButton.addActionListener(new ToLevelSelectScreenController(super.getApplication()));
 		super.add(levelSelectButton);
 		
-		this.nextButton = new JButton("Next Level");
-		this.nextButton.setSize(120,50);
-		this.nextButton.setLocation(465,300);
+//		this.nextButton = new JButton("Next Level");
+//		this.nextButton.setSize(120,50);
+//		this.nextButton.setLocation(465,300);
 		// add listener
-		super.add(nextButton);	
+		//super.add(nextButton);	
 		
 		this.Message = new JLabel("You Won!");
 		this.Message.setSize(200, 35);
@@ -75,7 +75,7 @@ public class VictoryScreen extends AbstractScreen {
 		g.setColor(Color.BLACK);
 		g.drawRoundRect(185, 185, 420, 180, 20, 20);
 		
-		// TODO: get number of stars earned for completed level
+		
 		int starsEarned = 2;
 		
 		switch(starsEarned) 
