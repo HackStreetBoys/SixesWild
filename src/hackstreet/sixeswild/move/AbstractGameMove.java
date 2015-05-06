@@ -11,7 +11,7 @@ import hackstreet.sixeswild.level.AbstractLevel;
  * but each of them have validation, execution, and a 
  * list of slots the move is performed on.
  * 
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public abstract class AbstractGameMove {

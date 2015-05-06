@@ -8,29 +8,48 @@ import java.util.ArrayList;
 /**
  * Storage for all of the information saved about a level in SixesWildLevelBuilder.
  * This class should be nearly identical to its twin in the LevelBuilder.
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class AbstractLevelConfig {
 
+	/** Type of the game*/
 	protected String Type; // Added so that we can load files. It is protected b/c sub classes need to know this information;
+	/** Name of the level*/
 	private String name;
+	/** Inert tile locations*/
 	private ArrayList<Location> nullLocations;
+	/** Number of shuffles available*/
 	private int numShuffle;
+	/** Number of swaps available*/
 	private int numSwap;
+	/** Number of remove available*/
 	private int numRemove;
+	/** Number of hints available*/
 	private int numHint;
+	/** The frequency of 1 tiles*/
 	private double freq1;
+	/** The frequency of 2 tiles*/
 	private double freq2;
+	/** The frequency of 3 tiles*/
 	private double freq3;
+	/** The frequency of 4 tiles*/
 	private double freq4;
+	/** The frequency of 5 tiles*/
 	private double freq5;
+	/** The frequency of 6 tiles*/
 	private double freq6;
+	/** The frequency of 2x multipliers*/
 	private double freqMult2;
+	/** The frequency of 3x multipliers*/
 	private double freqMult3;
+	/** The number of points required to get 1 stars*/
 	private int pointsStar1;
+	/** The number of points required to get 2 stars*/
 	private int pointsStar2;
+	/** The number of points required to get 3 stars*/
 	private int pointsStar3;
+	/** The file this level is saved in*/
 	public File File;
 	
 	/**

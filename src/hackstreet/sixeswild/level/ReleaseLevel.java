@@ -12,9 +12,16 @@ import hackstreet.sixeswild.game.Location;
 import hackstreet.sixeswild.game.Slot;
 import hackstreet.sixeswild.game.Tile;
 
+/**
+ * 
+ * @author Patrick
+ *
+ */
 public class ReleaseLevel extends AbstractLevel {
 
+	/** Is the level initializing*/
 	private boolean initializing;
+	/** Number of moves left*/
 	private int numMovesLeft;
 
 	public ReleaseLevel(SavedLevelData savedLevelData) {

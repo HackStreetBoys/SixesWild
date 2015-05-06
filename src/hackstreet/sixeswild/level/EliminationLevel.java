@@ -13,7 +13,7 @@ import hackstreet.sixeswild.game.Slot;
 
 /**
  * 
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class EliminationLevel extends AbstractLevel {

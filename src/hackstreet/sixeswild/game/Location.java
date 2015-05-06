@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Stores x and y coordinates on the game board.
  * 
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class Location {

@@ -32,14 +32,24 @@ import com.google.gson.stream.JsonReader;
  * Over-arching master class which will contain all data, 
  * and handle file I/O.
  * 
- * @author Nicholas, Tim
+ * @author Nicholas, Tim, Pat
  *
  */
 public class SixesWild {
 
+	/**
+	 * All the stored information about all levels
+	 */
 	ArrayList<SavedLevelData> savedLevelData;
+	
+	/**
+	 * All information about achievements
+	 */
 	ArrayList<AbstractAchievement> achievements;
 
+	/**
+	 * The current level being played
+	 */
 	AbstractLevel activeLevel;
 
 	public SixesWild(ArrayList<SavedLevelData> savedLevelData, ArrayList<AbstractAchievement> achievements){

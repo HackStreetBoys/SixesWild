@@ -5,6 +5,11 @@ import javax.swing.JLabel;
 import hackstreet.sixeswild.gui.SWApplication;
 import hackstreet.sixeswild.level.ReleaseLevel;
 
+/**
+ * 
+ * @author Patrick
+ *
+ */
 @SuppressWarnings("serial")
 public class ReleaseGameScreen extends ActiveGameScreen {
 	

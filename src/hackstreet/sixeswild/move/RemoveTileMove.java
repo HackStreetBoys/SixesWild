@@ -7,7 +7,7 @@ import hackstreet.sixeswild.level.AbstractLevel;
 
 /**
  * Move: Remove the selected Tile, then repopulate.
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class RemoveTileMove extends AbstractGameMove {

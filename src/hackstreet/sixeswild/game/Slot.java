@@ -3,7 +3,7 @@ package hackstreet.sixeswild.game;
 /**
  * A Permanent game entity with a fixed Location and variable Tile.
  * 
- * @author Tim, Nicholas
+ * @author Tim, Nicholas, Pat
  *
  */
 public class Slot {

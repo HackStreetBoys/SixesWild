@@ -2,6 +2,7 @@ package hackstreet.sixeswild.game;
 
 public class EliminationSlot extends Slot{
 
+	/** Has the slot been used yet*/
 	private boolean eliminated;
 	
 	public EliminationSlot(Location loc) {

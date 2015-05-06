@@ -11,7 +11,7 @@ import hackstreet.sixeswild.level.AbstractLevel;
  * Move: If the selected tiles add up to 6, then remove them,
  * adjust the score, and repopulate the board.
  * 
- * @author Tim, Nicholas
+ * @author Tim, Nicholas, Pat
  *
  */
 public class StandardMove extends AbstractGameMove {
@@ -40,6 +40,9 @@ public class StandardMove extends AbstractGameMove {
 		return (sum == 6);
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public boolean doMove() {
 		boolean valid = this.isValid();
@@ -48,7 +51,7 @@ public class StandardMove extends AbstractGameMove {
 			int scoreIncrease = 1;
 			int scoreMultiplier = 1;
 			for (Slot slot : level.getSelectedSlots()){
-				scoreIncrease *= 2;
+				scoreIncrease += 10;
 				scoreMultiplier *= slot.getTile().getMultiplier();
 			}
 			this.score = scoreIncrease*scoreMultiplier;

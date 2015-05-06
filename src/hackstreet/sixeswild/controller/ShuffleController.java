@@ -14,6 +14,11 @@ import hackstreet.sixeswild.move.ShuffleBoardMove;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author Patrick
+ *
+ */
 public class ShuffleController implements ActionListener{
 
 	private SWApplication application;

@@ -2,6 +2,7 @@ package hackstreet.sixeswild.game;
 
 public class BucketSlot extends Slot{
 
+	/** The state of the slot*/
 	private boolean occupied;
 	
 	public BucketSlot(Location loc) {

@@ -12,7 +12,7 @@ import hackstreet.sixeswild.level.AbstractLevel;
 
 /**
  * 
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class ShuffleBoardMove extends AbstractGameMove {

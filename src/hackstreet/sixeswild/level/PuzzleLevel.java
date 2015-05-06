@@ -5,7 +5,7 @@ import hackstreet.sixeswild.config.SavedLevelData;
 
 /**
  * 
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class PuzzleLevel extends AbstractLevel {

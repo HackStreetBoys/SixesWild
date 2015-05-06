@@ -5,11 +5,16 @@ import javax.swing.JLabel;
 import hackstreet.sixeswild.gui.SWApplication;
 import hackstreet.sixeswild.level.EliminationLevel;
 
+/**
+ * 
+ * @author Patrick
+ *
+ */
 @SuppressWarnings("serial")
 public class EliminationGameScreen extends ActiveGameScreen {
 	
 	private JLabel movesLeftLabel;
-
+	
 	public EliminationGameScreen(SWApplication application, int levelNum) {
 		super(application, levelNum);
 		EliminationLevel level = (EliminationLevel)application.getModel().getLevel();

@@ -24,6 +24,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+/**
+ * 
+ * @author Patrick
+ *
+ */
 @SuppressWarnings("serial")
 public abstract class ActiveGameScreen extends AbstractScreen {
 

@@ -42,7 +42,7 @@ public class SixesWildRunner {
 
 		loadFonts();
 
-		//SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
+		SplashScreen splash = new SplashScreen(5000, "images/SixesWildSplashScreen.png");
 		//---------PlaceHolder Fake Stuff that needs to be corrected some time soon-----
 		ArrayList<AbstractAchievement> achievements = new ArrayList<AbstractAchievement>();
 		achievements.add(new AchievementFirstLevelCompleted());
@@ -53,7 +53,7 @@ public class SixesWildRunner {
 		achievements.add(new AchievementAllStars());
 		achievements.add(new AchievementTenThousandPoints());
 		//------------------------------------------------------------------------------
-		//splash.showSplash();
+		splash.showSplash();
 		ArrayList<SavedLevelData> savedLevelData = LoadManifest();
 		SixesWild model = new SixesWild(savedLevelData,achievements);
 

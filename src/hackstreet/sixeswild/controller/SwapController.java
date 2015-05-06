@@ -6,6 +6,11 @@ import hackstreet.sixeswild.gui.game.ActiveGameScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author Patrick
+ *
+ */
 public class SwapController implements ActionListener{
 
 	private SWApplication application;

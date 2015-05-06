@@ -12,8 +12,11 @@ import java.util.List;
  */
 public class ReleaseLevelConfig extends AbstractLevelConfig {
 	
+	/** Number of moves in the game*/
 	private int numMoves;
+	/** List of bucket locations*/
 	private List<Location> bucketLocations;
+	/** List of six starter locations*/
 	private List<Location> sixLocations;
 	
 	public ReleaseLevelConfig(int numMoves){

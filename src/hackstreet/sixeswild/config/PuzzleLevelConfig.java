@@ -2,11 +2,12 @@ package hackstreet.sixeswild.config;
 
 /**
  * 
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class PuzzleLevelConfig extends AbstractLevelConfig {
 	
+	/** Number of moves in the game*/
 	private int numMoves;
 	
 	public PuzzleLevelConfig(int numMoves){

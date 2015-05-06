@@ -9,6 +9,11 @@ import javax.swing.Timer;
 import hackstreet.sixeswild.gui.SWApplication;
 import hackstreet.sixeswild.level.LightningLevel;
 
+/**
+ * 
+ * @author Patrick
+ *
+ */
 @SuppressWarnings("serial")
 public class LightningGameScreen extends ActiveGameScreen {
 	

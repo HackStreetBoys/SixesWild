@@ -24,18 +24,31 @@ public abstract class AbstractLevel {
 
 	/** The data used to create the level. */
 	private SavedLevelData savedLevelData;
+	/** Number of shuffles left*/
 	private int numShuffleLeft;
+	/** Number of swaps left*/
 	private int numSwapLeft;
+	/** Number of removes left*/
 	private int numRemoveLeft;
+	/** Number of hints left*/
 	private int numHintLeft;
+	/** Number of points earned*/
 	private int pointsEarned;
+	/** The grid of slots*/
 	private HashMap <Location, Slot> board;
+	/** A dynamic collection of selected slots*/
 	private ArrayList<Slot> selectedSlots;
+	/** Nick's huge AI (iterator)*/
 	private AI ai;
+	/** State-based remove selection*/
 	private boolean isRemoveMoveSelected;
+	/** State-based swap selection*/
 	private boolean isSwapMoveSelected;
+	/** State-based shuffle selection*/
 	private boolean isShuffleMoveSelected;
+	/** State-based ai selection*/
 	private boolean isAISelected;
+	/** Stack of moves used*/
 	private Stack<AbstractGameMove> moveStack;
 	
 	public abstract int handlePostMove();

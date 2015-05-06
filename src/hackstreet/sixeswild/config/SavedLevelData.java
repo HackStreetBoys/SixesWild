@@ -23,14 +23,18 @@ import com.google.gson.JsonParser;
  * (whether it is unlocked, and how many stars were earned).
  * <p>
  * This class is saved to disk.
- * @author Nicholas, Ben
+ * @author Nicholas, Ben, Pat
  *
  */
 public class SavedLevelData {
 
+	/** The file this level is saved in*/
 	public File file;
+	/** The level configurations*/
 	public AbstractLevelConfig config;
+	/** Is the level unlucked*/
 	public boolean isUnlocked;
+	/** Have stars been earned*/
 	public int starsEarned;
 
 	/**
@@ -49,6 +53,10 @@ public class SavedLevelData {
 		this.starsEarned = 0;
 	}
 
+	/**
+	 * 
+	 * @return The level configuration of this data
+	 */
 	public AbstractLevelConfig getLevelConfig() {
 
 		if (config == null) {

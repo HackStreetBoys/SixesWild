@@ -11,7 +11,7 @@ import hackstreet.sixeswild.gui.game.ActiveGameScreen;
 
 /**
  * Move: display a tile that can be used in a move.
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class HintMove extends AbstractGameMove {

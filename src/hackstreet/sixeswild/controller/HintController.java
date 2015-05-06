@@ -6,6 +6,11 @@ import hackstreet.sixeswild.move.HintMove;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author Pat
+ *
+ */
 public class HintController implements ActionListener{
 
 	private SWApplication application;

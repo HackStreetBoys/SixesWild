@@ -2,11 +2,12 @@ package hackstreet.sixeswild.config;
 
 /**
  * 
- * @author Nicholas
+ * @author Nicholas, Pat
  *
  */
 public class EliminationLevelConfig extends AbstractLevelConfig {
 
+	/** Number of moves available*/
 	private int numMoves;
 	
 	public EliminationLevelConfig(int numMoves){

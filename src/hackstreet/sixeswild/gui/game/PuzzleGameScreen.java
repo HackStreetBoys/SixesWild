@@ -5,6 +5,11 @@ import javax.swing.JLabel;
 import hackstreet.sixeswild.gui.SWApplication;
 import hackstreet.sixeswild.level.PuzzleLevel;
 
+/**
+ * 
+ * @author Patrick
+ *
+ */
 @SuppressWarnings("serial")
 public class PuzzleGameScreen extends ActiveGameScreen {
 	
