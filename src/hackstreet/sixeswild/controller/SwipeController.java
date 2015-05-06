@@ -19,6 +19,7 @@ import hackstreet.sixeswild.move.SwapTilesMove;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SwipeController extends MouseAdapter{
@@ -49,7 +50,12 @@ public class SwipeController extends MouseAdapter{
 
 				int status = level.handlePostMove();
 				if(status > 0){
-					application.getModel().winLevel();
+					try {
+						application.getModel().winLevel();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					application.enterVictoryScreen();
 				}
 				else if(status < 0)
@@ -96,7 +102,12 @@ public class SwipeController extends MouseAdapter{
 
 				int status = level.handlePostMove();
 				if(status > 0){
-					application.getModel().winLevel();
+					try {
+						application.getModel().winLevel();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					application.enterVictoryScreen();
 				}
 				else if(status < 0)
@@ -123,7 +134,12 @@ public class SwipeController extends MouseAdapter{
 				level.getMoveStack().push(move);
 				int status = level.handlePostMove();
 				if(status > 0){
-					application.getModel().winLevel();
+					try {
+						application.getModel().winLevel();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					application.enterVictoryScreen();
 				}
 				else if(status < 0)
